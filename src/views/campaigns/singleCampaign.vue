@@ -4,12 +4,12 @@
       <h1>This route would display a single Campaigns details and the option for a
         user to contribute to said campaign</h1>
     </div>
-  <router-link to='/campaigns'>Back Home</router-link>
+  <router-link to='/'>Back Home</router-link>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SingleCampaign',
+  name: 'SingleCampaign'
 };
 </script>
