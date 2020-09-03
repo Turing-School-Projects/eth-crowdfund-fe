@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/campaigns">Campaigns</router-link>
+      <router-link to="/">Campaigns</router-link> |
+      <router-link to="/campaigns/0948dx83ds">Single Campaign</router-link> |
       <router-link to="/campaigns/new">New Campaign</router-link>
     </div>
     <router-view/>
