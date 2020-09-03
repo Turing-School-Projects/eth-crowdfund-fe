@@ -9,6 +9,6 @@
 
 <script>
 export default {
-  name: "NewCampaign"
+  name: 'NewCampaign',
 };
 </script>
