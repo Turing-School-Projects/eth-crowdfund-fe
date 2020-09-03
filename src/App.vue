@@ -12,12 +12,7 @@
 <script>
 
 export default {
-  name: 'App',
-  data() {
-    return {
-      campaigns: [{ name: 'Buy a well' }]
-    }
-  }
+  name: 'App'
 }
 </script>
 
