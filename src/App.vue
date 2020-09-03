@@ -9,6 +9,18 @@
   </div>
 </template>
 
+<script>
+
+export default {
+  name: 'App',
+  data() {
+    return {
+      campaigns: [{ name: 'Buy a well' }]
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
