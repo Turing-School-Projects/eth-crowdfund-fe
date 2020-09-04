@@ -1,14 +1,31 @@
 <template>
   <div class="new-campaign">
     <div class="new-campaign-form">
-      <h1> A form to create a new campaign would go here </h1>
+      <h1> Create a New Campaign </h1>
+      <div class='new-campaign-form'>
+        <new-campaign-form></new-campaign-form>
+      </div>
     </div>
     <router-link to='/'>Back Home</router-link>
   </div>
 </template>
 
 <script>
+import NewCampaignForm from '@/components/NewCampaignForm.vue'
+
 export default {
-  name: 'NewCampaign'
+  name: 'NewCampaign',
+  components: {
+    NewCampaignForm
+  }
 }
 </script>
+
+<style lang='scss'>
+.new-campaign-form {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>
