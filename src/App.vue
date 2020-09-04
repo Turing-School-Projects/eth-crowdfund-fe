@@ -10,9 +10,17 @@
 </template>
 
 <script>
-
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+    }
+  },
+  computed: {
+    campaigns() {
+      return this.$store.state.campaigns
+    }
+  }
 }
 </script>
 

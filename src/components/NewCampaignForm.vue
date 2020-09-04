@@ -13,7 +13,7 @@ export default {
     return {
       title: '',
       description: '',
-      minContribution: 0
+      minContribution: null
     }
   }
 }
