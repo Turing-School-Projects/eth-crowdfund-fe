@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <CampaignContainer v-bind:campaigns="campaigns"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import CampaignContainer from '@/components/Container.vue';
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    CampaignContainer
   },
   data() {
     return {
@@ -19,12 +19,14 @@ export default {
         {
           title: 'Buy a well',
           description: 'help us buy a well',
-          id: 1
+          id: 1,
+          completed: false
         },
         {
           title: 'Buy a well',
           description: 'help us buy a well',
-          id: 1
+          id: 1,
+          completed: false
         }
       ]
     }
