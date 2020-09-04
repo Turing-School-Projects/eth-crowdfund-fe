@@ -1,7 +1,7 @@
 <template>
   <div>
+    <h1> Campaign Container</h1>
     <section class="campaign-container">
-      <h1> Campaign Container</h1>
       <div v-for="campaign in campaigns" v-bind:key="campaign.id">
         <CampaignCard v-bind:campaign="campaign" />
       </div>
@@ -25,5 +25,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .campaign-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5vh;
+  }
 </style>
