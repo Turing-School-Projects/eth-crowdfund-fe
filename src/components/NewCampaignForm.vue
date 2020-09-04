@@ -1,11 +1,9 @@
 <template>
-  <form class='new-campaign-form'
-    @submit.prevent='addCampaign'
-  >
+  <form @submit.prevent='addCampaign'>
     <input v-model='title' placeholder='Campaign Title' />
     <input v-model='minContribution' placeholder='Minimun Wei Contribution' />
     <textarea v-model='description' placeholder='Describe your Campaign...'></textarea>
-    <button type='submit' > Submit </button>
+    <button type='submit' > Create Campaign </button>
   </form>
 </template>
 
@@ -33,5 +31,28 @@ export default {
 </script>
 
 <style lang='scss'>
+form {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 45vh;
+  width: 90vw;
 
+  input {
+    height: 2em;
+    width: 55vw;
+  }
+
+  textarea {
+    resize: none;
+    height: 12em;
+    width: 55vw;
+  }
+
+  button {
+    width: 45vw;
+    height: 2em;
+  }
+}
 </style>
