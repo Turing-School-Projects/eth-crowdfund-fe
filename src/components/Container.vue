@@ -11,7 +11,7 @@
 
 <script>
 
-import CampaignCard from '@/components/HelloWorld.vue';
+import CampaignCard from '@/components/CampaignCard.vue';
 
 export default {
   name: 'Container',
