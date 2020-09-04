@@ -2,7 +2,9 @@
   <div>
     <section class="campaign-card">
       <h1> {{campaign.title}}</h1>
-      <div class="img-div">Image goes here</div>
+      <router-link to="/campaigns/0948dx83ds">
+        <div class="img-div">Image goes here</div>
+      </router-link>
       <p>{{campaign.description}}</p>
     </section>
   </div>
