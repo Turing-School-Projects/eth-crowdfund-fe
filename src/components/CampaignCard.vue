@@ -2,6 +2,8 @@
   <div>
     <section class="campaign-card">
       <h1> {{campaign.title}}</h1>
+      <div class="img-div">Image goes here</div>
+      <p>{{campaign.description}}</p>
     </section>
   </div>
 </template>
@@ -21,6 +23,15 @@ export default {
 .campaign-card {
   border: 1px solid black;
   background: #42b983;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.img-div {
+  height: 20vh;
+  width: 40vw;
+  background: aqua;
 }
 
 </style>
