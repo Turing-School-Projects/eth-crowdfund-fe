@@ -15,7 +15,11 @@ export default createStore({
       }
     ]
   },
-  mutations: {},
+  mutations: {
+    ADD_CAMPAIGN: (state, payload) => {
+      state.campaigns = [...state.campaigns, payload];
+    }
+  },
   actions: {},
   modules: {}
 });
