@@ -2,7 +2,7 @@
   <div>
     <section class="campaign-card">
       <h1> {{campaign.title}}</h1>
-      <router-link to="/campaigns/0948dx83ds">
+      <router-link :to="{ name: 'Single Campaign', params: {address: campaign.address} }">
         <div class="img-div">Image goes here</div>
       </router-link>
       <p>{{campaign.description}}</p>

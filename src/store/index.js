@@ -4,7 +4,7 @@ export default createStore({
   state: {
     campaigns: [
       {
-        id: 1,
+        address: 1,
         title: "Buy a well",
         description: "Clean water for rural community",
         minContribution: 100
@@ -12,22 +12,26 @@ export default createStore({
       {
         title: "End World Hunger",
         description: "We can do it",
-        id: 2,
+        address: 2,
         completed: false
       },
       {
         title: "Clean up Cheesman park",
         description: "Its right by my house",
-        id: 3,
+        address: 3,
         minContribution: 35
       },
       {
         title: "Help orphaned children",
         description: "They really need it",
-        id: 4,
+        address: 4,
         completed: false
       }
     ]
+  },
+  getters: {
+    /* eslint-disable-next-line */
+    getSingleCampaign: state => address => state.campaigns.find((campaign) => campaign.address === address)
   },
   mutations: {
     ADD_CAMPAIGN: (state, payload) => {
