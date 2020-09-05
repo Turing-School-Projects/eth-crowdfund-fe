@@ -39,7 +39,7 @@ npm install -g truffle
 
 ### Download Ganache
 Ganache is a personal blockchain for Ethereum development you can use to deploy contracts, develop applications, and run tests. It is available as both a desktop application as well as a command-line tool.
-[Click here to download Ganache](https://www.trufflesuite.com/ganache)
+[Click here to download the desktop app.](https://www.trufflesuite.com/ganache)
 
 ### Connect to Ganache
 - Open Ganache and select `New Workspace`  
