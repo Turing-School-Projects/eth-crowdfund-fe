@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Campaigns</router-link> |
-      <router-link to="/campaigns/0948dx83ds">Single Campaign</router-link> |
+      <!-- <router-link to="/campaigns/:$route.params.id">Single Campaign</router-link> | -->
       <router-link to="/campaigns/new">New Campaign</router-link>
     </div>
     <router-view/>
@@ -11,16 +11,7 @@
 
 <script>
 export default {
-  name: 'App',
-  data() {
-    return {
-    }
-  },
-  computed: {
-    campaigns() {
-      return this.$store.state.campaigns
-    }
-  }
+  name: 'App'
 }
 </script>
 
