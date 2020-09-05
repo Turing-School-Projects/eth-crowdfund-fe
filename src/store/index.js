@@ -29,11 +29,14 @@ export default createStore({
       }
     ]
   },
+  getters: {
+    /* eslint-disable-next-line */
+    getSingleCampaign: state => address => state.campaigns.find((campaign) => campaign.address === address)
+  },
   mutations: {
     ADD_CAMPAIGN: (state, payload) => {
       state.campaigns = [...state.campaigns, payload];
-    },
-    GET_SINGLE_CAMPAIGN: (state, payload) => state.campaigns.find((campaign) => campaign.address === payload)
+    }
   },
   actions: {},
   modules: {}

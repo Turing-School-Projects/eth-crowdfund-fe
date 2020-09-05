@@ -8,7 +8,12 @@
 
 export default {
   name: 'CampaignDetails',
-  props: ['address']
+  props: ['address'],
+  computed: {
+    campaign() {
+      return this.$store.getters.getSingleCampaign(Number(this.address))
+    }
+  }
 }
 </script>
 
