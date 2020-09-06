@@ -3,8 +3,10 @@
     <div class="about">
     </div>
     <h2>Top Fundraisers</h2>
+    <button @click="previousPage">Previous</button>
+    <button @click="nextPage">Next</button>
     <section class="campaign-container">
-      <div v-for="campaign in campaigns" v-bind:key="campaign.id">
+      <div v-for="campaign in campaigns.slice(startIndex, startIndex + 4)" v-bind:key="campaign.id">
         <CampaignCard v-bind:campaign="campaign" />
       </div>
     </section>
@@ -18,6 +20,25 @@ import CampaignCard from '@/components/CampaignCard.vue';
 export default {
   name: 'Container',
   props: ["campaigns"],
+  data() {
+    return {
+      visibleCampaigns: [],
+      startIndex: 0,
+      endIndex: 4
+    }
+  },
+  methods: {
+    nextPage() {
+      if (this.startIndex < this.campaigns.length - 4) {
+        this.startIndex += 1
+      }
+    },
+    previousPage() {
+      if (this.startIndex > 0) {
+        this.startIndex -= 1
+      }
+    }
+  },
   components: {
     CampaignCard
   }
