@@ -2,7 +2,8 @@
   <div class="home">
     <CampaignContainer v-bind:campaigns="campaigns"/>
   </div>
-  <div> {{factory}} </div>
+  <div> {{todos}} </div>
+  <button @click="logFactory"> Console.log Factory</button>
 </template>
 
 <script>
@@ -24,6 +25,9 @@ export default {
     CampaignContainer
   },
   methods: {
+    logFactory() {
+      console.log(this.$store.state.factory)
+    }
   },
   created() {
     this.$store.dispatch('fetchTodos')

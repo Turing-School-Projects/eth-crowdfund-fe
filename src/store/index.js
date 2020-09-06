@@ -60,7 +60,8 @@ export default createStore({
   },
   getters: {
     /* eslint-disable-next-line */
-    getSingleCampaign: state => address => state.campaigns.find((campaign) => campaign.address === address)
+    getSingleCampaign: state => address => state.campaigns.find((campaign) => campaign.address === address), 
+    getFactory: (state) => state.factory
   },
   mutations: {
     ADD_CAMPAIGN: (state, payload) => {
@@ -80,7 +81,7 @@ export default createStore({
     fetchFactory: async ({ commit }) => {
       const instance = await factory.at('0x7c70286f6991c660a0cC6d52A74aEBbDE45Da380')
       console.log('instance of factory in global state', instance)
-      commit('setTodos', instance);
+      commit('setFactory', instance);
     }
 
   },
