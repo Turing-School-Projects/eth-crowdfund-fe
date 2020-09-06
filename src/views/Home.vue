@@ -4,7 +4,7 @@
   </div>
   <button @click="logFactory"> Console.log Factory</button>
   <!-- //Put your account # into from, or figure out how to get your account from web3 -->
-  <button @click="factory.createCampaign(100, {from: '' } )">
+  <button @click="factory.createCampaign(100, {from: '0xa21b4eEa9261eB71D54c1694C7C7e732cCDd9825' } )">
     Create Campaign
   </button>
 </template>
@@ -35,6 +35,7 @@ export default {
   created() {
     this.$store.dispatch('fetchTodos')
     this.$store.dispatch('fetchFactory')
+    this.$store.dispatch('fetchAccountNum')
   },
   computed: {
     campaigns() {
