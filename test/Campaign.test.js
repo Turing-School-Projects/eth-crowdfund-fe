@@ -90,5 +90,9 @@ contract("Campaign", async accounts => {
       let approversCount = summary[3].toString();
 
       assert.equal(1, approversCount);
+
+      await campaign.contribute({from: accounts[1], value: '200'});
+
+      assert.equal(1, approversCount);
     });
 });
