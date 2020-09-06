@@ -1,5 +1,6 @@
 import Web3 from "web3";
 
+// eslint-disable-next-line import/no-mutable-exports
 let web3;
 
 if (typeof window !== "undefined" && typeof window.web3 !== "undefined") {
