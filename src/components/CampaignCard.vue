@@ -1,13 +1,21 @@
 <template>
-  <div>
-    <section class="campaign-card">
-      <h1> {{campaign.title}}</h1>
-      <router-link :to="{ name: 'Single Campaign', params: {address: campaign.address} }">
+  <router-link
+    style="text-decoration: none;"
+    :to="{ name: 'Single Campaign',
+    params: {address: campaign.address}}">
+    <div>
+      <section class="campaign-card">
+        <section>
         <div class="img-div">Image goes here</div>
-      </router-link>
-      <p>{{campaign.description}}</p>
-    </section>
-  </div>
+        <div class="campaign-info">
+          <h1> {{campaign.title}}</h1>
+          <p>{{campaign.description}}</p>
+        </div>
+        </section>
+        <div class="goal"><b>$2,000</b> USD raised</div>
+      </section>
+    </div>
+  </router-link>
 </template>
 
 <script>
@@ -20,19 +28,34 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
+
+.goal {
+}
+h1 {
+  margin: 1rem 0 0 0;
+}
 
 .campaign-card {
-  border: 1px solid black;
-  background: #42b983;
+  background: whitesmoke;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  text-decoration: none;
+  box-shadow: 1px 1px 3px grey;
+  height: 30rem;
+  width: 18rem;
+  &:hover {
+    margin:-3px;
+    box-shadow: 1px 1px 10px grey;
+    transition: all 0.25s;
+  }
 }
 
 .img-div {
-  height: 20vh;
-  width: 40vw;
+  height: 15rem;
+  width: 18rem;
   background: aqua;
 }
 
