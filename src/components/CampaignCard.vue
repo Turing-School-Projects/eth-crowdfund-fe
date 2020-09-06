@@ -46,8 +46,10 @@ h1 {
   box-shadow: 1px 1px 3px grey;
   height: 30rem;
   width: 18rem;
+  box-sizing: border-box;
+  transform: scale(1);
   &:hover {
-    margin:-3px;
+    transform: scale(1.02);
     box-shadow: 1px 1px 10px grey;
     transition: all 0.25s;
   }
