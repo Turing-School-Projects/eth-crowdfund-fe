@@ -30,8 +30,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
-.goal {
-}
 h1 {
   margin: 1rem 0 0 0;
 }
