@@ -82,4 +82,13 @@ contract("Campaign", async accounts => {
 
     assert(newBalance > initialBalance);
     });
+
+    it('Increases the approver count once per contributor', async () => {
+      let campaign = await Campaign.deployed();
+      await campaign.contribute({from: accounts[1], value: '200'});
+      let summary = await campaign.getSummary()
+      let approversCount = summary[3].toString();
+
+      assert.equal(1, approversCount);
+    });
 });
