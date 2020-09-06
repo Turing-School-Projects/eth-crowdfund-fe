@@ -1,20 +1,21 @@
-pragma solidity >=0.4.22 <0.7.0;
+pragma solidity >=0.6.0 <0.8.0;
 
 contract Campaign {
     struct Request {
         string description;
         uint value;
-        address recipient;
+        address payable recipient;
         bool complete;
         uint approvalCount;
-        mapping(address => bool) approvals;
+        mapping (address => bool) approvals;
     }
 
-    Request[] public requests;
     address public manager;
     uint public minimumContribution;
-    mapping(address => bool) public approvers;
     uint public approversCount;
+    mapping(address => bool) public approvers;
+    uint public requestsCount;
+    mapping (uint => Request) public requests;
 
      modifier restricted() {
         require(msg.sender == manager);
@@ -35,17 +36,15 @@ contract Campaign {
         }
     }
 
-    function createRequest(string memory description, uint value, address recipient)
-        public restricted {
-        Request memory newRequest = Request({
-           description: description,
-           value: value,
-           recipient: recipient,
-           complete: false,
-           approvalCount: 0
-        });
-
-        requests.push(newRequest);
+    function createRequest(string memory description, uint value, address payable recipient)
+        public restricted returns (uint requestID){
+          requestID = requestsCount++;
+          Request storage newRequest = requests[requestID];
+          newRequest.description = description;
+          newRequest.value = value;
+          newRequest.recipient = recipient;
+          newRequest.complete = false;
+          newRequest.approvalCount = 0;
     }
 
     function approveRequest(uint index) public {
@@ -72,13 +71,9 @@ contract Campaign {
         return (
             minimumContribution,
             address(this).balance,
-            requests.length,
+            requestsCount,
             approversCount,
             manager
         );
   }
-
-    function getRequestsCount() public view returns (uint) {
-        return requests.length;
-    }
 }

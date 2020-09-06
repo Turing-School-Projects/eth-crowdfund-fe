@@ -60,6 +60,7 @@ contract("Campaign", async accounts => {
 
     await campaign.createRequest("Buy Supplies", "100", accounts[1], {from: accounts[0]})
     const request = await campaign.requests(0);
+    
     assert.equal("Buy Supplies", request.description);
     assert.equal(accounts[1], request.recipient);
   });
