@@ -8,6 +8,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'NewCampaignForm',
   data() {
@@ -25,6 +26,11 @@ export default {
         minContribution: this.minContribution
       }
       this.$store.commit('ADD_CAMPAIGN', newCampaign)
+    }
+  },
+  computed: {
+    factory() {
+      return this.$store.state.factory
     }
   }
 }

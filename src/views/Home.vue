@@ -2,7 +2,6 @@
   <div class="home">
     <CampaignContainer v-bind:campaigns="campaigns"/>
   </div>
-  <div> {{todos}} </div>
   <button @click="logFactory"> Console.log Factory</button>
 </template>
 
