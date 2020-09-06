@@ -2,7 +2,6 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Campaigns</router-link> |
-      <!-- <router-link to="/campaigns/:$route.params.id">Single Campaign</router-link> | -->
       <router-link to="/campaigns/new">New Campaign</router-link>
     </div>
     <router-view/>
@@ -16,6 +15,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -23,16 +23,20 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+body {
+  margin: 0;
+}
 
 #nav {
   padding: 30px;
-
+  background: #42b983;
   a {
     font-weight: bold;
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: white;
+      text-shadow: 1px black;
     }
   }
 }
