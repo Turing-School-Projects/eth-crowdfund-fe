@@ -3,7 +3,8 @@
     <CampaignContainer v-bind:campaigns="campaigns"/>
   </div>
   <button @click="logFactory"> Console.log Factory</button>
-  <button @click="factory.createCampaign(100, {from: '0xa21b4eEa9261eB71D54c1694C7C7e732cCDd9825' } )">
+  <!-- //Put your account # into from, or figure out how to get your account from web3 -->
+  <button @click="factory.createCampaign(100, {from: '' } )">
     Create Campaign
   </button>
 </template>
