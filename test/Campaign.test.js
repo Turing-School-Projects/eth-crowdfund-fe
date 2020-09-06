@@ -60,6 +60,7 @@ contract("Campaign", async accounts => {
 
     await campaign.createRequest("Buy Supplies", "100", accounts[1], {from: accounts[0]})
     const request = await campaign.requests(0);
+    
     assert.equal("Buy Supplies", request.description);
     assert.equal(accounts[1], request.recipient);
   });
@@ -81,5 +82,18 @@ contract("Campaign", async accounts => {
     let newBalance = await web3.eth.getBalance(accounts[1]);
 
     assert(newBalance > initialBalance);
+    });
+
+    it('Increases the approver count once per contributor', async () => {
+      let campaign = await Campaign.deployed();
+      await campaign.contribute({from: accounts[1], value: '200'});
+      let summary = await campaign.getSummary()
+      let approversCount = summary[3].toString();
+
+      assert.equal(1, approversCount);
+
+      await campaign.contribute({from: accounts[1], value: '200'});
+
+      assert.equal(1, approversCount);
     });
 });
