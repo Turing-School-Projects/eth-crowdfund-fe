@@ -4,6 +4,10 @@
     <input v-model='minContribution' placeholder='Minimun Wei Contribution' />
     <textarea v-model='description' placeholder='Describe your Campaign...'></textarea>
     <button type='submit' > Create Campaign </button>
+    <button @click="factory.createCampaign(100, {from: accountNum } )">
+    Create Campaign Blockchain
+  </button>
+  <div>{{accountNum}}</div>
   </form>
 </template>
 
@@ -35,6 +39,9 @@ export default {
   computed: {
     factory() {
       return this.$store.state.factory
+    },
+    accountNum() {
+      return this.$store.state.accountNum
     }
   }
 }
