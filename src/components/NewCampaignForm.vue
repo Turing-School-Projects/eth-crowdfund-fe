@@ -7,7 +7,13 @@
     <button @click="factory.createCampaign(100, {from: accountNum } )">
     Create Campaign Blockchain
   </button>
-  <div>{{accountNum}}</div>
+   <button @click="campaign.contribute({from: accountNum, value: '900'} )">
+     contribute
+     </button>
+   <button @click="displaySummary">
+     Display Summary
+    </button>
+    <div>{{campaign}} </div>
   </form>
 </template>
 
@@ -34,6 +40,11 @@ export default {
         minContribution: this.minContribution
       }
       this.$store.commit('ADD_CAMPAIGN', newCampaign)
+    },
+    async displaySummary() {
+      const summary = await this.$store.state.campaign.getSummary();
+      const keySummary = Object.keys(summary).map((key) => summary[key].toString())
+      console.log(keySummary)
     }
   },
   computed: {
@@ -42,6 +53,9 @@ export default {
     },
     accountNum() {
       return this.$store.state.accountNum
+    },
+    campaign() {
+      return this.$store.state.campaign
     }
   }
 }
