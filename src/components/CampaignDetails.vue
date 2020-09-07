@@ -9,10 +9,7 @@
     <h1>{{ campaign.minContribution }}</h1>
     <p>There is some information missing and this has no styles </p>
     <input v-model='contribution' placeholder='Enter your contribution' type="number"/>
-    <button @click="ethCampaign.contibute(
-      {from: accountNum, value: '0.1'})"> Submit Contribution </button>
-    <!-- <button @click="console.log(ethCampaign)"> Submit Contribution </button> -->
-    <div>{{ethCampaign}}</div>
+    <button @click="ethCampaign.contribute({from: accountNum, value: '300'})"> Submit Contribution </button>
 
   </section>
 </template>

@@ -33,14 +33,6 @@ export default {
     }
   },
   methods: {
-    addCampaign() {
-      const newCampaign = {
-        title: this.title,
-        description: this.description,
-        minContribution: this.minContribution
-      }
-      this.$store.commit('ADD_CAMPAIGN', newCampaign)
-    },
     async displaySummary() {
       const summary = await this.$store.state.campaign.getSummary();
       const keySummary = Object.keys(summary).map((key) => summary[key].toString())
