@@ -1,7 +1,8 @@
 /* eslint-disable no-return-assign */
 import { createStore } from "vuex";
 import axios from "axios";
-import factory from "../contracts/campaign";
+import factory from "../contracts/factory";
+import campaign from "../contracts/campaign";
 import web3 from "../contracts/web3";
 
 export default createStore({
@@ -58,7 +59,8 @@ export default createStore({
     ],
     todos: [],
     factory: {},
-    accountNum: null
+    accountNum: null,
+    campaign: {}
   },
   getters: {
     /* eslint-disable-next-line */
@@ -71,17 +73,21 @@ export default createStore({
     },
     setTodos: (state, todos) => (state.todos = todos),
     setFactory: (state, instance) => (state.factory = instance),
+    setCampaign: (state, instance) => (state.campaign = instance),
     setAccountNum: (state, accNum) => (state.accountNum = accNum)
   },
   actions: {
     fetchTodos: async ({ commit }) => {
       const response = await axios.get("https://jsonplaceholder.typicode.com/todos");
-
       commit("setTodos", response.data);
     },
     fetchFactory: async ({ commit }) => {
       const instance = await factory.at("0x7c70286f6991c660a0cC6d52A74aEBbDE45Da380");
       commit("setFactory", instance);
+    },
+    fetchCampaign: async ({ commit }) => {
+      const instance = await campaign.at("0xe8a0980C2B37C2C4FCE45e579301B00CC824bCFc");
+      commit("setCampaign", instance);
     },
     fetchAccountNum: async ({ commit }) => {
       const accounts = await web3.eth.getAccounts();
