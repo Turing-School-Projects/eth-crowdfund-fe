@@ -35,6 +35,10 @@ export default {
       return this.$store.state.accountNum
     }
   },
+  created() {
+    const campaignAddress = "0xe8a0980C2B37C2C4FCE45e579301B00CC824bCFc"
+    this.$store.dispatch('fetchCampaign', campaignAddress)
+  },
   methods: {
     submitContribution() {
       const newCampaign = {

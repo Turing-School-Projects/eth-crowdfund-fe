@@ -7,13 +7,9 @@
     <button @click="factory.createCampaign(100, {from: accountNum } )">
     Create Campaign Blockchain
   </button>
-   <button @click="campaign.contribute({from: accountNum, value: '900'} )">
-     contribute
-     </button>
    <button @click="displaySummary">
      Display Summary
     </button>
-    <div>{{campaign}} </div>
   </form>
 </template>
 
