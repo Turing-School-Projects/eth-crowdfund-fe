@@ -85,8 +85,9 @@ export default createStore({
       const instance = await factory.at("0x7c70286f6991c660a0cC6d52A74aEBbDE45Da380");
       commit("setFactory", instance);
     },
-    fetchCampaign: async ({ commit }) => {
-      const instance = await campaign.at("0xe8a0980C2B37C2C4FCE45e579301B00CC824bCFc");
+    fetchCampaign: async ({ commit }, address) => {
+      console.log('campaignAddress', address)
+      const instance = await campaign.at(address);
       commit("setCampaign", instance);
     },
     fetchAccountNum: async ({ commit }) => {
