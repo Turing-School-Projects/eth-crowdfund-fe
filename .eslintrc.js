@@ -13,8 +13,7 @@ module.exports = {
     "comma-dangle": ["error", "never"],
     "max-len": ["error", { code: 110 }],
     quotes: ["off"],
-    semi: ["off"],
-    "no-multiple-empty-lines": ["error", "never"]
+    semi: ["off"]
   },
   overrides: [
     {
