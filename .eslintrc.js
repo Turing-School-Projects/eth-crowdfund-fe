@@ -14,7 +14,6 @@ module.exports = {
     "max-len": ["error", { code: 110 }],
     quotes: ["off"],
     semi: ["off"],
-    "no-multiple-empty-lines": ["error", "never"]
   },
   overrides: [
     {
