@@ -1,8 +1,8 @@
 /* eslint-disable no-return-assign */
 import { createStore } from "vuex";
 import axios from "axios";
-import factory from '../../ethereum/factory'
-import web3 from '../../ethereum/web3'
+import factory from "../contracts/campaign";
+import web3 from "../contracts/web3";
 
 export default createStore({
   state: {
@@ -62,7 +62,7 @@ export default createStore({
   },
   getters: {
     /* eslint-disable-next-line */
-    getSingleCampaign: state => address => state.campaigns.find((campaign) => campaign.address === address), 
+    getSingleCampaign: state => address => state.campaigns.find((campaign) => campaign.address === address),
     getFactory: (state) => state.factory
   },
   mutations: {
@@ -75,21 +75,18 @@ export default createStore({
   },
   actions: {
     fetchTodos: async ({ commit }) => {
-      const response = await axios.get(
-        'https://jsonplaceholder.typicode.com/todos'
-      );
+      const response = await axios.get("https://jsonplaceholder.typicode.com/todos");
 
-      commit('setTodos', response.data);
+      commit("setTodos", response.data);
     },
     fetchFactory: async ({ commit }) => {
-      const instance = await factory.at('0x7c70286f6991c660a0cC6d52A74aEBbDE45Da380')
-      commit('setFactory', instance);
+      const instance = await factory.at("0x7c70286f6991c660a0cC6d52A74aEBbDE45Da380");
+      commit("setFactory", instance);
     },
     fetchAccountNum: async ({ commit }) => {
-      const accounts = await web3.eth.getAccounts()
-      commit('setAccountNum', accounts[0]);
+      const accounts = await web3.eth.getAccounts();
+      commit("setAccountNum", accounts[0]);
     }
-
   },
   modules: {}
 });
