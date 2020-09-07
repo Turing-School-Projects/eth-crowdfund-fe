@@ -4,5 +4,10 @@ node_js:
 notifications:
   email: false
 deploy:
+  provider: heroku
   api_key:
     secure: FQRlzLuDkZn6fJCJTPDhkg0aNYev3xCw0Z3G75HAeP5fpU6Cw8bbcAb6G79qebugn0wucpUD/Hx3VuWdOCJ2tLK/s8JOHMmZeFMKKqvyIX8h+EmagkPl7RNrmFOW5vOJN3+Nw6MgGZtBUTsTha1NANUXct7HirnntkACmNNCxcKO9SCQiGdfSwOmBkarLKOxv2NqH3QrZMOGLKy3BjtGf9MQEPuRaexWBsOpall+rAzUvncSs0vL9HAP4xSHr18aZLJqq9r/0/exlOpyqEZniqKbp74FWOF9ZnxG6/ugeny77uYv9hXEUQ+PS5E0xSSpSGLj8+V502XTenQnrwQXtT993QC6uflb3iXwUOqr0nq1Gg0lhBzoZaId/I0E+1KZmlay++9EQRGua40iUTDgOQ9y08zN0aZIaUvSxY5ufMgfNwCGdOiSbc6lXVI9Kw+ZWzpOUHmlfCfrXY/0rqGsZvScAqaUTMp7yWX8qLh+UD6N+7FgHCuqxMyhcdocDoxhyQEw/c9qBhDRRUjI5qwqpiXj+p5FVlKdgLFFQuLqLnNg8QpGNkFUGiTZGs8SK4Nwgt8f5+UmJWnaiMJi7D9Xgvb6zKc4LriKwaKDr286qGkUy4oVpIauNAw+GWoxg4/pvFX9sUElnuWGXr5mT2h0QyeDYPkoEab7Tc+AEoNt/94=
+  app: cash-moneth
+  on:
+    all_branches: true
+  skip_cleanup: true
