@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import web3 from "../../ethereum/web3";
+import web3 from "../contracts/web3";
 
 web3.eth.getAccounts()
   .then((accounts) => console.log(accounts[0]))

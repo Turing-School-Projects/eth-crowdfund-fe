@@ -13,7 +13,7 @@
 // @ is an alias to /src
 import CampaignContainer from '@/components/Container.vue';
 // import mapActions from 'vuex'
-import factory from '../../ethereum/factory'
+import factory from '../contracts/factory'
 // import campaign from '../../ethereum/campaign'
 
 factory.at('0x7c70286f6991c660a0cC6d52A74aEBbDE45Da380')
