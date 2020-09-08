@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 <template>
   <section>
     <h3> Campaing Title: </h3>
@@ -7,10 +8,21 @@
     <h3> Minimum Contribution </h3>
     <h1>{{ campaign.minContribution }}</h1>
     <p>There is some information missing and this has no styles </p>
+    <input v-model='contribution' placeholder='Enter your contribution' type="number"/>
+    <button :disabled="!contribution"
+    @click="submitContribution">
+    Submit Contribution </button>
+
   </section>
 </template>
 
 <script>
+
+import web3 from "../contracts/web3";
+import ethCampaign from "../contracts/campaign";
+
+web3.eth.getAccounts()
+  .then((accounts) => console.log(accounts[0]))
 
 export default {
   name: 'CampaignDetails',
@@ -18,6 +30,22 @@ export default {
   computed: {
     campaign() {
       return this.$store.getters.getSingleCampaign(Number(this.address))
+    }
+  },
+  created() {
+    const campaignAddress = "0xe8a0980C2B37C2C4FCE45e579301B00CC824bCFc"
+    this.$store.dispatch('fetchCampaign', campaignAddress)
+  },
+  methods: {
+    async submitContribution() {
+      const campaignAddress = "0xe8a0980C2B37C2C4FCE45e579301B00CC824bCFc"
+      const campaignInstance = await ethCampaign.at(campaignAddress);
+      campaignInstance.contribute({ from: this.$store.state.accountNum, value: this.contribution })
+    }
+  },
+  data() {
+    return {
+      contribution: 0
     }
   }
 }
