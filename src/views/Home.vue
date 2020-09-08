@@ -24,6 +24,7 @@ export default {
     this.$store.dispatch('fetchTodos')
     this.$store.dispatch('fetchFactory')
     this.$store.dispatch('fetchAccountNum')
+    this.$store.dispatch('fetchAllCampaigns')
   },
   computed: {
     campaigns() {
