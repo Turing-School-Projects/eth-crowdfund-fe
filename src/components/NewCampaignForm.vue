@@ -5,9 +5,6 @@
     <textarea v-model='description' placeholder='Describe your Campaign...'></textarea>
     <button type='submit' > Create Campaign </button>
   <div v-if="this.userMessage">Please fill out all inputs</div>
-   <button @click="displaySummary">
-     Console.log summary of Campaign
-    </button>
   </form>
 </template>
 
