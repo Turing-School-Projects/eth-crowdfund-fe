@@ -7,56 +7,7 @@ import web3 from "../contracts/web3";
 
 export default createStore({
   state: {
-    campaigns: [
-      {
-        address: 1,
-        title: "Buy a well",
-        description: "Clean water for rural community",
-        minContribution: 100
-      },
-      {
-        title: "End World Hunger",
-        description: "We can do it",
-        address: 2,
-        completed: false
-      },
-      {
-        title: "Clean up Cheesman park",
-        description: "Its right by my house",
-        address: 3,
-        minContribution: 35
-      },
-      {
-        title: "Help orphaned children",
-        description: "They really need it",
-        address: 4,
-        completed: false
-      },
-      {
-        address: 1,
-        title: "Buy a well 2",
-        description: "Clean water for rural community",
-        minContribution: 100
-      },
-      {
-        title: "End World Hunger 2",
-        description: "We can do it",
-        address: 2,
-        completed: false
-      },
-      {
-        title: "Clean up Cheesman park 2",
-        description: "Its right by my house",
-        address: 3,
-        minContribution: 35
-      },
-      {
-        title: "Help orphaned children 2",
-        description: "They really need it",
-        address: 4,
-        completed: false
-      }
-    ],
+    campaigns: [],
     todos: [],
     factory: {},
     accountNum: null,
@@ -74,6 +25,7 @@ export default createStore({
     setTodos: (state, todos) => (state.todos = todos),
     setFactory: (state, instance) => (state.factory = instance),
     setCampaign: (state, instance) => (state.campaign = instance),
+    setCampaigns: (state, instance) => (state.campaigns = instance),
     setAccountNum: (state, accNum) => (state.accountNum = accNum)
   },
   actions: {
@@ -84,6 +36,13 @@ export default createStore({
     fetchFactory: async ({ commit }) => {
       const instance = await factory.at("0x7c70286f6991c660a0cC6d52A74aEBbDE45Da380");
       commit("setFactory", instance);
+    },
+    fetchAllCampaigns: async ({ commit }) => {
+      console.log('campaigns response')
+      // eslint-disable-next-line max-len
+      const response = await axios.get('http://localhost:3000/api/v1/campaigns/')
+      console.log('fetched Campaigns', response.data)
+      commit('setCampaigns', response.data);
     },
     fetchCampaign: async ({ commit }, address) => {
       console.log('campaignAddress', address)
