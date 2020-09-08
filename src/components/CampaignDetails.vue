@@ -6,6 +6,7 @@
     <h3> Description: </h3>
     <h4>{{ campaign.description }}</h4>
     <h3> Minimum Contribution </h3>
+    <img :src=campaign.image />
     <h1>{{ campaign.min_contribution }}</h1>
     <p>There is some information missing and this has no styles </p>
     <input v-model='contribution' placeholder='Enter your contribution' type="number"/>

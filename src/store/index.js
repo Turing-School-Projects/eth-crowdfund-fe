@@ -41,6 +41,7 @@ export default createStore({
     fetchAllCampaigns: async ({ commit }) => {
       console.log('campaigns response')
       // eslint-disable-next-line max-len
+      // const response = await axios.get('http://localhost:3000/api/v1/campaigns/')
       const response = await axios.get('http://localhost:3000/api/v1/campaigns/')
       console.log('fetched Campaigns', response.data)
       commit('setCampaigns', response.data);

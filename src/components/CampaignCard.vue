@@ -6,7 +6,7 @@
     <div>
       <section class="campaign-card">
         <section>
-        <div class="img-div"><img :src=campaign.image></div>
+        <div class="img-div"><img :src=campaign.image /></div>
         <div class="campaign-info">
           <h1> {{campaign.name}}</h1>
           <p>{{campaign.description}}</p>
