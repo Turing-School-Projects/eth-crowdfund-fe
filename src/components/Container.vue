@@ -30,12 +30,12 @@ export default {
   methods: {
     nextPage() {
       if (this.startIndex < this.campaigns.length - 4) {
-        this.startIndex += 1
+        this.startIndex += 4
       }
     },
     previousPage() {
       if (this.startIndex > 0) {
-        this.startIndex -= 1
+        this.startIndex -= 4
       }
     }
   },

@@ -4,18 +4,19 @@
     <input v-model='minContribution' placeholder='Minimun Wei Contribution' />
     <textarea v-model='description' placeholder='Describe your Campaign...'></textarea>
     <button type='submit' > Create Campaign </button>
-    <button @click="factory.createCampaign(100, {from: accountNum } )">
+    <button @click="createCampaign">
     Create Campaign Blockchain
   </button>
-  <div>{{accountNum}}</div>
+   <button @click="displaySummary">
+     Display Summary
+    </button>
   </form>
 </template>
 
 <script>
+import axios from "axios";
 import web3 from "../contracts/web3";
-
-web3.eth.getAccounts()
-  .then((accounts) => console.log(accounts[0]))
+import Factory from "../contracts/factory";
 
 export default {
   name: 'NewCampaignForm',
@@ -27,13 +28,28 @@ export default {
     }
   },
   methods: {
-    addCampaign() {
-      const newCampaign = {
-        title: this.title,
-        description: this.description,
-        minContribution: this.minContribution
-      }
-      this.$store.commit('ADD_CAMPAIGN', newCampaign)
+    async displaySummary() {
+      const summary = await this.$store.state.campaign.getSummary();
+      const keySummary = Object.keys(summary).map((key) => summary[key].toString())
+      console.log(keySummary)
+    },
+    async createCampaign() {
+      const accounts = await web3.eth.getAccounts();
+      const factory = await Factory.at("0x7c70286f6991c660a0cC6d52A74aEBbDE45Da380");
+      await factory.createCampaign(100, { from: accounts[0] })
+      const addresses = await factory.getDeployedCampaigns()
+      const campaignAddress = addresses[addresses.length - 1];
+      axios.post("http://localhost:3000/api/v1/campaigns/", {
+        name: "Test Campaign",
+        description: "test description",
+        image: "test.jpg",
+        contributors: "1",
+        upvote: "2",
+        manager: "3",
+        address: campaignAddress,
+        min_contribution: 5.0
+      })
+        .then((resp) => console.log(resp))
     }
   },
   computed: {
@@ -42,6 +58,9 @@ export default {
     },
     accountNum() {
       return this.$store.state.accountNum
+    },
+    campaign() {
+      return this.$store.state.campaign
     }
   }
 }
