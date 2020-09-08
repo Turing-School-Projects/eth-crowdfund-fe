@@ -4,7 +4,7 @@ import axios from "axios";
 import factory from "../contracts/factory";
 import campaign from "../contracts/campaign";
 import web3 from "../contracts/web3";
-import API_URL from "../env";
+import { API_URL } from "../env";
 
 export default createStore({
   state: {
@@ -94,13 +94,13 @@ export default createStore({
     fetchAccountNum: async ({ commit }) => {
       const accounts = await web3.eth.getAccounts();
       commit("setAccountNum", accounts[0]);
-    },
-    createBECampaign: async ({ commit }, campaignRequest) => {
-      const accounts = await web3.eth.getAccounts();
-      const newCampaign = { ...campaignRequest, manager: accounts[1] };
-      const response = await axios.post(`${API_URL}campaigns`, newCampaign);
-      commit("ADD_CAMPAIGN", response);
     }
+    // createBECampaign: async ({ commit }, campaignRequest) => {
+    //   const accounts = await web3.eth.getAccounts();
+    //   const newCampaign = { ...campaignRequest, manager: accounts[1] };
+    //   const response = await axios.post(`${API_URL}campaigns`, newCampaign);
+    //   commit("ADD_CAMPAIGN", response);
+    // }
   },
   modules: {}
 });
