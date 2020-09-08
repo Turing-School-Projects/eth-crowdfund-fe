@@ -6,9 +6,9 @@
     <div>
       <section class="campaign-card">
         <section>
-        <div class="img-div">Image goes here</div>
+        <div class="img-div"><img :src=campaign.image></div>
         <div class="campaign-info">
-          <h1> {{campaign.title}}</h1>
+          <h1> {{campaign.name}}</h1>
           <p>{{campaign.description}}</p>
         </div>
         </section>
@@ -32,6 +32,11 @@ export default {
 
 h1 {
   margin: 1rem 0 0 0;
+}
+
+img {
+  width: 100%;
+  height: 100%;
 }
 
 .campaign-card {

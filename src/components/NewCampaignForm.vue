@@ -49,14 +49,14 @@ export default {
       const addresses = await factory.getDeployedCampaigns()
       const campaignAddress = addresses[addresses.length - 1];
       axios.post("http://localhost:3000/api/v1/campaigns/", {
-        name: "Test Campaign",
-        description: "test description",
-        image: "test.jpg",
+        name: this.title,
+        description: this.description,
+        image: "https://picsum.photos/200/300",
         contributors: "1",
         upvote: "2",
-        manager: "3",
+        manager: this.$store.state.accountNum,
         address: campaignAddress,
-        min_contribution: 5.0
+        min_contribution: this.minContribution
       })
         .then((resp) => console.log(resp))
     }
