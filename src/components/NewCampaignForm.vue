@@ -1,6 +1,7 @@
 <template>
   <form @submit.prevent='addCampaign'>
     <input v-model='title' placeholder='Campaign Title' />
+    <input v-model='imageUrl' placeholder='Enter Image Url' />
     <input v-model='minContribution' placeholder='Minimun Wei Contribution' />
     <textarea v-model='description' placeholder='Describe your Campaign...'></textarea>
     <button type='submit' > Create Campaign </button>
@@ -22,6 +23,7 @@ export default {
       description: '',
       minContribution: null,
       userMessage: false,
+      email: '',
       error: null
     }
   },
@@ -41,7 +43,7 @@ export default {
       this.$store.commit('ADD_CAMPAIGN', newCampaign)
     },
     async createCampaign() {
-      if (!this.title && !this.description && !this.minContribution) {
+      if (!this.title && !this.description && !this.minContribution && !this.imageUrl) {
         this.userMessage = true
         return
       }
@@ -53,7 +55,7 @@ export default {
       axios.post("http://localhost:3000/api/v1/campaigns/", {
         name: this.title,
         description: this.description,
-        image: "https://picsum.photos/200/300",
+        image: this.imageUrl,
         contributors: "1",
         upvote: "2",
         manager: this.$store.state.accountNum,
