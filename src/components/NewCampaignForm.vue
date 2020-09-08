@@ -4,12 +4,9 @@
     <input v-model='minContribution' placeholder='Minimun Wei Contribution' />
     <textarea v-model='description' placeholder='Describe your Campaign...'></textarea>
     <button type='submit' > Create Campaign </button>
-    <button @click="createCampaign">
-    Create Campaign Blockchain
-  </button>
   <div v-if="this.userMessage">Please fill out all inputs</div>
    <button @click="displaySummary">
-     Display Summary
+     Console.log summary of Campaign
     </button>
   </form>
 </template>
@@ -34,6 +31,15 @@ export default {
       const summary = await this.$store.state.campaign.getSummary();
       const keySummary = Object.keys(summary).map((key) => summary[key].toString())
       console.log(keySummary)
+    },
+    addCampaign() {
+      const newCampaign = {
+        title: this.title,
+        description: this.description,
+        minContribution: this.minContribution
+      }
+      this.createCampaign()
+      this.$store.commit('ADD_CAMPAIGN', newCampaign)
     },
     async createCampaign() {
       if (!this.title && !this.description && !this.minContribution) {

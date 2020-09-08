@@ -10,7 +10,7 @@
     <p>There is some information missing and this has no styles </p>
     <input v-model='contribution' placeholder='Enter your contribution' type="number"/>
     <button :disabled="!contribution"
-    @click="submitContributionBlockchain">
+    @click="submitContribution">
     Submit Contribution </button>
 
   </section>
@@ -37,14 +37,6 @@ export default {
     this.$store.dispatch('fetchCampaign', campaignAddress)
   },
   methods: {
-    submitContribution() {
-      const newCampaign = {
-        title: this.title,
-        description: this.description,
-        minContribution: this.minContribution
-      }
-      this.$store.commit('ADD_CAMPAIGN', newCampaign)
-    },
     async submitContributionBlockchain() {
       const campaignAddress = "0xe8a0980C2B37C2C4FCE45e579301B00CC824bCFc"
       const campaignInstance = await ethCampaign.at(campaignAddress);
