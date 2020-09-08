@@ -34,9 +34,13 @@ export default {
       console.log(keySummary)
     },
     async createCampaign() {
+      if (!this.title && !this.description && !this.minContribution) {
+        console.log('please fill out all forms')
+        return
+      }
       const accounts = await web3.eth.getAccounts();
-      const factory = await Factory.at("0x7c70286f6991c660a0cC6d52A74aEBbDE45Da380");
-      await factory.createCampaign(100, { from: accounts[0] })
+      const factory = await this.$store.state.factory;
+      await factory.createCampaign(this.minContribution, { from: accounts[0] })
       const addresses = await factory.getDeployedCampaigns()
       const campaignAddress = addresses[addresses.length - 1];
       axios.post("http://localhost:3000/api/v1/campaigns/", {
