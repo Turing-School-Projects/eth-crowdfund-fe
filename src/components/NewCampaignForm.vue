@@ -7,6 +7,7 @@
     <button @click="createCampaign">
     Create Campaign Blockchain
   </button>
+  <div v-if="this.userMessage">Please fill out all inputs</div>
    <button @click="displaySummary">
      Display Summary
     </button>
@@ -24,7 +25,8 @@ export default {
     return {
       title: '',
       description: '',
-      minContribution: null
+      minContribution: null,
+      userMessage: false
     }
   },
   methods: {
@@ -35,11 +37,11 @@ export default {
     },
     async createCampaign() {
       if (!this.title && !this.description && !this.minContribution) {
-        console.log('please fill out all forms')
+        this.userMessage = true
         return
       }
       const accounts = await web3.eth.getAccounts();
-      const factory = await this.$store.state.factory;
+      const factory = await Factory.at("0x7c70286f6991c660a0cC6d52A74aEBbDE45Da380");
       await factory.createCampaign(this.minContribution, { from: accounts[0] })
       const addresses = await factory.getDeployedCampaigns()
       const campaignAddress = addresses[addresses.length - 1];

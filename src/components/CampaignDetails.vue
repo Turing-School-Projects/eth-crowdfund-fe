@@ -10,7 +10,7 @@
     <p>There is some information missing and this has no styles </p>
     <input v-model='contribution' placeholder='Enter your contribution' type="number"/>
     <button :disabled="!contribution"
-    @click="ethCampaign.contribute({from: accountNum, value: this.contribution})">
+    @click="submitContributionBlockchain">
     Submit Contribution </button>
 
   </section>
@@ -19,6 +19,7 @@
 <script>
 
 import web3 from "../contracts/web3";
+import ethCampaign from "../contracts/campaign";
 
 web3.eth.getAccounts()
   .then((accounts) => console.log(accounts[0]))
@@ -27,14 +28,8 @@ export default {
   name: 'CampaignDetails',
   props: ['address'],
   computed: {
-    ethCampaign() {
-      return this.$store.state.campaign
-    },
     campaign() {
       return this.$store.getters.getSingleCampaign(Number(this.address))
-    },
-    accountNum() {
-      return this.$store.state.accountNum
     }
   },
   created() {
@@ -49,6 +44,11 @@ export default {
         minContribution: this.minContribution
       }
       this.$store.commit('ADD_CAMPAIGN', newCampaign)
+    },
+    async submitContributionBlockchain() {
+      const campaignAddress = "0xe8a0980C2B37C2C4FCE45e579301B00CC824bCFc"
+      const campaignInstance = await ethCampaign.at(campaignAddress);
+      campaignInstance.contribute({ from: this.$store.state.accountNum, value: this.contribution })
     }
   },
   data() {
