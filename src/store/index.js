@@ -4,7 +4,7 @@ import axios from "axios";
 import factory from "../contracts/factory";
 import campaign from "../contracts/campaign";
 import web3 from "../contracts/web3";
-import { API_URL } from "../env";
+// import { API_URL } from "../env";
 
 export default createStore({
   state: {
