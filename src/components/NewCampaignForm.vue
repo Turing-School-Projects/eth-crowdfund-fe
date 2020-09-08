@@ -18,21 +18,6 @@ import axios from "axios";
 import web3 from "../contracts/web3";
 import Factory from "../contracts/factory";
 
-web3.eth.getAccounts()
-  .then((accounts) => console.log(accounts[0]))
-
-// axios.post("http://localhost:3000/api/v1/campaigns/", {
-//   name: "Test Campaign",
-//   description: "test description",
-//   image: "test.jpg",
-//   contributors: "1",
-//   upvote: "2",
-//   manager: "3",
-//   address: "1",
-//   min_contribution: 5.0
-// })
-//   .then((resp) => console.log(resp))
-
 export default {
   name: 'NewCampaignForm',
   data() {
