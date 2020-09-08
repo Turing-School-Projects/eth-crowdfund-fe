@@ -37,7 +37,7 @@ export default {
     this.$store.dispatch('fetchCampaign', campaignAddress)
   },
   methods: {
-    async submitContributionBlockchain() {
+    async submitContribution() {
       const campaignAddress = "0xe8a0980C2B37C2C4FCE45e579301B00CC824bCFc"
       const campaignInstance = await ethCampaign.at(campaignAddress);
       campaignInstance.contribute({ from: this.$store.state.accountNum, value: this.contribution })
