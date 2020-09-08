@@ -5,6 +5,7 @@
     <textarea v-model='description' placeholder='Describe your Campaign...'></textarea>
     <button type='submit' > Create Campaign </button>
   <div v-if="this.userMessage">Please fill out all inputs</div>
+  <div v-if="this.error">{{this.error}}</div>
   </form>
 </template>
 
@@ -20,7 +21,8 @@ export default {
       title: '',
       description: '',
       minContribution: null,
-      userMessage: false
+      userMessage: false,
+      error: null
     }
   },
   methods: {
@@ -59,6 +61,8 @@ export default {
         min_contribution: this.minContribution
       })
         .then((resp) => console.log(resp))
+        // eslint-disable-next-line no-return-assign
+        .catch((error) => this.error = error.message)
     }
   },
   computed: {
