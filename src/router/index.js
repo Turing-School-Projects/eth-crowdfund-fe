@@ -20,6 +20,11 @@ const routes = [
     path: "/campaigns/new",
     name: "New Camaign",
     component: () => import("../views/campaigns/newCampaign.vue")
+  },
+  {
+    path: "/campaigns/request",
+    name: "Campaign Request",
+    component: () => import("../components/CampaignRequestForm.vue")
   }
 ];
 
