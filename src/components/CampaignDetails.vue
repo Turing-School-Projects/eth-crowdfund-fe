@@ -18,7 +18,10 @@
         <button :disabled="!contribution"
         @click="submitContribution">
         Submit Contribution </button>
-        <div v-if="userMessage"> Please enter a contribution over {{campaign.min_contribution}}</div>
+        <p class="user-message"
+          v-if="userMessage">
+          Please enter a contribution over {{campaign.min_contribution}}!
+        </p>
       </div>
     </div>
   </div>
@@ -81,6 +84,10 @@ section {
   margin: 1rem;
 }
 
+.user-message {
+  font-weight: 600;
+}
+
 .contribution-area {
   border: 3px solid black;
   margin-left: 2rem;
@@ -94,8 +101,8 @@ section {
 }
 
 img {
-  width: 20rem;
-  height: 30rem;
+  width: 30vw;
+  height: 46.67vh;
 }
 
 .details-card {

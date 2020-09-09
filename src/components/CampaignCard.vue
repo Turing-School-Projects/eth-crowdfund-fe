@@ -47,8 +47,8 @@ img {
   align-items: center;
   text-decoration: none;
   box-shadow: 1px 1px 3px grey;
-  height: 30rem;
-  width: 18rem;
+  height: 60vh;
+  width: 20vw;
   box-sizing: border-box;
   transform: scale(1);
   &:hover {
@@ -61,8 +61,8 @@ img {
 }
 
 .img-div {
-  height: 15rem;
-  width: 18rem;
+  height: 30vh;
+  width: 20vw;
   background: aqua;
 }
 
