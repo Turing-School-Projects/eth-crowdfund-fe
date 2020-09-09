@@ -14,6 +14,7 @@
 import axios from "axios";
 import web3 from "../contracts/web3";
 import Factory from "../contracts/factory";
+import { VUE_APP_API_URL } from "../env";
 
 export default {
   name: 'NewCampaignForm',
@@ -52,12 +53,12 @@ export default {
       await factory.createCampaign(this.minContribution, { from: accounts[0] })
       const addresses = await factory.getDeployedCampaigns()
       const campaignAddress = addresses[addresses.length - 1];
-      axios.post("http://localhost:3000/api/v1/campaigns/", {
+      axios.post(`${VUE_APP_API_URL}campaigns/`, {
         name: this.title,
         description: this.description,
         image: this.imageUrl,
-        contributors: "1",
-        upvote: "2",
+        contributors: "0",
+        upvote: "0",
         manager: this.$store.state.accountNum,
         address: campaignAddress,
         min_contribution: this.minContribution
@@ -65,6 +66,13 @@ export default {
         .then((resp) => console.log(resp))
         // eslint-disable-next-line no-return-assign
         .catch((error) => this.error = error.message)
+      this.clearInputs()
+    },
+    clearInputs() {
+      this.title = ''
+      this.description = ''
+      this.imageUrl = ''
+      this.minContribution = null
     }
   },
   computed: {

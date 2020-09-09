@@ -4,7 +4,9 @@ import axios from "axios";
 import factory from "../contracts/factory";
 import campaign from "../contracts/campaign";
 import web3 from "../contracts/web3";
-import { API_URL } from "../env";
+import { VUE_APP_API_URL } from "../env";
+
+require('dotenv').config()
 
 export default createStore({
   state: {
@@ -39,7 +41,9 @@ export default createStore({
       commit("setFactory", instance);
     },
     fetchAllCampaigns: async ({ commit }) => {
-      const response = await axios.get('http://localhost:3000/api/v1/campaigns/')
+      console.log('API_URL', process.env)
+      console.log('API_URL imported', VUE_APP_API_URL)
+      const response = await axios.get(`${VUE_APP_API_URL}campaigns/`)
       commit('setCampaigns', response.data);
     },
     fetchCampaign: async ({ commit }, address) => {
