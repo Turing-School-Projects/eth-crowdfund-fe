@@ -53,8 +53,9 @@ img {
   transform: scale(1);
   &:hover {
     transform: scale(1.02);
-    box-shadow: 1px 1px 10px grey;
+    box-shadow: 2px 2px 10px black;
     transition: all 0.25s;
+    text-decoration: underline;
   }
 }
 
