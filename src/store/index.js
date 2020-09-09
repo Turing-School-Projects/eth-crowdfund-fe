@@ -37,7 +37,7 @@ export default createStore({
       commit("setTodos", response.data);
     },
     fetchFactory: async ({ commit }) => {
-      const instance = await factory.at("0x7c70286f6991c660a0cC6d52A74aEBbDE45Da380");
+      const instance = await factory.at(process.env.VUE_APP_FACTORY_ADDRESS);
       commit("setFactory", instance);
     },
     fetchAllCampaigns: async ({ commit }) => {

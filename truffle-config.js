@@ -2,7 +2,7 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 const path = require("path");
 require("dotenv").config();
 
-const { INFURA_PHRASE, INFURA_KEY } = process.env;
+const { VUE_APP_INFURA_PHRASE, VUE_APP_INFURA_KEY } = process.env;
 
 module.exports = {
   contracts_directory: "./ethereum/contracts",
@@ -33,7 +33,7 @@ module.exports = {
     },
     rinkeby: {
       provider() {
-        return new HDWalletProvider(INFURA_PHRASE, `https://rinkeby.infura.io/v3/${INFURA_KEY}`);
+        return new HDWalletProvider(VUE_APP_INFURA_PHRASE, `https://rinkeby.infura.io/v3/${VUE_APP_INFURA_KEY}`);
       },
       network_id: 4,
       gas: 4500000,
