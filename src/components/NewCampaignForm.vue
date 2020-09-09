@@ -33,11 +33,6 @@ export default {
     }
   },
   methods: {
-    async displaySummary() {
-      const summary = await this.$store.state.campaign.getSummary();
-      const keySummary = Object.keys(summary).map((key) => summary[key].toString())
-      console.log(keySummary)
-    },
     addCampaign() {
       const newCampaign = {
         title: this.title,
@@ -53,7 +48,7 @@ export default {
         return
       }
       const accounts = await web3.eth.getAccounts();
-      const factory = await Factory.at("0x7c70286f6991c660a0cC6d52A74aEBbDE45Da380");
+      const factory = await Factory.at(process.env.VUE_APP_FACTORY_ADDRESS);
       await factory.createCampaign(this.minContribution, { from: accounts[0] })
       const addresses = await factory.getDeployedCampaigns()
       const campaignAddress = addresses[addresses.length - 1];

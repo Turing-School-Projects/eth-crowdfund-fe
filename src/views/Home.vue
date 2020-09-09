@@ -9,7 +9,7 @@
 import CampaignContainer from '@/components/Container.vue';
 import factory from '../contracts/factory'
 
-factory.at('0x7c70286f6991c660a0cC6d52A74aEBbDE45Da380')
+factory.at(process.env.VUE_APP_FACTORY_ADDRESS)
   .then((instance) => instance.getDeployedCampaigns())
   .then((campaignAddresses) => console.log(campaignAddresses))
 
