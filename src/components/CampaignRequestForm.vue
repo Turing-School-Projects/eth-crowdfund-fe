@@ -1,7 +1,8 @@
 <template>
   <form @submit.prevent='addCampaign'>
-    <input v-model='name' placeholder='Name your Request' />
+    <input v-model='name' placeholder='Request Title' />
     <input v-model='amount' type='number' placeholder='Request Amount' />
+    <input v-model='wallet' placeholder="Wallet address. Defaults to current CryptoWallet address" />
     <textarea v-model='description' placeholder='Request description'></textarea>
     <button type='submit' > Create Campaign </button>
   <div v-if="this.userMessage">Please fill out all inputs</div>

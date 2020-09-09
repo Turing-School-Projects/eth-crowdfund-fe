@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Campaigns</router-link> |
-      <router-link to="/campaigns/new">New Campaign</router-link>
+      <router-link to="/campaigns/new">New Campaign</router-link> |
+      <router-link to="/campaigns/user">Your Campaigns</router-link>
     </div>
     <router-view/>
   </div>

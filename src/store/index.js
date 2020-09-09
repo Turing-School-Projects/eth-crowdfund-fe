@@ -6,16 +6,15 @@ import campaign from "../contracts/campaign";
 import web3 from "../contracts/web3";
 import { VUE_APP_API_URL } from "../env";
 
-require('dotenv').config()
-
 export default createStore({
-  state: {
+  state: () => ({
     campaigns: [],
     todos: [],
     factory: {},
     accountNum: null,
-    campaign: {}
-  },
+    campaign: {},
+    userCampaigns: []
+  }),
   getters: {
     /* eslint-disable-next-line */
     getSingleCampaign: state => address => state.campaigns.find((campaign) => campaign.address === address),
@@ -41,10 +40,10 @@ export default createStore({
       commit("setFactory", instance);
     },
     fetchAllCampaigns: async ({ commit }) => {
-      console.log('API_URL', process.env)
-      console.log('API_URL imported', VUE_APP_API_URL)
-      const response = await axios.get(`${VUE_APP_API_URL}campaigns/`)
-      commit('setCampaigns', response.data);
+      console.log("API_URL", process.env);
+      console.log("API_URL imported", VUE_APP_API_URL);
+      const response = await axios.get(`${VUE_APP_API_URL}campaigns/`);
+      commit("setCampaigns", response.data);
     },
     fetchCampaign: async ({ commit }, address) => {
       console.log("campaignAddress", address);
