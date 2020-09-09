@@ -1,22 +1,26 @@
 /* eslint-disable max-len */
 <template>
   <div class="details-card">
+    <h1>{{ campaign.name }}</h1>
+    <div class="campaign-section">
     <section>
-      <div>
+      <div class="img-area">
         <img :src=campaign.image />
       </div>
       <div class= "campaign-text">
-      <h2>{{ campaign.name }}</h2>
       <h4>{{ campaign.description }}</h4>
-      <p>Minimum Contribution  <b> {{ campaign.min_contribution }}</b></p>
-      <div>Make a contribution</div>
-      <input v-model='contribution' placeholder='Enter your contribution' type="number"/>
-      <button :disabled="!contribution"
-      @click="submitContribution">
-      Submit Contribution </button>
-      <div v-if="userMessage"> Please enter a contribution over {{campaign.min_contribution}}</div>
       </div>
     </section>
+      <div class="contribution-area">
+        <h2>Make a contribution</h2>
+        <p>Minimum Contribution  <b> {{ campaign.min_contribution }}</b></p>
+        <input v-model='contribution' placeholder='Enter your contribution' type="number"/>
+        <button :disabled="!contribution"
+        @click="submitContribution">
+        Submit Contribution </button>
+        <div v-if="userMessage"> Please enter a contribution over {{campaign.min_contribution}}</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -53,7 +57,7 @@ export default {
   },
   data() {
     return {
-      contribution: 0,
+      contribution: null,
       userMessage: null
     }
   }
@@ -65,22 +69,46 @@ section {
   display: flex;
   justify-content: center;
   text-align: left;
+  background: tan;
+  box-shadow: 2px 2px 2px grey;
+  align-items: center;
+  border: 3px solid black;
+  width: 45rem;
+}
+
+.img-area {
+  display: inherit;
+  margin: 1rem;
+}
+
+.contribution-area {
+  border: 3px solid black;
+  margin-left: 2rem;
+
+}
+
+.campaign-section {
+  display: flex;
+  margin: auto;
+  width: 60rem;
 }
 
 img {
   width: 20rem;
   height: 30rem;
+  border: 3px solid black;
 }
 
 .details-card {
-  width: 40rem;
   margin: auto;
   margin-top: 3em;
 }
 
 input {
   display: block;
-  margin: 0rem 1rem 1rem 0rem;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .campaign-text {
