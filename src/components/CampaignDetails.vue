@@ -66,11 +66,7 @@ export default {
   },
   data() {
     return {
-<<<<<<< HEAD
       contribution: null,
-=======
-      contribution: 0,
->>>>>>> main
       userMessage: null
     }
   }
