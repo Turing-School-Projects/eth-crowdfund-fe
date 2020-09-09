@@ -13,7 +13,7 @@
     <router-link
       style="text-decoration: none;"
       :to="{ name: 'Campaign Request',
-      params: {id: campaign.id}}">
+      params: {id: campaign.id, address: campaign.address}}">
       Create A Request
     </router-link>
   </div>

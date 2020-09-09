@@ -44,7 +44,6 @@ export default createStore({
       commit("setCampaigns", response.data);
     },
     fetchCampaign: async ({ commit }, address) => {
-      console.log("campaignAddress", address);
       const instance = await campaign.at(address);
       commit("setCampaign", instance);
     },
@@ -52,8 +51,11 @@ export default createStore({
       const accounts = await web3.eth.getAccounts();
       commit("setAccountNum", accounts[0]);
     },
-    createWithdrawalRequest: async ({ commit }, newCampaign) => {
+    createWithdrawalRequest: async ({ commit }, { newCampaign, address }) => {
+      console.log(address, "in action");
+      const campaignInstance = await campaign.at(address);
       console.log(newCampaign);
+      console.log(campaignInstance);
       // const response = await axios.post(`${VUE_APP_API_URL}requests/`, newCampaign);
       commit("setTodos", {});
     }

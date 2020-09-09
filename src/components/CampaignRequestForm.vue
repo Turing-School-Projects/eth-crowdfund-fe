@@ -22,7 +22,7 @@
 <script>
 export default {
   name: 'CampaignRequestForm',
-  props: ['id'],
+  props: ['id', 'address'],
   data() {
     return {
       name: '',
@@ -63,11 +63,12 @@ export default {
         description: this.description,
         image: this.image
       }
-      this.$store.dispatch('createWithdrawalRequest', JSON.stringify(newCampaign))
+      this.$store.dispatch('createWithdrawalRequest', { newCampaign, address: this.address })
     }
   }
 }
 </script>
+
 <style lang='scss'> form { display: flex;
   flex-flow: column;
   justify-content: space-around;

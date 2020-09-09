@@ -24,7 +24,7 @@ const routes = [
     component: () => import("../views/campaigns/userCampaigns.vue")
   },
   {
-    path: "/campaigns/requests/:id",
+    path: "/campaigns/requests/:id/:address",
     name: "Campaign Request",
     component: () => import("../components/CampaignRequestForm.vue"),
     props: (route) => ({ ...route.params })
