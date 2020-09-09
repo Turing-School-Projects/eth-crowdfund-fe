@@ -40,8 +40,6 @@ export default createStore({
       commit("setFactory", instance);
     },
     fetchAllCampaigns: async ({ commit }) => {
-      console.log("API_URL", process.env);
-      console.log("API_URL imported", VUE_APP_API_URL);
       const response = await axios.get(`${VUE_APP_API_URL}campaigns/`);
       commit("setCampaigns", response.data);
     },
@@ -53,13 +51,12 @@ export default createStore({
     fetchAccountNum: async ({ commit }) => {
       const accounts = await web3.eth.getAccounts();
       commit("setAccountNum", accounts[0]);
+    },
+    createWithdrawalRequest: async ({ commit }, newCampaign) => {
+      console.log(newCampaign);
+      // const response = await axios.post(`${VUE_APP_API_URL}requests/`, newCampaign);
+      commit("setTodos", {});
     }
-    // createBECampaign: async ({ commit }, campaignRequest) => {
-    //   const accounts = await web3.eth.getAccounts();
-    //   const newCampaign = { ...campaignRequest, manager: accounts[1] };
-    //   const response = await axios.post(`${API_URL}campaigns`, newCampaign);
-    //   commit("ADD_CAMPAIGN", response);
-    // }
   },
   modules: {}
 });
