@@ -3,8 +3,8 @@
     <div class="about">
     </div>
     <h2>Top Fundraisers</h2>
-    <button @click="previousPage">Previous</button>
-    <button @click="nextPage">Next</button>
+    <button :disabled="startIndex === 0" @click="previousPage">⇦</button>
+    <button :disabled="startIndex + 4 > campaigns.length" @click="nextPage">⇨</button>
     <section class="campaign-container">
       <div v-for="campaign in campaigns.slice(startIndex, startIndex + 4)" v-bind:key="campaign.id">
         <CampaignCard v-bind:campaign="campaign" />
@@ -48,6 +48,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+  button {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    font-size: 20px;
+    border: 1px solid black;
+    margin: .1rem;
+  }
 
   .campaign-container {
     margin: 1rem 0rem 4rem 4rem;

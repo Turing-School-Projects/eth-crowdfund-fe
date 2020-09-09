@@ -69,7 +69,7 @@ section {
   display: flex;
   justify-content: center;
   text-align: left;
-  background: tan;
+  background: whitesmoke;
   box-shadow: 2px 2px 2px grey;
   align-items: center;
   border: 3px solid black;
@@ -84,7 +84,7 @@ section {
 .contribution-area {
   border: 3px solid black;
   margin-left: 2rem;
-
+  background: #42b983;
 }
 
 .campaign-section {
@@ -96,7 +96,6 @@ section {
 img {
   width: 20rem;
   height: 30rem;
-  border: 3px solid black;
 }
 
 .details-card {

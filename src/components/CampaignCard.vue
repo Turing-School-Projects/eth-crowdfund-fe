@@ -56,6 +56,7 @@ img {
     box-shadow: 2px 2px 10px black;
     transition: all 0.25s;
     text-decoration: underline;
+    outline: 1px solid black;
   }
 }
 
