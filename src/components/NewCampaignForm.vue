@@ -1,9 +1,13 @@
 <template>
   <form @submit.prevent='addCampaign'>
-    <input v-model='title' placeholder='Campaign Title' />
-    <input v-model='imageUrl' placeholder='Enter Image Url' />
-    <input v-model='minContribution' placeholder='Minimun Wei Contribution' />
-    <textarea v-model='description' placeholder='Describe your Campaign...'></textarea>
+    <label>Campaign Title</label>
+    <input v-model='title' placeholder='Ex: Arc Thrift needs a new roof' />
+    <label>Enter Image Url</label>
+    <input v-model='imageUrl' placeholder='Ex: https://picsum.photos/200/300' />
+    <label>Minimum Wei Contribution</label>
+    <input v-model='minContribution' placeholder='Ex: 100' />
+    <label>Describe your campaign</label>
+    <textarea v-model='description' placeholder='Ex: Help out a Denver-area store serving our community'></textarea>
     <button type='submit' > Create Campaign </button>
   <div v-if="this.userMessage">Please fill out all inputs</div>
   <div v-if="this.error">{{this.error}}</div>
@@ -97,10 +101,14 @@ form {
   align-items: center;
   height: 45vh;
   width: 90vw;
-
+label {
+  align-self: flex-start;
+  margin-left: 17.5vw;
+}
   input {
     height: 2em;
     width: 55vw;
+    margin-bottom: 2vh;
   }
 
   textarea {

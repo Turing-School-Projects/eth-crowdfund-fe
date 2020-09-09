@@ -12,7 +12,7 @@
       </div>
     </section>
       <div class="contribution-area">
-        <h2>Make a contribution</h2>
+        <h3>Make a Contribution</h3>
         <p>Minimum Contribution  <b> {{ campaign.min_contribution }}</b></p>
         <input v-model='contribution' placeholder='Enter your contribution' type="number"/>
         <button :disabled="!contribution"
@@ -22,6 +22,12 @@
           v-if="userMessage">
           Please enter a contribution over {{campaign.min_contribution}}!
         </p>
+        <p><b>Past contributors:</b></p>
+        <ul>
+        <li>Andy: $10 </li>
+        <li>Edwin: $10 </li>
+        <li>Jack: $1 </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -82,6 +88,11 @@ section {
 .img-area {
   display: inherit;
   margin: 1rem;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
 .user-message {
