@@ -5,7 +5,7 @@
         <img class="logo" src="@/assets/etho-boost-logo.png"/>
         <h1>Etho-Boost</h1>
       <router-link to="/">Campaigns</router-link>
-      <router-link to="/campaigns/new">New Campaign</router-link>
+      <router-link to="/campaigns/new"> Create a New Campaign</router-link>
       <router-link to="/campaigns/user">Your Campaigns</router-link>
       </div>
     </div>
