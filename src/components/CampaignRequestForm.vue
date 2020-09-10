@@ -67,6 +67,7 @@ export default {
         manager: this.accountNum,
         address: this.address
       }
+
       try {
         this.$store.dispatch('createWithdrawalRequest', payload)
       } catch (error) {
