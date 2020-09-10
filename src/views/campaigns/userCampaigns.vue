@@ -1,7 +1,7 @@
 <template>
   <h2 @click="userView = true"> Campaigns I've Created</h2>
   <h2 @click="userView = false"> Campaigns I've Contributed To </h2>
-  <div v-if="userView" class="container">
+  <div v-if="userView" v-bind:class="{ active: userView }" class="container">
     <MyCreatedCampaigns />
   </div>
   <div v-if="!userView" class="container">
@@ -34,6 +34,9 @@ export default {
 h2 {
   display: inline-block;
   margin: 2rem 2rem;
+}
+.active {
+  color: white;
 }
 
 .container {
