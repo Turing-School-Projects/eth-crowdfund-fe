@@ -1,7 +1,7 @@
 <template>
 
   <div class="hello">
-    Waiting For MetaMasK to complete Transaction
+    <h1>{{mainMessage}}</h1>
     <div class="main-image">
       <img :src="mainImageSrc">
     </div>
@@ -15,32 +15,66 @@ export default {
   name: 'Loading',
   data() {
     return {
-      mainImageSrc: 'https://i.imgur.com/cZftGOD.png?1'
+      mainImageSrc: 'https://i.imgur.com/cZftGOD.png?1',
+      images: [],
+      mainMessage: 'Waiting for Metamask Connection',
+      messages: []
     }
-  },  
+  },
   created() {
     const self = this
     this.images = [
       {
         id: '1',
-        image: 'https://i.imgur.com/cZftGOD.png?1'
+        image: 'https://i.imgur.com/cZftGOD.png?1',
+        message: 'Waiting for Metamask Connection'
       },
       {
         id: '2',
         // eslint-disable-next-line max-len
-        image: 'https://i.imgur.com/6I1jB54.png?3'
+        image: 'https://i.imgur.com/6I1jB54.png?3',
+        message: 'Getting Blockchain Address'
       },
       {
         id: '3',
-        image: 'https://i.imgur.com/vy0OuXC.png'
+        image: 'https://i.imgur.com/vy0OuXC.png',
+        message: 'Adding New Campaign to Blockchain'
       },
       {
         id: '4',
         // eslint-disable-next-line max-len
-        image: 'https://i.imgur.com/6I1jB54.png?3'
+        image: 'https://i.imgur.com/6I1jB54.png?3',
+        message: 'Almost finished ...'
+      }
+    ]
+    this.messages = [
+      {
+        id: '1',
+        message: 'Waiting for Metamask Connection'
+      },
+      {
+        id: '1',
+        message: 'Waiting for Metamask Connection'
+      },
+      {
+        id: '2',
+        message: 'Connecting Ethereum Blockchain'
+      },
+      {
+        id: '3',
+        message: 'Creating Your Campaign'
+      },
+      {
+        id: '3',
+        message: 'Adding New Campaign to Blockchain'
+      },
+      {
+        id: '4',
+        message: 'Almost finished ...'
       }
     ]
     let i = 0
+    let j = 0
     setInterval(
       /* eslint-disable-next-line */
       function() { 
@@ -50,6 +84,13 @@ export default {
           i = 0
         }
       }, 1000
+    );
+    setInterval(
+      /* eslint-disable-next-line */
+      function() { 
+        self.mainMessage = self.messages[j].message;
+        j += 1
+      }, 5000
     );
 
   }

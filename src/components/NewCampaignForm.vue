@@ -1,4 +1,5 @@
 <template>
+  <h1  v-if="!this.loading"> Create a New Campaign </h1>
   <form v-if="!this.loading" @submit.prevent='addCampaign'>
     <label>Campaign Title</label>
     <input v-model='title' placeholder='Ex: Arc Thrift needs a new roof' />
@@ -32,7 +33,7 @@ export default {
       userMessage: false,
       email: '',
       error: null,
-      loading: true
+      loading: false
     }
   },
   methods: {
