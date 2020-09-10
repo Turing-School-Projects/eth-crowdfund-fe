@@ -25,6 +25,18 @@ export default {
 </script>
 
 <style lang="scss">
+@mixin pixelate($size, $base, $accent: rgba(0,0,0,.25)) {
+  background: $base;
+  background-image:
+    linear-gradient(45deg,
+    $accent 25%, transparent 0,
+    transparent 75%, $accent 0),
+    linear-gradient(45deg,
+    $accent 25%, transparent 0,
+    transparent 75%, $accent 0);
+  background-position: 0 0, $size $size;
+  background-size: 2*$size 2*$size;
+}
 
 .links-section {
   align-self: center;
@@ -40,21 +52,15 @@ export default {
 }
 
 body {
+  @include pixelate(3px, #bdae93, #a89984)
   margin: 0;
-  background: url(
-  "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmci" +
-  "IHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1Ii" +
-  "BmaWxsPSIjOWU5ZTllIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2" +
-  "Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiM4ODgiIH" +
-  "N0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=");
 }
 
 #nav {
   padding: .8em;
-  padding-bottom: 0;
-  background: #42b983;
+  background: #689d6a;
   height: 5rem;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid #2c3e50;
   display: grid;
   grid-template-columns: 21vw 79vw;
 
