@@ -58,7 +58,7 @@ export default {
         from: this.$store.state.accountNum,
         value: web3.utils.toWei(this.contribution, "ether")
       })
-      if (result && (this.contribution <= this.campaign.min_contribution)) {
+      if (result && (web3.utils.toWei(this.contribution, "ether") > this.campaign.min_contribution.toString())) {
         try {
           await axios.put(
             `${VUE_APP_API_URL}campaigns/${this.campaign.id}`,
