@@ -15,14 +15,13 @@
         <h3>Make a Contribution</h3>
         <p>To become an approver of this campaign please contribute more than:
           <b> {{ ethMinContribution() }} ETH</b></p>
-        <input v-model='contribution' placeholder='Enter your contribution' type="number"/>
+        <input v-model='contribution' placeholder='Enter your contribution (ETH)' type="number"/>
         <button :disabled="!contribution"
         @click="submitContribution">
         Submit Contribution </button>
-        <p class="user-message"
-          v-if="userMessage">
-          Please enter a contribution over {{ ethMinContribution() }} ETH!
-        </p>
+        <button :disabled="!contribution"
+        @click="convertToDollars">
+        Convert To USD </button>
         <p><b>Past contributors:</b></p>
         <ul>
         <li>Andy: $10 </li>
@@ -35,8 +34,10 @@
 </template>
 
 <script>
+import axios from "axios";
 import web3 from "../contracts/web3";
 import ethCampaign from "../contracts/campaign";
+import { VUE_APP_API_URL } from "../env";
 
 web3.eth.getAccounts()
   .then((accounts) => console.log(accounts[0]))
@@ -49,23 +50,26 @@ export default {
       return this.$store.getters.getSingleCampaign(this.address)
     }
   },
-  created() {
-    const campaignAddress = "0xe8a0980C2B37C2C4FCE45e579301B00CC824bCFc"
-    this.$store.dispatch('fetchCampaign', campaignAddress)
-  },
   methods: {
+    /* eslint-disable */
     async submitContribution() {
-      // const campaignAddress = "0xe8a0980C2B37C2C4FCE45e579301B00CC824bCFc"
-      if (this.contribution <= this.campaign.min_contribution) {
-        this.userMessage = true;
-        return
-      }
       const campaignInstance = await ethCampaign.at(this.address);
-      campaignInstance.contribute({
+      const result = await campaignInstance.contribute({
         from: this.$store.state.accountNum,
         value: web3.utils.toWei(this.contribution, "ether")
       })
+      if (result && (this.contribution <= this.campaign.min_contribution)) {
+        try {
+          await axios.put(
+            `${VUE_APP_API_URL}campaigns/${this.campaign.id}`,
+            { contributors: (this.campaign.contributors + 1) }
+          );
+        } catch (error) {
+          return { error };
+        }
+      }
     },
+    /* eslint-enable */
     ethMinContribution() {
       return web3.utils.fromWei(this.campaign.min_contribution.toString(), "ether")
     }
