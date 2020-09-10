@@ -28,7 +28,7 @@ export default {
       const accounts = await web3.eth.getAccounts();
       console.log(campaignInstance)
       const result = await campaignInstance.approveRequest(0, { from: this.$store.state.accountNum, gas: "1000000"})
-      const request = await campaignInstance.request(0)
+      const request = await campaignInstance.requests(0)
       console.log('result', result)
       console.log('request', request)
     }
