@@ -2,8 +2,8 @@
   <div id="app">
     <div id="nav">
       <div class= "logo-section">
-        <h1>Etho-Boost</h1>
         <img class="logo" src="@/assets/etho-boost-logo.png"/>
+        <h1>Etho-Boost</h1>
       <router-link to="/">Campaigns</router-link>
       <router-link to="/campaigns/new">New Campaign</router-link>
       </div>
@@ -47,6 +47,9 @@ body {
   text-align: left;
   height: 10vh;
   display: flex;
+  h1 {
+    font-family: 'Racing Sans One', cursive;
+  }
 }
 
 #nav {
