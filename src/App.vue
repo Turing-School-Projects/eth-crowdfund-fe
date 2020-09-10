@@ -1,9 +1,13 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Campaigns</router-link> |
-      <router-link to="/campaigns/new">New Campaign</router-link> |
+      <div class= "logo-section">
+        <img class="logo" src="@/assets/etho-boost-logo.png"/>
+        <h1>Etho-Boost</h1>
+      <router-link to="/">Campaigns</router-link>
+      <router-link to="/campaigns/new"> Create a New Campaign</router-link>
       <router-link to="/campaigns/user">Your Campaigns</router-link>
+      </div>
     </div>
     <router-view/>
   </div>
@@ -18,13 +22,15 @@ export default {
 <style lang="scss">
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
+
 body {
+
   margin: 0;
   background: url(
   "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmci" +
@@ -34,13 +40,28 @@ body {
   "N0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=");
 }
 
+.logo {
+  height: 9vh;
+}
+
+.logo-section {
+  text-align: left;
+  height: 10vh;
+  display: flex;
+
+  h1 {
+    font-family: 'Racing Sans One', cursive;
+  }
+}
 #nav {
   padding: 30px;
   background: #42b983;
+
   a {
     font-weight: bold;
     color: #2c3e50;
-
+    align-self: center;
+    margin: 1em;
     &.router-link-exact-active {
       color: white;
       text-shadow: 1px black;

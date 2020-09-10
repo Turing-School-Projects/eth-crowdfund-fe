@@ -4,7 +4,7 @@
     </div>
     <h2>Top Fundraisers</h2>
     <button :disabled="startIndex === 0" @click="previousPage">⇦</button>
-    <button :disabled="startIndex + 4 > campaigns.length" @click="nextPage">⇨</button>
+    <button :disabled="startIndex + 4 >= campaigns.length" @click="nextPage">⇨</button>
     <section class="campaign-container">
       <div v-for="campaign in campaigns.slice(startIndex, startIndex + 4)" v-bind:key="campaign.id">
         <CampaignCard v-bind:campaign="campaign" />
