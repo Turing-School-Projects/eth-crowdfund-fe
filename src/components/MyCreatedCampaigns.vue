@@ -8,6 +8,7 @@
           <p>{{campaign.description}}</p>
         </div>
         </section>
+        <button> Finalize Request and Distribute Money</button>
         <div class="requests"><b>Total Request:</b> {{campaign.requests.length}}</div>
         <router-link
           style="text-decoration: none;"
