@@ -51,14 +51,25 @@ export default createStore({
       const accounts = await web3.eth.getAccounts();
       commit("setAccountNum", accounts[0]);
     },
-    createWithdrawalRequest: async ({ commit }, { newCampaign, address }) => {
-      console.log(address, "in action");
+    /* eslint-disable */
+    createWithdrawalRequest: async (context, { request, address, manager }) => {
+      const { description, value, recipient } = request;
+      const weiValue = web3.utils.toWei(value);
+
       const campaignInstance = await campaign.at(address);
-      console.log(newCampaign);
-      console.log(campaignInstance);
-      // const response = await axios.post(`${VUE_APP_API_URL}requests/`, newCampaign);
-      commit("setTodos", {});
+      const result = await campaignInstance.createRequest(description, weiValue, recipient, {
+        from: manager
+      });
+      if (result) {
+        const newRequest = { ...request, value: weiValue };
+        try {
+          await axios.post(`${VUE_APP_API_URL}requests/`, newRequest);
+        } catch (error) {
+          return { error };
+        }
+      }
     }
+    /* eslint-enable */
   },
   modules: {}
 });

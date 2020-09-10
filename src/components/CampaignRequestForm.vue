@@ -6,7 +6,7 @@
     </div>
     <div>
       <label for='eth-value' />
-        <input id='eth-value' v-model='value' type='number' step='0.0001'/>
+        <input id='eth-value' v-model='value' type='number' step='0.0001' min='0' />
     </div>
     <div>
       <label for='recipient-wallet' />
@@ -56,14 +56,22 @@ export default {
         this.recipientWallet = this.accountNum
       }
 
-      const newCampaign = {
-        campaing_id: this.id,
-        value: Number.parseFloat(this.value),
-        recipient: this.recipientWallet,
-        description: this.description,
-        image: this.image
+      const payload = {
+        request: {
+          campaign_id: this.id,
+          value: this.value,
+          recipient: this.recipientWallet,
+          description: this.description,
+          image: this.image
+        },
+        manager: this.accountNum,
+        address: this.address
       }
-      this.$store.dispatch('createWithdrawalRequest', { newCampaign, address: this.address })
+      try {
+        this.$store.dispatch('createWithdrawalRequest', payload)
+      } catch (error) {
+        this.error = { error }
+      }
     }
   }
 }
