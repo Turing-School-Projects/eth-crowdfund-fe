@@ -60,7 +60,7 @@ export default {
     margin: auto;
     margin-top: 2vh;
     margin-bottom: 0;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #2c3e50;
   }
 
   button {
