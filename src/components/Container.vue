@@ -55,11 +55,12 @@ export default {
 
   .container-header {
     display: flex;
-    width: 90vw;
+    width: 93vw;
     justify-content: space-between;
     margin: auto;
-    margin-top: 1vh;
+    margin-top: 2vh;
     margin-bottom: 0;
+    border-bottom: 1px solid black;
   }
 
   button {
@@ -71,13 +72,18 @@ export default {
     margin: .1rem;
   }
 
+  h2 {
+    margin-left: 1.5vw;
+    margin-bottom: 0;
+  }
+
   .button-section {
     margin-top: auto;
     margin-bottom: .5rem;
   }
 
   .campaign-container {
-    margin: 0rem 0rem 4rem 4rem;
+    margin: 2rem 0rem 4rem 4rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: .5rem;
