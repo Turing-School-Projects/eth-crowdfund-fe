@@ -25,18 +25,7 @@ export default {
 </script>
 
 <style lang="scss">
-@mixin pixelate($size, $base, $accent: rgba(0,0,0,.25)) {
-  background: $base;
-  background-image:
-    linear-gradient(45deg,
-    $accent 25%, transparent 0,
-    transparent 75%, $accent 0),
-    linear-gradient(45deg,
-    $accent 25%, transparent 0,
-    transparent 75%, $accent 0);
-  background-position: 0 0, $size $size;
-  background-size: 2*$size 2*$size;
-}
+@import "variables";
 
 .links-section {
   align-self: center;
@@ -48,19 +37,19 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: $dark-blue;
 }
 
 body {
-  @include pixelate(3px, #bdae93, #a89984)
+  @include pixelate(3px, $bg_1, $bg_2)
   margin: 0;
 }
 
 #nav {
   padding: .8em;
-  background: #689d6a;
+  background: $green;
   height: 5rem;
-  border-bottom: 2px solid #2c3e50;
+  border-bottom: 2px solid $dark-blue;
   display: grid;
   grid-template-columns: 21vw 79vw;
 
