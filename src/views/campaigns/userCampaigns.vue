@@ -1,17 +1,22 @@
 <template>
-  <h2 @click="userView = true"> Campaigns I've Created</h2>
-  <h2 @click="userView = false"> Requests I Can Vote On </h2>
-  <div v-if="userView" v-bind:class="{ active: userView }" class="container">
+  <h2 @click="userView = 1"> Campaigns I've Created</h2>
+  <h2 @click="userView = 2"> Requests I Can Vote On </h2>
+  <h2 @click="userView = 3"> Requests I manage </h2>
+  <div v-if="userView === 1" v-bind:class="{ active: userView }" class="container">
     <MyCreatedCampaigns />
   </div>
-  <div v-if="!userView" class="container">
-    <MyContributedCampaigns />
+  <div v-if="userView === 2" class="container">
+    <ApproveRequests />
+  </div>
+  <div v-if="userView === 3" class="container">
+    <FinalizeRequests />
   </div>
 </template>
 
 <script>
 import MyCreatedCampaigns from '@/components/MyCreatedCampaigns.vue';
-import MyContributedCampaigns from '@/components/MyContributedCampaigns.vue';
+import ApproveRequests from '@/components/ApproveRequests.vue';
+import FinalizeRequests from '@/components/FinalizeRequests.vue';
 
 export default {
   name: 'UserCampaigns',
@@ -19,12 +24,13 @@ export default {
   },
   data() {
     return {
-      userView: true
+      userView: 1
     }
   },
   components: {
     MyCreatedCampaigns,
-    MyContributedCampaigns
+    ApproveRequests,
+    FinalizeRequests
   }
 }
 </script>
