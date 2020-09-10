@@ -28,9 +28,7 @@ contract Campaign {
     }
 
     function contribute() public payable {
-        require(msg.value > minimumContribution);
-
-        if (approvers[msg.sender] != true) {
+        if (approvers[msg.sender] != true && msg.value > minimumContribution) {
           approvers[msg.sender] = true;
           approversCount++;
         }
