@@ -15,11 +15,7 @@
         <h3>Make a Contribution</h3>
         <p>To become an approver of this campaign please contribute more than:
           <b> {{ ethMinContribution() }} ETH</b></p>
-<<<<<<< HEAD
         <input v-model='contribution' placeholder='Enter your contribution (ETH)' type='number' step='0.0001' min='0'/>
-=======
-        <input v-model='contribution' placeholder='Enter your contribution (ETH)' type="number"/>
->>>>>>> 53dcbab... Update contribute for to take in ether and send a post request to update the contributors in the db
         <button :disabled="!contribution"
         @click="submitContribution">
         Submit Contribution </button>
@@ -62,11 +58,7 @@ export default {
         from: this.$store.state.accountNum,
         value: web3.utils.toWei(this.contribution, "ether")
       })
-<<<<<<< HEAD
       if (result && (web3.utils.toWei(this.contribution, "ether") > this.campaign.min_contribution.toString())) {
-=======
-      if (result && (this.contribution <= this.campaign.min_contribution)) {
->>>>>>> 53dcbab... Update contribute for to take in ether and send a post request to update the contributors in the db
         try {
           await axios.put(
             `${VUE_APP_API_URL}campaigns/${this.campaign.id}`,
