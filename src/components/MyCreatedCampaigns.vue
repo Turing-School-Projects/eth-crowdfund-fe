@@ -52,13 +52,6 @@ img {
   align-self: flex-end;
 }
 
-.container {
-  margin: 1rem 0rem 4rem 4rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr ;
-  grid-gap: .5rem;
-}
-
 .campaign-card {
   background: whitesmoke;
   display: flex;

@@ -1,6 +1,6 @@
 <template>
-  <h2 @click="userView = true"> My Created Campaigns</h2>
-  <h2 @click="userView = false"> Campaigns I Contributed To </h2>
+  <h2 @click="userView = true"> Campaigns I've Created</h2>
+  <h2 @click="userView = false"> Campaigns I've Contributed To </h2>
   <div v-if="userView" class="container">
     <MyCreatedCampaigns />
   </div>
@@ -34,6 +34,13 @@ export default {
 h2 {
   display: inline-block;
   margin: 2rem 2rem;
+}
+
+.container {
+  margin: 1rem 0rem 4rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  grid-gap: .5rem;
 }
 
 </style>
