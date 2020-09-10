@@ -15,7 +15,7 @@
         <h3>Make a Contribution</h3>
         <p>To become an approver of this campaign please contribute more than:
           <b> {{ ethMinContribution() }} ETH</b></p>
-        <input v-model='contribution' placeholder='Enter your contribution (ETH)' type="number"/>
+        <input v-model='contribution' placeholder='Enter your contribution (ETH)' type='number' step='0.0001' min='0'/>
         <button :disabled="!contribution"
         @click="submitContribution">
         Submit Contribution </button>
