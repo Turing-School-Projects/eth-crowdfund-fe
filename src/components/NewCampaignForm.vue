@@ -108,10 +108,12 @@ form {
   align-items: center;
   height: 45vh;
   width: 90vw;
-label {
-  align-self: flex-start;
-  margin-left: 17.5vw;
-}
+
+  label {
+    align-self: flex-start;
+    margin-left: 17.5vw;
+  }
+
   input {
     height: 2em;
     width: 55vw;

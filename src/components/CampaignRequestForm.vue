@@ -1,22 +1,30 @@
 <template>
-  <form @submit.prevent='createRequest'>
-    <div>
-      <label for='request-title' />
-        <input v-model='name' id='request-title' placeholder='Request Title' />
-    </div>
-    <div>
-      <label for='eth-value' />
-        <input id='eth-value' v-model='value' type='number' step='0.0001' min='0' />
-    </div>
-    <div>
-      <label for='recipient-wallet' />
-      <input v-model='recipientWallet' placeholder="Wallet address. Defaults to current CryptoWallet address" />
-    </div>
-    <textarea v-model='description' placeholder='Request description'></textarea>
-    <button type='submit' > Create Campaign </button>
-  <div v-if="this.userMessage">Please request an Ether amount</div>
-  <div v-if="this.error">{{this.error}}</div>
-  </form>
+  <section class='withdrawal-request'>
+    <h2>Create A Withdrawal Request</h2>
+    <form @submit.prevent='createRequest'>
+      <label for='request-title'>Title</label>
+      <input v-model='name' id='request-title' placeholder='request title' />
+      <label for='eth-value'>Ether Value</label>
+      <div class='value-box'>
+        <input id='eth-value' v-model='value' type='number' step='0.0001' min='0' /><p
+               class='coin'>ETH</p>
+        <p class='text'><i>A note on conversion 1.0 ETH = ~$350.00</i></p>
+      </div>
+      <label for='recipient-wallet'>Wallet Public Address</label>
+      <div class='wallet-address'>
+        <input
+          id='recipient-wallet'
+          v-model='recipientWallet'
+          placeholder="Recipient Wallet Address"
+        />
+        <p class='message'><i>**Defaults to current connected CryptoWallet.**</i></p>
+      </div>
+        <textarea v-model='description' placeholder='Request description'></textarea>
+        <button type='submit' > Create Campaign </button>
+        <div v-if="this.userMessage">Please request an Ether amount</div>
+        <div v-if="this.error">{{this.error}}</div>
+    </form>
+  </section>
 </template>
 
 <script>
@@ -78,35 +86,75 @@ export default {
 }
 </script>
 
-<style lang='scss'> form { display: flex;
+<style scoped lang='scss'>
+form {
+  background: #42b983;
+  display: flex;
   flex-flow: column;
   justify-content: space-around;
   align-items: center;
-  height: 45vh;
-  width: 90vw;
+  margin: 5vh 7vw;
+  padding: 2.1em;
+  height: 65vh;
+  width: 81vw;
 
-  input {
-    height: 2em;
-    width: 55vw;
+  label {
+    align-self: flex-start;
+    margin-left: 15.8vw;
   }
 
-  #eth-value {
-    display: flex;
-    width:55vw;
+  input {
+    width: 49.5vw;
+    height: 2em;
+    font-size: 14px;
+  }
 
-    .whole-value {
-      width: 12vw
+  .value-box {
+    display: grid;
+    margin-bottom: 8px;
+    grid-template-areas:
+          "value coin"
+          "text .";
+
+    #eth-value {
+      grid-area: value;
+      padding: 0px;
+      margin: 0px;
+      width: 47vw;
+    }
+
+    .coin {
+      grid-area: coin;
+      align-self: center;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .text {
+      grid-area: text;
+      margin: 0px;
+      padding: 0px;
+    }
+  }
+
+  .wallet-address {
+
+    #recipient-wallet,
+    .message {
+      margin: 0px;
+      padding: 0px;
     }
   }
 
   textarea {
+    height: 7em;
+    margin-top: 8px;
     resize: none;
-    height: 12em;
-    width: 55vw;
+    width: 49.5vw;
   }
 
   button {
-    width: 45vw;
+    width: 49.5vw;
     height: 2em;
   }
 }
