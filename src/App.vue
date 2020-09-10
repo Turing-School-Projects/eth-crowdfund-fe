@@ -1,8 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Campaigns</router-link> |
+      <div class= "logo-section">
+        <h1>Etho-Boost</h1>
+        <img class="logo" src="@/assets/etho-boost-logo.png"/>
+      <router-link to="/">Campaigns</router-link>
       <router-link to="/campaigns/new">New Campaign</router-link>
+      </div>
     </div>
     <router-view/>
   </div>
@@ -23,7 +27,9 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
 body {
+
   margin: 0;
   background: url(
   "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmci" +
@@ -33,12 +39,24 @@ body {
   "N0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=");
 }
 
+.logo {
+  height: 9vh;
+}
+
+.logo-section {
+  text-align: left;
+  height: 10vh;
+  display: flex;
+}
+
 #nav {
   padding: 30px;
   background: #42b983;
+
   a {
     font-weight: bold;
     color: #2c3e50;
+    align-self: center;
 
     &.router-link-exact-active {
       color: white;
