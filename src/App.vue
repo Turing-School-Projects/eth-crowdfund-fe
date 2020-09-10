@@ -51,6 +51,7 @@ body {
 
 #nav {
   padding: .8em;
+  padding-bottom: 0;
   background: #42b983;
   height: 5rem;
   border-bottom: 1px solid black;
@@ -73,14 +74,14 @@ body {
 
     .logo {
       align-self: flex-start;
-      height: 2.7rem;
+      height: 3.5rem;
     }
 
     h1 {
       display: inline;
       color: #2c3e50;
       font-family: 'Racing Sans One', cursive;
-      font-size: 24px;
+      font-size: 35px;
       padding: 0px;
     }
   }
