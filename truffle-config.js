@@ -33,7 +33,10 @@ module.exports = {
     },
     rinkeby: {
       provider() {
-        return new HDWalletProvider(VUE_APP_INFURA_PHRASE, `https://rinkeby.infura.io/v3/${VUE_APP_INFURA_KEY}`);
+        return new HDWalletProvider(
+          VUE_APP_INFURA_PHRASE,
+          `https://rinkeby.infura.io/v3/${VUE_APP_INFURA_KEY}`
+        );
       },
       network_id: 4,
       gas: 4500000,
