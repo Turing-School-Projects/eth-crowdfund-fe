@@ -10,9 +10,6 @@ const routes = [
   {
     path: "/campaigns/:address",
     name: "Single Campaign",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import("../components/CampaignDetails.vue"),
     props: (route) => ({ ...route.params })
   },
@@ -20,6 +17,17 @@ const routes = [
     path: "/campaigns/new",
     name: "New Camaign",
     component: () => import("../views/campaigns/newCampaign.vue")
+  },
+  {
+    path: "/campaigns/user",
+    name: "User Campaigns",
+    component: () => import("../views/campaigns/userCampaigns.vue")
+  },
+  {
+    path: "/campaigns/requests/:id/:address",
+    name: "Campaign Request",
+    component: () => import("../components/CampaignRequestForm.vue"),
+    props: (route) => ({ ...route.params })
   }
 ];
 
