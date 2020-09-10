@@ -1,6 +1,6 @@
 <template>
   <h2 @click="userView = true"> Campaigns I've Created</h2>
-  <h2 @click="userView = false"> Campaigns I've Contributed To </h2>
+  <h2 @click="userView = false"> Requests I Can Vote On </h2>
   <div v-if="userView" v-bind:class="{ active: userView }" class="container">
     <MyCreatedCampaigns />
   </div>
