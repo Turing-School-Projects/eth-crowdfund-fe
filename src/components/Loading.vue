@@ -92,7 +92,6 @@ export default {
         j += 1
       }, 5000
     );
-
   }
 }
 </script>
