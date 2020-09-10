@@ -21,7 +21,7 @@ export default {
 <style lang="scss">
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -47,11 +47,11 @@ body {
   text-align: left;
   height: 10vh;
   display: flex;
+
   h1 {
     font-family: 'Racing Sans One', cursive;
   }
 }
-
 #nav {
   padding: 30px;
   background: #42b983;
@@ -60,7 +60,7 @@ body {
     font-weight: bold;
     color: #2c3e50;
     align-self: center;
-
+    margin: 1em;
     &.router-link-exact-active {
       color: white;
       text-shadow: 1px black;
