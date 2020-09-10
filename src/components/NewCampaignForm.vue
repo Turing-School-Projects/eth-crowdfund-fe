@@ -33,7 +33,7 @@ export default {
       userMessage: false,
       email: '',
       error: null,
-      loading: false
+      loading: true
     }
   },
   methods: {

@@ -31,7 +31,6 @@ export default {
       },
       {
         id: '2',
-        // eslint-disable-next-line max-len
         image: 'https://i.imgur.com/6I1jB54.png?3',
         message: 'Getting Blockchain Address'
       },
@@ -42,8 +41,19 @@ export default {
       },
       {
         id: '4',
-        // eslint-disable-next-line max-len
         image: 'https://i.imgur.com/6I1jB54.png?3',
+        message: 'Almost finished ...'
+      },
+      {
+        id: '5',
+        // eslint-disable-next-line max-len
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/1200px-Ethereum-icon-purple.svg.png',
+        message: 'Almost finished ...'
+      },
+      {
+        id: '8',
+        // eslint-disable-next-line max-len
+        image: 'https://i.imgur.com/kwjotxY.png?2',
         message: 'Almost finished ...'
       }
     ]
@@ -78,11 +88,12 @@ export default {
     setInterval(
       /* eslint-disable-next-line */
       function() { 
-        self.mainImageSrc = self.images[i].image;
-        i += 1
-        if (i === 4) {
-          i = 0
+        if (j > 2) {
+          self.mainImageSrc = self.images[(i % 2) + 4].image;
+        } else {
+          self.mainImageSrc = self.images[i % 4].image;
         }
+        i += 1
       }, 1000
     );
     setInterval(
