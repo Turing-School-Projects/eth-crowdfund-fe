@@ -13,14 +13,15 @@
     </section>
       <div class="contribution-area">
         <h3>Make a Contribution</h3>
-        <p>Minimum Contribution  <b> {{ campaign.min_contribution }}</b></p>
+        <p>To become an approver of this campaign please contribute more than:
+          <b> {{ ethMinContribution() }} ETH</b></p>
         <input v-model='contribution' placeholder='Enter your contribution' type="number"/>
         <button :disabled="!contribution"
         @click="submitContribution">
         Submit Contribution </button>
         <p class="user-message"
           v-if="userMessage">
-          Please enter a contribution over {{campaign.min_contribution}}!
+          Please enter a contribution over {{ ethMinContribution() }} ETH!
         </p>
         <p><b>Past contributors:</b></p>
         <ul>
@@ -34,7 +35,6 @@
 </template>
 
 <script>
-
 import web3 from "../contracts/web3";
 import ethCampaign from "../contracts/campaign";
 
@@ -61,7 +61,13 @@ export default {
         return
       }
       const campaignInstance = await ethCampaign.at(this.address);
-      campaignInstance.contribute({ from: this.$store.state.accountNum, value: this.contribution })
+      campaignInstance.contribute({
+        from: this.$store.state.accountNum,
+        value: web3.utils.toWei(this.contribution, "ether")
+      })
+    },
+    ethMinContribution() {
+      return web3.utils.fromWei(this.campaign.min_contribution.toString(), "ether")
     }
   },
   data() {

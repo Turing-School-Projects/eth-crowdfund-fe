@@ -35,12 +35,9 @@ contract("Campaign", async accounts => {
 
     assert.equal('100', minimumContribution);
 
-    try {
-      await campaign.contribute({from: accounts[1], value: '1'});
-      assert(false);
-    } catch (e) {
-      assert(e);
-    }
+    await campaign.contribute({from: accounts[1], value: '1'})
+    const isApprover = await campaign.approvers(accounts[1]);
+    assert.equal(false, isApprover);
   });
 
   it("accepts contributors", async () => {
@@ -60,7 +57,7 @@ contract("Campaign", async accounts => {
 
     await campaign.createRequest("Buy Supplies", "100", accounts[1], {from: accounts[0]})
     const request = await campaign.requests(0);
-    
+
     assert.equal("Buy Supplies", request.description);
     assert.equal(accounts[1], request.recipient);
   });
