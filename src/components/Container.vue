@@ -2,9 +2,13 @@
   <div>
     <div class="about">
     </div>
-    <h2>Top Fundraisers</h2>
-    <button :disabled="startIndex === 0" @click="previousPage">⇦</button>
-    <button :disabled="startIndex + 4 >= campaigns.length" @click="nextPage">⇨</button>
+    <div class="container-header">
+      <h2>Active Campaigns</h2>
+      <div class= "button-section">
+        <button :disabled="startIndex === 0" @click="previousPage">⇦</button>
+        <button :disabled="startIndex + 4 >= campaigns.length" @click="nextPage">⇨</button>
+      </div>
+    </div>
     <section class="campaign-container">
       <div v-for="campaign in campaigns.slice(startIndex, startIndex + 4)" v-bind:key="campaign.id">
         <CampaignCard v-bind:campaign="campaign" />
@@ -49,6 +53,16 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+  .container-header {
+    display: flex;
+    width: 93vw;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 2vh;
+    margin-bottom: 0;
+    border-bottom: 1px solid #2c3e50;
+  }
+
   button {
     width: 3rem;
     height: 3rem;
@@ -58,8 +72,18 @@ export default {
     margin: .1rem;
   }
 
+  h2 {
+    margin-left: 1.5vw;
+    margin-bottom: 0;
+  }
+
+  .button-section {
+    margin-top: auto;
+    margin-bottom: .5rem;
+  }
+
   .campaign-container {
-    margin: 1rem 0rem 4rem 4rem;
+    margin: 2rem 0rem 4rem 4rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: .5rem;

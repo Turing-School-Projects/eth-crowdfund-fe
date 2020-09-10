@@ -4,9 +4,11 @@
       <div class= "logo-section">
         <img class="logo" src="@/assets/etho-boost-logo.png"/>
         <h1>Etho-Boost</h1>
-      <router-link to="/">Campaigns</router-link>
-      <router-link to="/campaigns/new"> Create a New Campaign</router-link>
-      <router-link to="/campaigns/user">Your Campaigns</router-link>
+      <div class="links-section">
+        <router-link to="/">Campaigns</router-link>
+        <router-link to="/campaigns/new"> Create a New Campaign</router-link>
+        <router-link to="/campaigns/user">Your Campaigns</router-link>
+      </div>
       </div>
     </div>
     <router-view/>
@@ -20,6 +22,11 @@ export default {
 </script>
 
 <style lang="scss">
+
+.links-section {
+  align-self: center;
+  margin: auto;
+}
 
 #app {
   font-family: 'Roboto', sans-serif;
@@ -51,17 +58,21 @@ body {
 
   h1 {
     font-family: 'Racing Sans One', cursive;
+    font-size: 35px;
   }
 }
 #nav {
   padding: 30px;
   background: #42b983;
-
+  border-bottom: 1px solid black;
   a {
     font-weight: bold;
     color: #2c3e50;
     align-self: center;
-    margin: 1em;
+    margin: 0em 3rem;
+    font-size: 20px;
+    text-decoration: none;
+    text-shadow: 1px 1px solid black;
     &.router-link-exact-active {
       color: white;
       text-shadow: 1px black;

@@ -19,7 +19,7 @@
 <script>
 import axios from "axios";
 import Loading from '@/components/Loading.vue';
-import web3 from "../contracts/web3";
+// import web3 from "../contracts/web3";
 import Factory from "../contracts/factory";
 import { VUE_APP_API_URL } from "../env";
 
@@ -52,30 +52,29 @@ export default {
         return
       }
       this.loading = true;
-      const accounts = await web3.eth.getAccounts();
+      // const accounts = await web3.eth.getAccounts();
       const factory = await Factory.at(process.env.VUE_APP_FACTORY_ADDRESS);
-      try {
-        await factory.createCampaign(this.minContribution, { from: accounts[0] })
-      } catch (error) {
-        console.log(error.message)
-      }
+      const result = await factory.createCampaign(this.minContribution, { from: this.$store.state.accountNum })
       const addresses = await factory.getDeployedCampaigns()
       const campaignAddress = addresses[addresses.length - 1];
-      axios.post(`${VUE_APP_API_URL}campaigns/`, {
-        name: this.title,
-        description: this.description,
-        image: this.imageUrl,
-        contributors: "0",
-        upvote: "0",
-        manager: this.$store.state.accountNum,
-        address: campaignAddress,
-        min_contribution: this.minContribution
-      })
-        .then((resp) => console.log(resp))
-        // eslint-disable-next-line no-return-assign
-        .catch((error) => this.error = error.message)
-      this.loading = false;
-      this.clearInputs()
+
+      if (result) {
+        axios.post(`${VUE_APP_API_URL}campaigns/`, {
+          name: this.title,
+          description: this.description,
+          image: this.imageUrl,
+          contributors: "0",
+          upvote: "0",
+          manager: this.$store.state.accountNum,
+          address: campaignAddress,
+          min_contribution: this.minContribution
+        })
+          .then((resp) => console.log(resp))
+          // eslint-disable-next-line no-return-assign
+          .catch((error) => this.error = error.message)
+        this.loading = false;
+        this.clearInputs()
+      }
     },
     clearInputs() {
       this.title = ''
