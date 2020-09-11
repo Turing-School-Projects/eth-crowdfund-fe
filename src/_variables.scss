@@ -26,6 +26,7 @@ $dark-gray: #504945;
 $border_color_1, $border_color_2, $border_color_3, $border_color_4, $bg_accent_3: $bg_accent_2) {
   padding: $border_size;
   border: $border_size solid transparent;
+  box-shadow: 2px 2px 8px $dark-gray;
   background: radial-gradient($bg_accent_1 30%, $bg_accent_2 75%, $bg_accent_3 90%) padding-box,
               repeating-linear-gradient(-45deg,
               $border_color_1 0, $border_color_1 12.5%,
@@ -33,5 +34,4 @@ $border_color_1, $border_color_2, $border_color_3, $border_color_4, $bg_accent_3
               $border_color_3 0, $border_color_3 37.5%,
               $border_color_4 0, $border_color_4 50%)
               0 / 2.1em 2.1em;
-
 }
