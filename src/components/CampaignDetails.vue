@@ -50,7 +50,7 @@ export default {
   methods: {
     /* eslint-disable */
     async submitContribution() {
-      dispatch('contributeToBlockChain', {address: this.address, contribution: this.contribution})
+      this.$store.dispatch('contributeToBlockChain', {address: this.address, contribution: this.contribution})
     }
   },
   data() {
