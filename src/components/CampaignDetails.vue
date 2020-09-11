@@ -60,13 +60,12 @@ export default {
       })
       if (result && (web3.utils.toWei(this.contribution, "ether") > this.campaign.min_contribution.toString())) {
         try {
-          const resp = await axios.put(
+          await axios.put(
             `${VUE_APP_API_URL}campaigns/${this.campaign.id}`,
             {
               value: (this.$store.getters.getSingleCampaign(this.address).value + this.contribution)
              }
           );
-          console.log(resp);
         } catch (error) {
           return { error };
         }
