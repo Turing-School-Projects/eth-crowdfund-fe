@@ -17,7 +17,9 @@ export default {
 </script>
 
 <style lang='scss'>
+@import "../_variables.scss";
+
 .side-bar {
-  background-color: white;
+  background-color: $light-green;
 }
 </style>

@@ -79,18 +79,36 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-section {
-  width: 13rem;
-}
-.member {
-  a {
-    text-decoration: none;
-    &:visited {
-      color: white;
-    }
+@import '../_variables.scss';
 
-    p {
-      display: inline;
+section {
+  @include beautifyBorder(.8rem, $light-green, $green, $bg_2, $dark-blue, $bg_1, $blue)
+  width: 13rem;
+  color: $black;
+
+  .member {
+    a {
+      color: $dark-blue;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      padding: 0 .8rem;
+      height: 2.1rem;
+      text-decoration: none;
+
+      &:visited {
+        color: $dark-gray;
+      }
+
+      img {
+        height: 1.3rem;
+        width: 1.3rem;
+      }
+
+      p {
+        margin-left: .3rem;
+        display: inline;
+      }
     }
   }
 }
