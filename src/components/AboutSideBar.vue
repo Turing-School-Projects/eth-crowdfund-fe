@@ -84,12 +84,12 @@ export default {
 section {
   @include beautifyBorder(.8rem, $light-green, $green, $bg_2, $dark-blue, $bg_1, $blue)
   width: 13rem;
-  color: $black;
+  color: $dark-blue;
   margin-left: 2rem;
 
   .member {
     a {
-      color: $dark-blue;
+      color: $black;
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
@@ -98,7 +98,7 @@ section {
       text-decoration: none;
 
       &:visited {
-        color: $dark-gray;
+        color: $black;
       }
 
       img {

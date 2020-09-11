@@ -17,6 +17,7 @@
       <h3>Why use blockchain?</h3>
       <h3>Working wiht the blockchain</h3>
       <h3>Back-End Technologies</h3>
+      <h3>Front-End Technologies</h3>
     </section>
   </div>
 </template>
@@ -49,6 +50,11 @@ export default {
     @include beautifyBorder(.8rem, $light-green, $green, $bg_2, $dark-blue, $bg_1, $blue)
     margin-left: 0rem;
     margin-right: 1.3rem;
+    color: $black;
+
+    h2, h3, b {
+      color: $dark-blue
+    }
   }
 }
 </style>
