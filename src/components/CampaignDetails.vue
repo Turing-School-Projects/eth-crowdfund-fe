@@ -34,10 +34,7 @@
 </template>
 
 <script>
-import axios from "axios";
 import web3 from "../contracts/web3";
-import ethCampaign from "../contracts/campaign";
-import { VUE_APP_API_URL } from "../env";
 
 web3.eth.getAccounts()
   .then((accounts) => console.log(accounts[0]))
@@ -53,37 +50,8 @@ export default {
   methods: {
     /* eslint-disable */
     async submitContribution() {
-      const campaignInstance = await ethCampaign.at(this.address);
-      const result = await campaignInstance.contribute({
-        from: this.$store.state.accountNum,
-        value: web3.utils.toWei(this.contribution, "ether")
-      })
-      if (result) {
-        try {
-          await axios.put(
-            `${VUE_APP_API_URL}campaigns/${this.campaign.id}`,
-            {
-              value: (this.$store.getters.getSingleCampaign(this.address).value + parseFloat(this.contribution))
-            }
-          );
-        } catch (error) {
-          return { error };
-        }
-        if (this.contribution > this.campaign.min_contribution) {
-          try {
-            const resp = await axios.post(
-              `${VUE_APP_API_URL}campaigns/${this.campaign.address}/contributor/${this.$store.state.accountNum}`,
-              {
-                address: this.$store.state.accountNum,
-                email: null
-              }
-            );
-          } catch (error) {
-            return { error };
-          }
-        }
-      }
-    },
+      dispatch('contributeToBlockChain', {address: this.address, contribution: this.contribution})
+    }
   },
   data() {
     return {
@@ -154,3 +122,31 @@ input {
 }
 
 </style>
+      <!-- const campaignInstance = await ethCampaign.at(this.address); -->
+      <!-- const result = await campaignInstance.contribute({ -->
+      <!--   from: this.$store.state.accountNum, -->
+      <!--   value: web3.utils.toWei(this.contribution, "ether") -->
+      <!-- }) -->
+      <!-- if (result) { -->
+      <!--   try { -->
+      <!--     await axios.put( -->
+      <!--       `${VUE_APP_API_URL}campaigns/${this.campaign.id}`, -->
+      <!--       { -->
+      <!--         value: (this.$store.getters.getSingleCampaign(this.address).value + parseFloat(this.contribution)) -->
+      <!--       } -->
+      <!--     ); -->
+      <!--   } catch (error) { -->
+      <!--     return { error }; -->
+      <!--   } -->
+      <!--   if (this.contribution > this.campaign.min_contribution) { -->
+      <!--     try { -->
+      <!--       const resp = await axios.post( -->
+      <!--         `${VUE_APP_API_URL}campaigns/${this.campaign.address}/contributor/${this.$store.state.accountNum}`, -->
+      <!--         { -->
+      <!--           address: this.$store.state.accountNum, -->
+      <!--           email: null -->
+      <!--         } -->
+      <!--       ); -->
+      <!--     } catch (error) { -->
+      <!--       return { error }; -->
+      <!--     } -->
