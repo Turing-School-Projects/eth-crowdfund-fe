@@ -3,25 +3,30 @@
       <section class="campaign-card">
         <section>
         <div class="img-div"><img :src=campaign.image /></div>
-        </section>
         <div>
           <div class="campaign-info">
             <h1> {{campaign.name}}</h1>
             <p>{{campaign.description}}</p>
           </div>
-          <div class="requests"><b>Total Request:</b> {{campaign.requests.length}}</div>
         </div>
+        </section>
+        <div class="requests"><b>Total Request:</b> {{campaign.requests.length}}</div>
+        <router-link
+          style="text-decoration: none;"
+          :to="{ name: 'Campaign Request',
+          params: {id: campaign.id, address: campaign.address}}">
+          Create A Request
+        </router-link>
+        <a href="javascript:;" v-on:click="deleteCampaign(campaign)">Delete</a>
+        <link rel="stylesheet" href="/css/master.css">
       </section>
-      <router-link
-            style="text-decoration: none;"
-            :to="{ name: 'Campaign Request',
-            params: {id: campaign.id, address: campaign.address}}">
-      <button>Create A Request</button>
-      </router-link>
     </div>
 </template>
 
 <script>
+import axios from "axios";
+import { VUE_APP_API_URL } from "../env";
+
 export default {
   name: 'UserCampaigns',
   computed: {
@@ -33,6 +38,15 @@ export default {
     },
     userCampaigns() {
       return this.campaigns.filter((campaign) => campaign.manager === this.accountNum)
+    }
+  },
+  methods: {
+    async deleteCampaign(campaign) {
+      // eslint-disable-next-line no-restricted-globals
+      if (confirm(`Are you sure you want to delete ${campaign.name}?`)) {
+        await axios.delete(`${VUE_APP_API_URL}campaigns/${campaign.id}`)
+        this.$store.commit('DELETE_CAMPAIGN', campaign.id)
+      }
     }
   },
   data() {
