@@ -9,18 +9,18 @@
         </a>
       </div>
     </article>
-    <article class='back-end-team'>
-      <h3>Back End Team</h3>
-      <div class='member' v-for="developer in contributors.BE" v-bind:key="developer.id">
+    <article class='front-end-team'>
+      <h3>Front End Team</h3>
+      <div class='member' v-for="developer in contributors.FE" v-bind:key="developer.id">
         <a v-bind:href="developer.gitHub" target="blank">
           <img src="@/assets/GitHub-Mark-32px.png" />
           <p>{{ developer.name }}</p>
         </a>
       </div>
     </article>
-    <article class='front-end-team'>
-      <h3>Front End Team</h3>
-      <div class='member' v-for="developer in contributors.FE" v-bind:key="developer.id">
+    <article class='back-end-team'>
+      <h3>Back End Team</h3>
+      <div class='member' v-for="developer in contributors.BE" v-bind:key="developer.id">
         <a v-bind:href="developer.gitHub" target="blank">
           <img src="@/assets/GitHub-Mark-32px.png" />
           <p>{{ developer.name }}</p>
