@@ -63,7 +63,7 @@ export default {
           name: this.title,
           description: this.description,
           image: this.imageUrl,
-          contributors: "0",
+          value: "0",
           upvote: "0",
           manager: this.$store.state.accountNum,
           address: campaignAddress,
@@ -101,7 +101,9 @@ export default {
 </script>
 
 <style lang='scss'>
+@import '../_variables.scss';
 form {
+  @include beautifyBorder(.8rem, $white, $gray, $bg_2, $dark-blue, $bg_1, $blue)
   display: flex;
   flex-flow: column;
   justify-content: space-around;

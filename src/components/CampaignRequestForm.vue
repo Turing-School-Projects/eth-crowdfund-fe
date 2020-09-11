@@ -20,7 +20,7 @@
         <p class='message'><i>**Defaults to current connected CryptoWallet.**</i></p>
       </div>
         <textarea v-model='description' placeholder='Request description'></textarea>
-        <button type='submit' > Create Campaign </button>
+        <button type='submit' > Create Withdrawal Request </button>
         <div v-if="this.userMessage">Please request an Ether amount</div>
         <div v-if="this.error">{{this.error}}</div>
     </form>
@@ -87,8 +87,10 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+@import "../_variables.scss";
+
 form {
-  background: #42b983;
+  @include beautifyBorder(.8rem, $white, $gray, $bg_2, $dark-blue, $bg_1, $blue)
   display: flex;
   flex-flow: column;
   justify-content: space-around;

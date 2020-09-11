@@ -25,6 +25,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "variables";
 
 .links-section {
   align-self: center;
@@ -36,25 +37,25 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: $dark-blue;
 }
 
 body {
+  @include pixelate(3px, $bg_1, $bg_2)
   margin: 0;
-  background: url(
-  "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmci" +
-  "IHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1Ii" +
-  "BmaWxsPSIjOWU5ZTllIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2" +
-  "Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiM4ODgiIH" +
-  "N0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=");
 }
 
 #nav {
-  padding: .8em;
-  padding-bottom: 0;
-  background: #42b983;
+  padding: .3rem;
+  border-bottom: .3rem solid transparent;
+  background: radial-gradient($light-green 45%, $green 95%) padding-box,
+              repeating-linear-gradient(45deg,
+              $bg_2 0, $bg_2 12.5%,
+              $dark-blue 0, $dark-blue 25%,
+              $bg_1 0, $bg_1 37.5%,
+              $blue 0, $blue 50%)
+              0 / 1.3em 1.3em;
   height: 5rem;
-  border-bottom: 1px solid black;
   display: grid;
   grid-template-columns: 21vw 79vw;
 

@@ -12,7 +12,6 @@
 </template>
 
 <script>
-
 import Campaign from "../contracts/campaign";
 
 export default {
@@ -23,7 +22,7 @@ export default {
   methods: {
     /* eslint-disable */
     async finalizeRequest() {
-      const campaignInstance = await Campaign.at("0x9eec8dA2626c5Be52e6A7Fe9b666695fE1185679")
+      const campaignInstance = await Campaign.at("0xcd579f2539a1Ed7753Dd74D065656680C93d7737")
       const result = await campaignInstance.finalizeRequest(1, { from: this.$store.state.accountNum, gas: "1000000"})
       const request = await campaignInstance.requests(1)
       console.log('request', request)
