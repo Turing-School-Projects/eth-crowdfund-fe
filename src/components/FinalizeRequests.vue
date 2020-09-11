@@ -14,7 +14,6 @@
 <script>
 
 import Campaign from "../contracts/campaign";
-import web3 from "../contracts/web3";
 
 export default {
   name: 'HelloWorld',
