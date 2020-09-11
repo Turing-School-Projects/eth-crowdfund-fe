@@ -61,7 +61,7 @@ export default createStore({
         from: manager
       });
       if (result) {
-        const newRequest = { ...request, value: weiValue };
+        const newRequest = { ...request, value: value };
         try {
           await axios.post(`${VUE_APP_API_URL}requests/`, newRequest);
         } catch (error) {
