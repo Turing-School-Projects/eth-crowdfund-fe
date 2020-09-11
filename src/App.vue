@@ -47,7 +47,7 @@ body {
 
 #nav {
   padding: .8em;
-  background: $green;
+  background: $light-green;
   height: 5rem;
   border-bottom: 2px solid $dark-blue;
   display: grid;
