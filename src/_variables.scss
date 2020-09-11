@@ -25,7 +25,7 @@ $dark-gray: #504945;
 }
 
 @mixin beautifyBorder($border_size, $bg_accent_1, $bg_accent_2,
-$border_color_1, $border_color_2, $border_color_3, $border_color_4) {
+$border_color_1, $border_color_2, $border_color_3, $border_color_4, $expression: 0 / 2.1em 2.1em) {
   padding: $border_size;
   border: $border_size solid transparent;
   box-shadow: 2px 2px 8px $dark-gray;
@@ -35,5 +35,5 @@ $border_color_1, $border_color_2, $border_color_3, $border_color_4) {
               $border_color_2 0, $border_color_2 25%,
               $border_color_3 0, $border_color_3 37.5%,
               $border_color_4 0, $border_color_4 50%)
-              0 / 2.1em 2.1em;
+              $expression;
 }

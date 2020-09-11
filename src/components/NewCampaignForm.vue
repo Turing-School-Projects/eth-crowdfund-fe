@@ -106,7 +106,8 @@ export default {
 <style lang='scss'>
 @import '../_variables.scss';
 form {
-  // @include beautifyBorder(.8rem, $white, $gray, $bg_2, $dark-blue, $bg_1, $blue)
+  @include beautifyBorder(.3rem, $white, $gray, $bg_2, $dark-blue, $bg_1, $blue, 0 / .8em
+  .8em)
   display: flex;
   flex-flow: column;
   justify-content: space-around;
