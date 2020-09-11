@@ -69,41 +69,36 @@ export default createStore({
         }
       }
     },
-    contributeToBlockChain: async ({ dispatch }, { address, contribution }) => {
-      const { toWei, toBN } = web3.utils;
+    contributeToBlockChain: async ({ dispatch, state }, { address, contribution }) => {
+      const { toWei } = web3.utils;
       const campaignInstance = await campaign.at(address);
-      console.log(toWei(toBN(contribution), "ether"));
-      // const result = await campaignInstance.contribute({
-      //   from: this.state.accountNum,
-      //   value: web3.utils.toWei(contribution, "ether")
-      // });
+      const result = await campaignInstance.contribute({
+        from: state.accountNum,
+        value: toWei(contribution, "ether")
+      });
       if (result) {
         dispatch("sendContributionToDB", { address, contribution });
       }
     },
     sendContributionToDB: async ({ getters, dispatch }, { address, contribution }) => {
-      const currentCampaign = getters.getSingleCampaign(address).value;
+      const { value, id, min_contribution } = getters.getSingleCampaign(address);
       try {
-        await axios.put(`${VUE_APP_API_URL}campaigns/${this.campaign.id}`, {
-          value: currentCampaign + parseFloat(contribution)
+        await axios.put(`${VUE_APP_API_URL}campaigns/${id}`, {
+          value: value + parseFloat(contribution)
         });
       } catch (error) {
         return { error };
       }
-      if (contribution > currentCampaign.min_contribution) {
+      if (contribution > min_contribution) {
         dispatch("addContributorToCampaign", { address });
       }
     },
-    addContributorToCampaign: async (context, { address }) => {
+    addContributorToCampaign: async ({ state }, { address }) => {
       try {
-        const resp = await axios.post(
-          `${VUE_APP_API_URL}campaigns/${address}/contributor/${this.state.accountNum}`,
-          {
-            address: this.state.accountNum,
-            email: null
-          }
-        );
-        console.log(resp);
+        await axios.post(`${VUE_APP_API_URL}campaigns/${address}/contributor/${state.accountNum}`, {
+          address: state.accountNum,
+          email: null
+        });
       } catch (error) {
         return { error };
       }
