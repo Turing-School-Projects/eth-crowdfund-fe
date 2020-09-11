@@ -63,7 +63,7 @@ export default {
           await axios.put(
             `${VUE_APP_API_URL}campaigns/${this.campaign.id}`,
             {
-              value: (this.$store.getters.getSingleCampaign(this.address).value + this.contribution)
+              value: (this.campaign.value + this.contribution)
              }
           );
         } catch (error) {
