@@ -63,7 +63,7 @@ export default {
           name: this.title,
           description: this.description,
           image: this.imageUrl,
-          contributors: "0",
+          value: "0",
           upvote: "0",
           manager: this.$store.state.accountNum,
           address: campaignAddress,
