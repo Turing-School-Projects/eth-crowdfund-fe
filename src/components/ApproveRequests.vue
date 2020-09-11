@@ -24,7 +24,7 @@ export default {
   methods: {
     /* eslint-disable */
     async approveRequest() {
-      const campaignInstance = await Campaign.at("0x9eec8dA2626c5Be52e6A7Fe9b666695fE1185679")
+      const campaignInstance = await Campaign.at("0xcd579f2539a1Ed7753Dd74D065656680C93d773")
       const accounts = await web3.eth.getAccounts();
       console.log(campaignInstance)
       const result = await campaignInstance.approveRequest(1, { from: this.$store.state.accountNum})
