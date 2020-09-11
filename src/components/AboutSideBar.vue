@@ -1,7 +1,7 @@
 <template>
   <section class='sidebar'>
     <article class='project-manager'>
-      <h4>Project Manager &<br />BlockChain Developer</h4>
+      <h3>Project Manager &<br />BlockChain Guide</h3>
       <div class='member' v-for="developer in contributors.BC" v-bind:key="developer.id">
         <a v-bind:href="developer.gitHub" target="blank">
           <img src="@/assets/GitHub-Mark-32px.png" />
@@ -10,7 +10,7 @@
       </div>
     </article>
     <article class='back-end-team'>
-      <h4>Back End Team</h4>
+      <h3>Back End Team</h3>
       <div class='member' v-for="developer in contributors.BE" v-bind:key="developer.id">
         <a v-bind:href="developer.gitHub" target="blank">
           <img src="@/assets/GitHub-Mark-32px.png" />
@@ -19,7 +19,7 @@
       </div>
     </article>
     <article class='front-end-team'>
-      <h4>Front End Team</h4>
+      <h3>Front End Team</h3>
       <div class='member' v-for="developer in contributors.FE" v-bind:key="developer.id">
         <a v-bind:href="developer.gitHub" target="blank">
           <img src="@/assets/GitHub-Mark-32px.png" />
@@ -85,6 +85,7 @@ section {
   @include beautifyBorder(.8rem, $light-green, $green, $bg_2, $dark-blue, $bg_1, $blue)
   width: 13rem;
   color: $black;
+  margin-left: 2rem;
 
   .member {
     a {
@@ -106,6 +107,7 @@ section {
       }
 
       p {
+        font-weight: 600;
         margin-left: .3rem;
         display: inline;
       }
