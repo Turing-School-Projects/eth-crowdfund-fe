@@ -49,7 +49,7 @@ body {
   padding: .3rem;
   border-bottom: .3rem solid transparent;
   background: radial-gradient($light-green 45%, $green 95%) padding-box,
-              repeating-linear-gradient(-45deg,
+              repeating-linear-gradient(45deg,
               $bg_2 0, $bg_2 12.5%,
               $dark-blue 0, $dark-blue 25%,
               $bg_1 0, $bg_1 37.5%,
