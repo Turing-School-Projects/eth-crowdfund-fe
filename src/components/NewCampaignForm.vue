@@ -6,7 +6,7 @@
     <label>Enter Image Url</label>
     <input v-model='imageUrl' placeholder='Ex: https://picsum.photos/200/300' />
     <label>Minimum Wei Contribution</label>
-    <input v-model='minContribution' placeholder='Ex: 100' />
+    <input v-model='minContribution' placeholder='Ex: 100' type='number' step='0.0001'/>
     <label>Describe your campaign</label>
     <textarea v-model='description' placeholder='Ex: Help out a Denver-area store serving our community'></textarea>
     <button type='submit' > Create Campaign </button>
@@ -54,7 +54,7 @@ export default {
       this.loading = true;
       // const accounts = await web3.eth.getAccounts();
       const factory = await Factory.at(process.env.VUE_APP_FACTORY_ADDRESS);
-      const result = await factory.createCampaign(this.minContribution, { from: this.$store.state.accountNum })
+      const result = await factory.createCampaign(web3.utils.toWei(this.minContribution), { from: this.$store.state.accountNum })
       const addresses = await factory.getDeployedCampaigns()
       const campaignAddress = addresses[addresses.length - 1];
 

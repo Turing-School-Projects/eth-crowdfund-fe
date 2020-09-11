@@ -68,6 +68,45 @@ export default createStore({
           return { error };
         }
       }
+    },
+    contributeToBlockChain: async ({ dispatch }, { address, contribution }) => {
+      const { toWei, toBN } = web3.utils;
+      const campaignInstance = await campaign.at(address);
+      console.log(toWei(toBN(contribution), "ether"));
+      // const result = await campaignInstance.contribute({
+      //   from: this.state.accountNum,
+      //   value: web3.utils.toWei(contribution, "ether")
+      // });
+      if (result) {
+        dispatch("sendContributionToDB", { address, contribution });
+      }
+    },
+    sendContributionToDB: async ({ getters, dispatch }, { address, contribution }) => {
+      const currentCampaign = getters.getSingleCampaign(address).value;
+      try {
+        await axios.put(`${VUE_APP_API_URL}campaigns/${this.campaign.id}`, {
+          value: currentCampaign + parseFloat(contribution)
+        });
+      } catch (error) {
+        return { error };
+      }
+      if (contribution > currentCampaign.min_contribution) {
+        dispatch("addContributorToCampaign", { address });
+      }
+    },
+    addContributorToCampaign: async (context, { address }) => {
+      try {
+        const resp = await axios.post(
+          `${VUE_APP_API_URL}campaigns/${address}/contributor/${this.state.accountNum}`,
+          {
+            address: this.state.accountNum,
+            email: null
+          }
+        );
+        console.log(resp);
+      } catch (error) {
+        return { error };
+      }
     }
     /* eslint-enable */
   },
