@@ -20,7 +20,7 @@
         <router-link
           style="text-decoration: none;"
           :to="{name: 'Edit Campaign',
-            params: { campaignID: campaign.id } }">Edit
+            params: { address: campaign.address } }">Edit
         </router-link>
         <a href="javascript:;" v-on:click="deleteCampaign(campaign)">Delete</a>
       </section>
