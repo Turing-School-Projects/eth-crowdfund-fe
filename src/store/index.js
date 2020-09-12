@@ -25,6 +25,15 @@ export default createStore({
     ADD_CAMPAIGN: (state, payload) => {
       state.campaigns = [...state.campaigns, payload];
     },
+    EDIT_CAMPAIGN: (state, payload) => {
+      const index = state.campaigns.findIndex((camp) => camp.id === payload.id);
+
+      state.campaigns = [
+        ...state.campaigns.slice(0, index),
+        payload,
+        ...state.campaigns.slice(index + 1)
+      ]
+    },
     DELETE_CAMPAIGN: (state, id) => {
       const index = state.campaigns.findIndex((camp) => camp.id === id)
       state.campaigns.splice(index, 1)

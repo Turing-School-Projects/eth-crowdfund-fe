@@ -1,6 +1,6 @@
 <template>
-  <h1  v-if="!this.loading"> Edit Campaign</h1>
-  <form v-if="!this.loading" @submit.prevent='updateCampaign'>
+  <h1> Edit Campaign</h1>
+  <form @submit.prevent='updateCampaign'>
     <label>Campaign Title</label>
     <input v-model='title' >
     <label>Image Url</label>
@@ -11,12 +11,10 @@
   <div v-if="this.userMessage">Please fill out all inputs</div>
   <div v-if="this.error">{{this.error}}</div>
   </form>
-    <Loading v-if="this.loading" />
 </template>
 
 <script>
 import axios from "axios";
-import Loading from '@/components/Loading.vue';
 import { VUE_APP_API_URL } from "../env";
 
 export default {
@@ -28,8 +26,8 @@ export default {
       description: this.$store.getters.getSingleCampaign(this.address).description,
       userMessage: false,
       error: null,
-      loading: false,
-      imageUrl: this.$store.getters.getSingleCampaign(this.address).image
+      imageUrl: this.$store.getters.getSingleCampaign(this.address).image,
+      id: this.$store.getters.getSingleCampaign(this.address).id
     }
   },
   methods: {
@@ -40,33 +38,23 @@ export default {
         minContribution: this.imageUrl
       }
       this.editCampaign()
-      this.$store.commit('edit_CAMPAIGN', editedCampaign)
+      this.$store.commit('EDIT_CAMPAIGN', editedCampaign)
     },
     async editCampaign() {
-      if (!this.title && !this.description && !this.minContribution && !this.imageUrl) {
-        this.userMessage = true
-        return
-      }
       if (!this.title && !this.description && !this.imageUrl) {
         this.userMessage = true
         return
       }
-      this.loading = true;
-
-      if (true) {
-        axios.put(`${VUE_APP_API_URL}campaigns/`, {
-          name: this.title,
-          description: this.description,
-          image: this.imageUrl,
-          min_contribution: this.minContribution
-        })
-          .then((resp) => console.log(resp))
-          // eslint-disable-next-line no-return-assign
-          .catch((error) => this.error = error.message)
-        this.clearInputs()
-        this.$router.push(`/campaigns/user`)
-        this.loading = false;
-      }
+      axios.put(`${VUE_APP_API_URL}campaigns/${this.id}`, {
+        name: this.title,
+        description: this.description,
+        image: this.imageUrl
+      })
+        .then((resp) => console.log(resp))
+        // eslint-disable-next-line no-return-assign
+        .catch((error) => this.error = error.message)
+      this.clearInputs()
+      this.$router.push(`/campaigns/user`)
     },
     clearInputs() {
       this.title = ''
@@ -81,7 +69,7 @@ export default {
     }
   },
   components: {
-    Loading
+    // Loading
   }
 }
 </script>
