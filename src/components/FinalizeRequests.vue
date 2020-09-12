@@ -18,11 +18,13 @@
               Value: {{request.value}}
             </div>
             <div class="">
-            <!-- {{ approvalCount(campaign.address, request.eth_id) }} -->
               <button type="button" @click="approvalCount(campaign.address, request.eth_id)">
               approvalCount</button>
             </div>
-            <button @click="finalizeRequest(campaign.address, request.eth_id)">Finalize and Distribute</button>
+            <button
+              :disabled="!request.approved || request.finalized"
+              @click="finalizeRequest(campaign.address, request, campaign)">
+              Finalize and Distribute</button>
           </div>
         </div>
       </section>
@@ -38,6 +40,7 @@
 <script>
 import axios from "axios";
 import Campaign from "../contracts/campaign";
+import { VUE_APP_API_URL } from "../env";
 // import Loading from "./Loading.vue";
 
 export default {
@@ -54,16 +57,22 @@ export default {
   },
   methods: {
     /* eslint-disable */
-    async finalizeRequest(address, ethId) {
+    async finalizeRequest(address, {eth_id, id, value}, campaign) {
       this.loading = true
       const campaignInstance = await Campaign.at(address)
-      const result = await campaignInstance.finalizeRequest(ethId, { from: this.$store.state.accountNum, gas: "1000000"})
-      const request = await campaignInstance.requests(ethId)
-      console.log('request', request)
-      console.log('result', result)
-      
+      const result = await campaignInstance.finalizeRequest(eth_id, { from: this.$store.state.accountNum, gas: '100000' })
+      // const request = await campaignInstance.requests(ethId)
+
       if(result) {
         this.loading = false;
+        const req_resp = await axios.put(`${VUE_APP_API_URL}requests/${id}`, {
+          finalized: "true"
+        });
+        const camp_resp = await axios.put(`${VUE_APP_API_URL}campaigns/${campaign.id}`, {
+          value: campaign.value - value
+        });
+        console.log('request', req_resp);
+        console.log('campaign', camp_resp);
       }
     },
     async approvalCount(address, ethId) {
@@ -75,7 +84,7 @@ export default {
     },
   },
   async created() {
-    const unfilteredCampaigns = await axios.get('http://localhost:3000/api/v1/campaigns/manager/0xa21b4eEa9261eB71D54c1694C7C7e732cCDd9825')
+    const unfilteredCampaigns = await axios.get(`${VUE_APP_API_URL}campaigns/manager/${this.$store.state.accountNum}`)
     const filteredCampaigns = unfilteredCampaigns.data.filter(campaign => campaign.requests.length)
     console.log(filteredCampaigns)
     this.campaigns = filteredCampaigns
