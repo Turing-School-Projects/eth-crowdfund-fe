@@ -75,6 +75,7 @@ export default {
         this.loading = false;
         this.clearInputs()
       }
+      this.$router.push(`/campaigns/user`)
     },
     clearInputs() {
       this.title = ''
