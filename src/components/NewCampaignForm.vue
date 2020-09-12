@@ -6,7 +6,7 @@
     <label>Enter Image Url</label>
     <input v-model='imageUrl' placeholder='Ex: https://picsum.photos/200/300' />
     <label>Minimum Ether Contribution</label>
-    <input v-model='minContribution' placeholder='Ex: 100' type='number' step='0.0001'/>
+    <ether-input v-model:value="minContribution" class='ether-input'/>
     <label>Describe your campaign</label>
     <textarea v-model='description' placeholder='Ex: Help out a Denver-area store serving our community'></textarea>
     <basicButton type='submit' text='Create Campaign' />
@@ -20,6 +20,8 @@
 import axios from "axios";
 import Loading from '@/components/Loading.vue';
 import basicButton from '@/ui/basicButton.vue'
+import etherInput from '@/ui/etherInput.vue'
+import web3 from '../contracts/web3'
 import Factory from "../contracts/factory";
 import { VUE_APP_API_URL } from "../env";
 
@@ -29,7 +31,7 @@ export default {
     return {
       title: '',
       description: '',
-      minContribution: null,
+      minContribution: 0,
       userMessage: false,
       email: '',
       error: null,
@@ -99,7 +101,8 @@ export default {
   },
   components: {
     Loading,
-    basicButton
+    basicButton,
+    etherInput
   }
 }
 </script>
@@ -113,7 +116,7 @@ form {
   flex-flow: column;
   justify-content: space-around;
   align-items: center;
-  height: 60vh;
+  height: 65vh;
   margin-top: 0.8rem;
   padding: 2.1rem 0;
   width: 65vw;
@@ -127,6 +130,14 @@ form {
     height: 2em;
     width: 50vw;
     margin-bottom: 2vh;
+  }
+
+  .ether-input {
+    justify-self: center;
+    height: 2em;
+    width: 48vw;
+    margin-bottom: 2vh;
+    margin-right: 2.1rem;
   }
 
   textarea {

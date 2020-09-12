@@ -10,6 +10,7 @@
                class='coin'>ETH</p>
         <p class='text'><i>A note on conversion 1.0 ETH = ~$350.00</i></p>
       </div>
+      <ether-input label='Ether Value' />
       <label for='recipient-wallet'>Wallet Public Address</label>
       <div class='wallet-address'>
         <input
@@ -32,12 +33,14 @@
 
 import Loading from '@/components/Loading.vue';
 import basicButton from "@/ui/basicButton.vue"
+import EtherInput from '@/ui/etherInput.vue'
 
 export default {
   name: 'CampaignRequestForm',
   props: ['id', 'address'],
   components: {
-    basicButton
+    basicButton,
+    EtherInput
   },
   data() {
     return {
