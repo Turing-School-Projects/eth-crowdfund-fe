@@ -17,6 +17,11 @@
           params: {id: campaign.id, address: campaign.address}}">
           Create A Request
         </router-link>
+        <router-link
+          style="text-decoration: none;"
+          :to="{name: 'Edit Campaign',
+            params: { campaignID: campaign.id } }">Edit
+        </router-link>
         <a href="javascript:;" v-on:click="deleteCampaign(campaign)">Delete</a>
       </section>
     </div>
