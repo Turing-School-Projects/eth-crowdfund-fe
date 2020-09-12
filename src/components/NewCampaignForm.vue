@@ -2,7 +2,7 @@
   <h1  v-if="!this.loading"> Create a New Campaign </h1>
   <form v-if="!this.loading" @submit.prevent='addCampaign'>
     <label>Campaign Title</label>
-    <input v-model='title' placeholder='Ex: Arc Thrift needs a new roof' />
+    <input v-model='title' placeholder='Ex: Arc Thrift' />
     <label>Enter Image Url</label>
     <input v-model='imageUrl' placeholder='Ex: https://picsum.photos/200/300' />
     <label>Minimum Ether Contribution</label>
@@ -105,13 +105,15 @@ export default {
 <style lang='scss'>
 @import '../_variables.scss';
 form {
-  @include beautifyBorder(.8rem, $white, $gray, $bg_2, $dark-blue, $bg_1, $blue)
+  // @include beautifyBorder(.8rem, $white, $gray, $bg_2, $dark-blue, $bg_1, $blue)
   display: flex;
   flex-flow: column;
   justify-content: space-around;
   align-items: center;
-  height: 45vh;
+  height: 70vh;
   width: 90vw;
+  border: 3px solid rgb(80, 80, 80);
+  background: radial-gradient($light-green 45%, $green 98%);
 
   label {
     align-self: flex-start;

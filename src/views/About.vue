@@ -47,11 +47,12 @@ export default {
   }
 
   .about-content {
-    @include beautifyBorder(.8rem, $light-green, $green, $bg_2, $dark-blue, $bg_1, $blue)
+    // @include beautifyBorder(.8rem, $light-green, $green, $bg_2, $dark-blue, $bg_1, $blue)
     margin-left: 0rem;
     margin-right: 1.3rem;
     color: $black;
-
+    background: radial-gradient($light-green 45%, $green 98%);
+    border: 3px solid rgb(80, 80, 80);
     h2, h3, b {
       color: $dark-blue
     }

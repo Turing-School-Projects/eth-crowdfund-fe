@@ -62,16 +62,21 @@ export default {
 }
 </script>
 
+
 <style scoped lang='scss'>
+@import "../_variables.scss";
+
 section {
   display: flex;
   justify-content: center;
   text-align: left;
-  background: whitesmoke;
+  // background: whitesmoke;
   box-shadow: 2px 2px 2px grey;
   align-items: center;
   border: 3px solid black;
   width: 45rem;
+  background: radial-gradient($light-green 45%, $green 98%);
+
 }
 
 .img-area {
