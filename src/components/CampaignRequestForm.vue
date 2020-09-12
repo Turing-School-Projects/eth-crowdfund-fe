@@ -1,5 +1,5 @@
 <template>
-  <section class='withdrawal-request'>
+  <section v-if="!loading" class='withdrawal-request'>
     <h2>Create A Withdrawal Request</h2>
     <form @submit.prevent='createRequest'>
       <label for='request-title'>Title</label>
@@ -25,9 +25,13 @@
         <div v-if="this.error">{{this.error}}</div>
     </form>
   </section>
+  <Loading v-if="loading" />
 </template>
 
 <script>
+
+import Loading from '@/components/Loading.vue';
+
 export default {
   name: 'CampaignRequestForm',
   props: ['id', 'address'],
@@ -39,7 +43,8 @@ export default {
       recipientWallet: '',
       userMessage: false,
       email: '',
-      error: null
+      error: null,
+      loading: false
     }
   },
   computed: {
@@ -55,15 +60,22 @@ export default {
   },
   methods: {
     createRequest() {
+      const self = this
       if (!this.value) {
         this.userMessage = true
         return
       }
-
       if (!this.recipientWallet) {
         this.recipientWallet = this.accountNum
       }
-
+      self.loading = true;
+      setInterval(
+        // No way of knowing when loading shoyld be complete
+        // eslint-disable-next-line func-names
+        () => {
+          self.loading = false
+        }, 15000
+      );
       const payload = {
         request: {
           campaign_id: this.id,
@@ -82,6 +94,9 @@ export default {
         this.error = { error }
       }
     }
+  },
+  components: {
+    Loading
   }
 }
 </script>
@@ -99,6 +114,8 @@ form {
   padding: 2.1em;
   height: 65vh;
   width: 81vw;
+  border: 3px solid black;
+  background: radial-gradient($light-green 45%, $green 98%);
 
   label {
     align-self: flex-start;
