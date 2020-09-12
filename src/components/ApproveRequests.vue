@@ -58,13 +58,14 @@ export default {
     userContributions() {
       return this.$store.state.userContributions
     }
+  },
   data() {
     return {
       loading: false
     }
   },
   components: {
-    Loading
+    // Loading
   },
   methods: {
     showContributions() {
@@ -100,7 +101,6 @@ export default {
         console.log("How many people can vote", voterCount.toString());
     }
   }
-}
 }
 </script>
 

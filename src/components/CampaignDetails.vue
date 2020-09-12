@@ -52,7 +52,7 @@ export default {
     }
   },
   components: {
-    Loading
+    // Loading
   },
   methods: {
     /* eslint-disable */
@@ -63,7 +63,6 @@ export default {
         this.userMessage = true;
       }
     }
-  }
   }
 }
 </script>
