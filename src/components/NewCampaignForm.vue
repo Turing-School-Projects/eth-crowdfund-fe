@@ -9,7 +9,7 @@
     <input v-model='minContribution' placeholder='Ex: 100' type='number' step='0.0001'/>
     <label>Describe your campaign</label>
     <textarea v-model='description' placeholder='Ex: Help out a Denver-area store serving our community'></textarea>
-    <button type='submit' > Create Campaign </button>
+    <basicButton type='submit' text='Create Campaign' />
   <div v-if="this.userMessage">Please fill out all inputs</div>
   <div v-if="this.error">{{this.error}}</div>
   </form>
@@ -19,7 +19,7 @@
 <script>
 import axios from "axios";
 import Loading from '@/components/Loading.vue';
-import web3 from "../contracts/web3";
+import basicButton from '@/ui/basicButton.vue'
 import Factory from "../contracts/factory";
 import { VUE_APP_API_URL } from "../env";
 
@@ -98,7 +98,8 @@ export default {
     }
   },
   components: {
-    Loading
+    Loading,
+    basicButton
   }
 }
 </script>
@@ -106,16 +107,16 @@ export default {
 <style lang='scss'>
 @import '../_variables.scss';
 form {
-  @include beautifyBorder(.3rem, $white, $gray, $bg_2, $dark-blue, $bg_1, $blue, 0 / .8em
+  @include beautifyBorder(.3rem, $white, $white-gray, $bg_2, $dark-purple, $bg_1, $blue, 0 / .8em
   .8em)
   display: flex;
   flex-flow: column;
   justify-content: space-around;
   align-items: center;
-  height: 70vh;
-  width: 90vw;
-  border: 3px solid rgb(80, 80, 80);
-  background: radial-gradient($light-green 45%, $green 98%);
+  height: 60vh;
+  margin-top: 13px;
+  padding: 1.3rem 0;
+  width: 65vw;
 
   label {
     align-self: flex-start;
@@ -130,7 +131,7 @@ form {
 
   textarea {
     resize: none;
-    height: 12em;
+    height: 5rem;
     width: 55vw;
   }
 

@@ -105,7 +105,7 @@ export default {
 @import "../_variables.scss";
 
 form {
-  // @include beautifyBorder(.8rem, $white, $gray, $bg_2, $dark-blue, $bg_1, $blue)
+  @include beautifyBorder(.8rem, $white, $gray, $bg_2, $dark-purple, $bg_1, $blue)
   display: flex;
   flex-flow: column;
   justify-content: space-around;
@@ -115,7 +115,6 @@ form {
   height: 65vh;
   width: 81vw;
   border: 3px solid black;
-  background: radial-gradient($light-green 45%, $green 98%);
 
   label {
     align-self: flex-start;
