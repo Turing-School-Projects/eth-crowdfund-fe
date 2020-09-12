@@ -39,7 +39,6 @@
 
 // import Loading from './Loading.vue';
 import Campaign from "../contracts/campaign";
-import web3 from "../contracts/web3";
 
 export default {
   name: 'User Contributions',
@@ -70,13 +69,12 @@ export default {
       this.$store.dispatch('getUserContribution', this.accountNum)
     },
     /* eslint-disable */
-    async approveRequest() {
+    async approveRequest(address, ethId) {
       this.loading = true;
-      const campaignInstance = await Campaign.at("0x8378944D41237C286592a2f7510BD48C1c3dc8F0")
-      const accounts = await web3.eth.getAccounts();
+      const campaignInstance = await Campaign.at(address)
       console.log(campaignInstance)
-      const result = await campaignInstance.approveRequest(1, { from: this.$store.state.accountNum})
-      const request = await campaignInstance.requests(1)
+      const result = await campaignInstance.approveRequest(ethId, { from: this.$store.state.accountNum})
+      const request = await campaignInstance.requests(ethId)
       console.log('result', result)
       console.log('request', request)
 
@@ -86,9 +84,10 @@ export default {
     },
     async approvalCount(address, ethId) {
         const campaignInstance = await Campaign.at(address);
-        console.log('campaignInstance', campaignInstance)
         const request = await campaignInstance.requests(ethId);
-        console.log(request);
+        console.log("How many people have voted", request.approvalCount.toString());
+        const voterCount = await campaignInstance.approversCount()
+        console.log("How many people can vote", voterCount.toString());
     }
   },
 }
