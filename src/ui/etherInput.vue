@@ -5,14 +5,22 @@
            :value="value" @change="$emit('update:value', $event.target.value)"
       />
     <p class='coin'>ETH</p>
-    <p class='text'><i>A note on conversion 1.0 ETH = ~$350.00</i></p>
+    <p class='text'><i>That's roughly ${{ value * exchangeRate }}</i></p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'EtherInput',
-  props: ["value"]
+  props: ["value"],
+  created() {
+    this.$store.dispatch('fetchExchangeRate')
+  },
+  computed: {
+    exchangeRate() {
+      return this.$store.state.exchangeRate
+    }
+  }
 }
 </script>
 

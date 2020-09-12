@@ -14,7 +14,8 @@ export default createStore({
     accountNum: null,
     campaign: {},
     userCampaigns: [],
-    userContributions: []
+    userContributions: [],
+    exchangeRate: 0
   }),
   getters: {
     /* eslint-disable-next-line */
@@ -32,18 +33,19 @@ export default createStore({
         ...state.campaigns.slice(0, index),
         payload,
         ...state.campaigns.slice(index + 1)
-      ]
+      ];
     },
     DELETE_CAMPAIGN: (state, id) => {
-      const index = state.campaigns.findIndex((camp) => camp.id === id)
-      state.campaigns.splice(index, 1)
+      const index = state.campaigns.findIndex((camp) => camp.id === id);
+      state.campaigns.splice(index, 1);
     },
     setTodos: (state, todos) => (state.todos = todos),
     setFactory: (state, instance) => (state.factory = instance),
     setCampaign: (state, instance) => (state.campaign = instance),
     setCampaigns: (state, instance) => (state.campaigns = instance),
     setContributions: (state, instance) => (state.userContributions = instance),
-    setAccountNum: (state, accNum) => (state.accountNum = accNum)
+    setAccountNum: (state, accNum) => (state.accountNum = accNum),
+    setExchangeRate: (state, rate) => (state.exchangeRate = rate)
   },
   actions: {
     fetchTodos: async ({ commit }) => {
@@ -65,6 +67,12 @@ export default createStore({
     fetchAccountNum: async ({ commit }) => {
       const accounts = await web3.eth.getAccounts();
       commit("setAccountNum", accounts[0]);
+    },
+    fetchExchangeRate: async ({ commit }) => {
+      const {
+        data: { USD }
+      } = await axios.get(`${VUE_APP_API_URL}price_converter?wei=1000000000000000000`);
+      commit("setExchangeRate", USD);
     },
     /* eslint-disable */
     createWithdrawalRequest: async (context, { request, address, manager }) => {
