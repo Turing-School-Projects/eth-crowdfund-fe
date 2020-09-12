@@ -15,7 +15,7 @@
       <div class="contribution-area">
         <h3>Make a Contribution</h3>
         <p>To become an approver of this campaign please contribute more than:</p>
-        <input v-model='contribution' placeholder='Enter your contribution (ETH)' type='number' step='0.0001' min='0'/>
+        <ether-input v-model:value="contribution" />
         <button :disabled="!contribution"
         @click="submitContribution">
         Submit Contribution </button>
@@ -30,10 +30,7 @@
 </template>
 
 <script>
-import web3 from "../contracts/web3";
-
-web3.eth.getAccounts()
-  .then((accounts) => console.log(accounts[0]))
+import etherInput from "@/ui/etherInput.vue";
 
 export default {
   name: 'CampaignDetails',
@@ -62,6 +59,9 @@ export default {
         this.userMessage = true;
       }
     }
+  },
+  components: {
+    etherInput
   }
 }
 </script>
@@ -69,6 +69,9 @@ export default {
 
 <style scoped lang='scss'>
 @import "../_variables.scss";
+.details-card {
+  margin-left: 3rem;
+  margin-right: 22rem;
 
 section {
   display: flex;
@@ -104,6 +107,12 @@ ul {
   background: radial-gradient($light-green 45%, $green 98%);
 }
 
+input {
+  .eth-value {
+    width: 8vw;
+  }
+}
+
 .campaign-section {
   display: flex;
   margin: auto;
@@ -115,20 +124,10 @@ img {
   height: 46.67vh;
 }
 
-.details-card {
-  margin: auto;
-  margin-top: 3em;
-}
-
-input {
-  display: block;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 .campaign-text {
   margin-left: 2rem;
 }
 
+}
 </style>
