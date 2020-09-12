@@ -20,7 +20,6 @@ export default {
     this.$store.dispatch('fetchFactory')
     this.$store.dispatch('fetchAccountNum')
     this.$store.dispatch('fetchAllCampaigns')
-    this.$store.dispatch('fetchExchangeRate')
   },
   computed: {
     campaigns() {
