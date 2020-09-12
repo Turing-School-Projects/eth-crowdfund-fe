@@ -105,9 +105,9 @@ export default createStore({
         return { error };
       }
     },
-    getUserContribution: async ({ state }, payload) => {
+    getUserContribution: async ({ state, commit }, payload) => {
       const response = await axios.get(`${VUE_APP_API_URL}contributor/${payload}/campaigns`);
-      commit("setContributions", response);
+      commit("setContributions", response.data);
     }
     /* eslint-enable */
   },
