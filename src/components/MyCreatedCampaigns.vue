@@ -18,7 +18,6 @@
           Create A Request
         </router-link>
         <a href="javascript:;" v-on:click="deleteCampaign(campaign)">Delete</a>
-        <link rel="stylesheet" href="/css/master.css">
       </section>
     </div>
 </template>
@@ -43,7 +42,9 @@ export default {
   methods: {
     async deleteCampaign(campaign) {
       // eslint-disable-next-line no-restricted-globals
-      if (confirm(`Are you sure you want to delete ${campaign.name}?`)) {
+      if (confirm(
+        `Are you sure you want to delete ${campaign.name}? Any funds remaining in this campaign will be lost.`
+      )) {
         await axios.delete(`${VUE_APP_API_URL}campaigns/${campaign.id}`)
         this.$store.commit('DELETE_CAMPAIGN', campaign.id)
       }
