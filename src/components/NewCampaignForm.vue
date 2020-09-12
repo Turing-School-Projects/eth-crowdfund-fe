@@ -107,32 +107,32 @@ export default {
 <style lang='scss'>
 @import '../_variables.scss';
 form {
-  @include beautifyBorder(.3rem, $white, $white-gray, $bg_2, $dark-purple, $bg_1, $blue, 0 / .8em
-  .8em)
+  @include beautifyBorder(.4rem, $white, $white-gray, $bg_2, $bg_1, $dark-gray, $gray, 0 / .55em
+  .55em)
   display: flex;
   flex-flow: column;
   justify-content: space-around;
   align-items: center;
   height: 60vh;
-  margin-top: 13px;
-  padding: 1.3rem 0;
+  margin-top: 0.8rem;
+  padding: 2.1rem 0;
   width: 65vw;
 
   label {
     align-self: flex-start;
-    margin-left: 17.5vw;
+    margin-left: 3.4rem;
   }
 
   input {
     height: 2em;
-    width: 55vw;
+    width: 50vw;
     margin-bottom: 2vh;
   }
 
   textarea {
     resize: none;
     height: 5rem;
-    width: 55vw;
+    width: 50vw;
   }
 
   button {

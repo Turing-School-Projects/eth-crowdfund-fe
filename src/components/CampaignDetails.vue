@@ -14,8 +14,7 @@
     </section>
       <div class="contribution-area">
         <h3>Make a Contribution</h3>
-        <p>To become an approver of this campaign please contribute more than:
-          <b> {{ campaign.min_contribution }} ETH</b></p>
+        <p>To become an approver of this campaign please contribute more than:</p>
         <input v-model='contribution' placeholder='Enter your contribution (ETH)' type='number' step='0.0001' min='0'/>
         <button :disabled="!contribution"
         @click="submitContribution">
@@ -133,31 +132,3 @@ input {
 }
 
 </style>
-      <!-- const campaignInstance = await ethCampaign.at(this.address); -->
-      <!-- const result = await campaignInstance.contribute({ -->
-      <!--   from: this.$store.state.accountNum, -->
-      <!--   value: web3.utils.toWei(this.contribution, "ether") -->
-      <!-- }) -->
-      <!-- if (result) { -->
-      <!--   try { -->
-      <!--     await axios.put( -->
-      <!--       `${VUE_APP_API_URL}campaigns/${this.campaign.id}`, -->
-      <!--       { -->
-      <!--         value: (this.$store.getters.getSingleCampaign(this.address).value + parseFloat(this.contribution)) -->
-      <!--       } -->
-      <!--     ); -->
-      <!--   } catch (error) { -->
-      <!--     return { error }; -->
-      <!--   } -->
-      <!--   if (this.contribution > this.campaign.min_contribution) { -->
-      <!--     try { -->
-      <!--       const resp = await axios.post( -->
-      <!--         `${VUE_APP_API_URL}campaigns/${this.campaign.address}/contributor/${this.$store.state.accountNum}`, -->
-      <!--         { -->
-      <!--           address: this.$store.state.accountNum, -->
-      <!--           email: null -->
-      <!--         } -->
-      <!--       ); -->
-      <!--     } catch (error) { -->
-      <!--       return { error }; -->
-      <!--     } -->
