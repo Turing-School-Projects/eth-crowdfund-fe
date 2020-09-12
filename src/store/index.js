@@ -13,7 +13,8 @@ export default createStore({
     factory: {},
     accountNum: null,
     campaign: {},
-    userCampaigns: []
+    userCampaigns: [],
+    userContributions: []
   }),
   getters: {
     /* eslint-disable-next-line */
@@ -28,6 +29,7 @@ export default createStore({
     setFactory: (state, instance) => (state.factory = instance),
     setCampaign: (state, instance) => (state.campaign = instance),
     setCampaigns: (state, instance) => (state.campaigns = instance),
+    setContributions: (state, instance) => (state.userContributions = instance),
     setAccountNum: (state, accNum) => (state.accountNum = accNum)
   },
   actions: {
@@ -102,6 +104,10 @@ export default createStore({
       } catch (error) {
         return { error };
       }
+    },
+    getUserContribution: async ({ state }, payload) => {
+      const response = await axios.get(`${VUE_APP_API_URL}contributor/${payload}/campaigns`);
+      commit("setContributions", response);
     }
     /* eslint-enable */
   },
