@@ -8,6 +8,7 @@
     <p>Description: Less haircuts</p>
     <p>Amount: 1 Eth</p>
     <button> Approve This Request</button>
+    <button @click='showContributions'>Con</button>
   </div>
   <Loading v-if="loading" />
 </template>
@@ -19,10 +20,21 @@ import Campaign from "../contracts/campaign";
 import web3 from "../contracts/web3";
 
 export default {
-  name: 'HelloWorld',
+  name: 'User Contributions',
   props: {
     msg: String
   },
+  created() {
+    this.$store.dispatch('fetchAccountNum')
+    this.$store.dispatch('getUserContribution', this.accountNum)
+  },
+  computed: {
+    accountNum() {
+      return this.$store.state.accountNum
+    },
+    userContributions() {
+      return this.$store.state.userContributions
+    }
   data() {
     return {
       loading: false
@@ -32,6 +44,9 @@ export default {
     Loading
   },
   methods: {
+    showContributions() {
+      this.$store.dispatch('getUserContribution', this.accountNum)
+    },
     /* eslint-disable */
     async approveRequest() {
       this.loading = true;
@@ -42,16 +57,12 @@ export default {
       const request = await campaignInstance.requests(1)
       console.log('result', result)
       console.log('request', request)
-      
+
       if(result) {
         this.loading = false;
       }
     }
   },
-  created() {
-    // Get all campaigns I have voting power
-    // From Antonio
-  }
 }
 </script>
 
