@@ -20,7 +20,7 @@
         <p class='message'><i>**Defaults to current connected CryptoWallet.**</i></p>
       </div>
         <textarea v-model='description' placeholder='Request description'></textarea>
-        <button type='submit' > Create Withdrawal Request </button>
+        <basicButton type='submit' text="Create Withdrawal Request" />
         <div v-if="this.userMessage">Please request an Ether amount</div>
         <div v-if="this.error">{{this.error}}</div>
     </form>
@@ -31,10 +31,14 @@
 <script>
 
 import Loading from '@/components/Loading.vue';
+import basicButton from "@/ui/basicButton.vue"
 
 export default {
   name: 'CampaignRequestForm',
   props: ['id', 'address'],
+  components: {
+    basicButton
+  },
   data() {
     return {
       name: '',
