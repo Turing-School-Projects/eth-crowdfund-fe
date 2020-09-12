@@ -23,12 +23,8 @@
         <button :disabled="!contribution"
         @click="convertToDollars">
         Convert To USD </button>
-        <p><b>Past contributors:</b></p>
-        <ul>
-        <li>Andy: $10 </li>
-        <li>Edwin: $10 </li>
-        <li>Jack: $1 </li>
-        </ul>
+        <p><b>Past contributors: 3</b></p>
+        <p v-if="userMessage">Please Enter an amount greater than {{campaign.min_contribution}}ETH</p>
       </div>
     </div>
   </div>
@@ -52,7 +48,7 @@ export default {
     return {
       contribution: null,
       userMessage: null,
-      loading: true
+      loading: false
     }
   },
   components: {
@@ -61,7 +57,11 @@ export default {
   methods: {
     /* eslint-disable */
     async submitContribution() {
-      this.$store.dispatch('contributeToBlockChain', {address: this.address, contribution: this.contribution})
+      if(this.contribution > this.campaign.min_contribution){
+        this.$store.dispatch('contributeToBlockChain', {address: this.address, contribution: this.contribution})
+      } else {
+        this.userMessage = true;
+      }
     }
   }
   }
@@ -76,7 +76,7 @@ section {
   display: flex;
   justify-content: center;
   text-align: left;
-  // background: whitesmoke;
+  background: whitesmoke;
   box-shadow: 2px 2px 2px grey;
   align-items: center;
   border: 3px solid black;
@@ -102,13 +102,14 @@ ul {
 .contribution-area {
   border: 3px solid black;
   margin-left: 2rem;
-  background: #42b983;
+  width: 30vw;
+  background: radial-gradient($light-green 45%, $green 98%);
 }
 
 .campaign-section {
   display: flex;
   margin: auto;
-  width: 60rem;
+  width: 80vw;
 }
 
 img {

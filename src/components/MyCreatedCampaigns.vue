@@ -11,13 +11,13 @@
           </div>
           <div class="requests"><b>Total Request:</b> {{campaign.requests.length}}</div>
         </div>
+      </section>
       <router-link
             style="text-decoration: none;"
             :to="{ name: 'Campaign Request',
             params: {id: campaign.id, address: campaign.address}}">
       <button>Create A Request</button>
       </router-link>
-      </section>
     </div>
 </template>
 
@@ -46,6 +46,11 @@ export default {
 <style scoped lang='scss'>
 .user-campaigns {
   margin-top: 5vh;
+  background: whitesmoke;
+  height: 60vh;
+  width: 40vw;
+  box-shadow: 1px 1px 3px grey;
+
 }
 
 img {
@@ -58,25 +63,20 @@ router-link {
  align-self: flex-end;
 }
 
+button {
+  margin-top: -5vh;
+}
+
 .campaign-card {
-  background: whitesmoke;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
   text-decoration: none;
-  box-shadow: 1px 1px 3px grey;
-  height: 60vh;
+  height: 55vh;
   width: 40vw;
   box-sizing: border-box;
   transform: scale(1);
   color: black;
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: 2px 2px 10px black;
-    transition: all 0.25s;
-    outline: 1px solid black;
-  }
 }
 
 .img-div {
