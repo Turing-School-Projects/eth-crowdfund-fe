@@ -18,11 +18,11 @@
               Value: {{request.value}}
             </div>
             <div class="">
-            <!-- {{ approvalCount(campaign.address, request.eth_id) }} -->
               <button type="button" @click="approvalCount(campaign.address, request.eth_id)">
               approvalCount</button>
             </div>
-            <button @click="approveRequest(campaign.address, request.eth_id)">Approve Request</button>
+            <button @click="approveRequest(campaign.address, request.eth_id, request.id)">
+              Approve Request</button>
           </div>
         </div>
       </section>
@@ -38,7 +38,9 @@
 <script>
 
 // import Loading from './Loading.vue';
+import axios from "axios";
 import Campaign from "../contracts/campaign";
+import { VUE_APP_API_URL } from "../env";
 
 export default {
   name: 'User Contributions',
@@ -69,15 +71,23 @@ export default {
       this.$store.dispatch('getUserContribution', this.accountNum)
     },
     /* eslint-disable */
-    async approveRequest(address, ethId) {
+    async approveRequest(address, ethId, requestID) {
       this.loading = true;
       const campaignInstance = await Campaign.at(address)
       console.log(campaignInstance)
       const result = await campaignInstance.approveRequest(ethId, { from: this.$store.state.accountNum})
       const request = await campaignInstance.requests(ethId)
-      console.log('result', result)
-      console.log('request', request)
-
+      const approvalCount = parseInt(request.approvalCount.toString())
+      const voterCount = await campaignInstance.approversCount()
+      const voterString = voterCount.toString();
+      console.log('approvalCount', approvalCount)
+      console.log('voterCount', voterCount)
+      if (result && (approvalCount >= parseInt(voterString) / 2)) {
+        const resp = await axios.put(`${VUE_APP_API_URL}requests/${requestID}`, {
+          approved: "true"
+        });
+        console.log(resp);
+      }
       if(result) {
         this.loading = false;
       }
@@ -89,7 +99,8 @@ export default {
         const voterCount = await campaignInstance.approversCount()
         console.log("How many people can vote", voterCount.toString());
     }
-  },
+  }
+}
 }
 </script>
 
