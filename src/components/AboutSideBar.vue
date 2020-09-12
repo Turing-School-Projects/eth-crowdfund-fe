@@ -82,11 +82,12 @@ export default {
 @import '../_variables.scss';
 
 section {
-  @include beautifyBorder(.8rem, $light-green, $green, $bg_2, $dark-blue, $bg_1, $blue)
+  // @include beautifyBorder(.8rem, $light-green, $green, $bg_2, $dark-blue, $bg_1, $blue)
   width: 13rem;
   color: $dark-blue;
   margin-left: 2rem;
-
+  background: radial-gradient($light-green 45%, $green 98%);
+  border: 3px solid rgb(80, 80, 80);
   .member {
     a {
       color: $black;
