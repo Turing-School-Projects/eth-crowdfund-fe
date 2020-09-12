@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 <template>
-  <div class="details-card">
+  <Loading v-if="loading" />
+  <div class="details-card" v-if="!loading">
     <h1>{{ campaign.name }}</h1>
     <div class="campaign-section">
     <section>
@@ -47,17 +48,22 @@ export default {
       return this.$store.getters.getSingleCampaign(this.address)
     }
   },
+  data() {
+    return {
+      contribution: null,
+      userMessage: null,
+      loading: true
+    }
+  },
+  components: {
+    Loading
+  },
   methods: {
     /* eslint-disable */
     async submitContribution() {
       this.$store.dispatch('contributeToBlockChain', {address: this.address, contribution: this.contribution})
     }
-  },
-  data() {
-    return {
-      contribution: null,
-      userMessage: null
-    }
+  }
   }
 }
 </script>

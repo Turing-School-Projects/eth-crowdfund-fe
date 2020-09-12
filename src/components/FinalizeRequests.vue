@@ -38,6 +38,10 @@ export default {
       const request = await campaignInstance.requests(1)
       console.log('request', request)
       console.log('result', result)
+      
+      if(result) {
+        this.loading = false;
+      }
     }
   },
   created() {
