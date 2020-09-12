@@ -1,7 +1,7 @@
 <template>
-  <h2 @click="userView = 1"> Campaigns I've Created</h2>
-  <h2 @click="userView = 2"> Requests I Can Vote On </h2>
-  <h2 @click="userView = 3"> Requests I manage </h2>
+  <h2 @click="userView = 1" v-bind:class="{ active: userView === 1 }"> Campaigns I've Created</h2>
+  <h2 @click="userView = 2" v-bind:class="{ active: userView === 2 }"> Requests I Can Vote On </h2>
+  <h2 @click="userView = 3" v-bind:class="{ active: userView === 3 }"> Requests I manage </h2>
   <div v-if="userView === 1" v-bind:class="{ active: userView }" class="container">
     <MyCreatedCampaigns />
   </div>
@@ -27,6 +27,12 @@ export default {
       userView: 1
     }
   },
+  created() {
+    this.$store.dispatch('fetchTodos')
+    this.$store.dispatch('fetchFactory')
+    this.$store.dispatch('fetchAccountNum')
+    this.$store.dispatch('fetchAllCampaigns')
+  },
   components: {
     MyCreatedCampaigns,
     ApproveRequests,
@@ -37,9 +43,14 @@ export default {
 
 <style scoped lang='scss'>
 
+.active {
+  color: white;
+}
+
 h2 {
   display: inline-block;
   margin: 2rem 2rem;
+  cursor: pointer;
 }
 .active {
   color: white;

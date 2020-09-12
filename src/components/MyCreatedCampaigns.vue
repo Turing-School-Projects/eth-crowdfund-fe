@@ -3,19 +3,20 @@
       <section class="campaign-card">
         <section>
         <div class="img-div"><img :src=campaign.image /></div>
-        <div class="campaign-info">
-          <h1> {{campaign.name}}</h1>
-          <p>{{campaign.description}}</p>
-        </div>
         </section>
-        <button> Finalize Request and Distribute Money</button>
-        <div class="requests"><b>Total Request:</b> {{campaign.requests.length}}</div>
-        <router-link
-          style="text-decoration: none;"
-          :to="{ name: 'Campaign Request',
-          params: {id: campaign.id, address: campaign.address}}">
-          Create A Request
-        </router-link>
+        <div>
+          <div class="campaign-info">
+            <h1> {{campaign.name}}</h1>
+            <p>{{campaign.description}}</p>
+          </div>
+          <div class="requests"><b>Total Request:</b> {{campaign.requests.length}}</div>
+        </div>
+      <router-link
+            style="text-decoration: none;"
+            :to="{ name: 'Campaign Request',
+            params: {id: campaign.id, address: campaign.address}}">
+      <button>Create A Request</button>
+      </router-link>
       </section>
     </div>
 </template>
@@ -53,11 +54,15 @@ img {
   align-self: flex-end;
 }
 
+router-link {
+ align-self: flex-end;
+}
+
 .campaign-card {
   background: whitesmoke;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   align-items: center;
   text-decoration: none;
   box-shadow: 1px 1px 3px grey;

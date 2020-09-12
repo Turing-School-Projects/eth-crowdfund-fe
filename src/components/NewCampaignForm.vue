@@ -74,10 +74,10 @@ export default {
           .then((resp) => console.log(resp))
           // eslint-disable-next-line no-return-assign
           .catch((error) => this.error = error.message)
-        this.loading = false;
         this.clearInputs()
+        this.$router.push(`/campaigns/user`)
+        this.loading = false;
       }
-      this.$router.push(`/campaigns/user`)
     },
     clearInputs() {
       this.title = ''
