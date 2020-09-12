@@ -19,8 +19,8 @@
             </div>
             <div class="">
             <!-- {{ approvalCount(campaign.address, request.eth_id) }} -->
-              <!-- <button type="button" @click="approvalCount(campaign.address, request.eth_id)">
-              approvalCount</button> -->
+              <button type="button" @click="approvalCount(campaign.address, request.eth_id)">
+              approvalCount</button>
             </div>
             <button @click="approveRequest(campaign.address, request.eth_id)">Approve Request</button>
           </div>
@@ -83,6 +83,12 @@ export default {
       if(result) {
         this.loading = false;
       }
+    },
+    async approvalCount(address, ethId) {
+        const campaignInstance = await Campaign.at(address);
+        console.log('campaignInstance', campaignInstance)
+        const request = await campaignInstance.requests(ethId);
+        console.log(request);
     }
   },
 }
