@@ -4,13 +4,8 @@
     <form @submit.prevent='createRequest'>
       <label for='request-title'>Title</label>
       <input v-model='name' id='request-title' placeholder='request title' />
-      <label for='eth-value'>Ether Value</label>
-      <div class='value-box'>
-        <input id='eth-value' v-model='value' type='number' step='0.0001' min='0' /><p
-               class='coin'>ETH</p>
-        <p class='text'><i>A note on conversion 1.0 ETH = ~$350.00</i></p>
-      </div>
-      <ether-input label='Ether Value' />
+      <label for='eth-value'>Withdrawal Amount</label>
+      <ether-input v-model:value='value' />
       <label for='recipient-wallet'>Wallet Public Address</label>
       <div class='wallet-address'>
         <input
@@ -112,20 +107,20 @@ export default {
 @import "../_variables.scss";
 
 form {
-  @include beautifyBorder(.8rem, $white, $gray, $bg_2, $dark-purple, $bg_1, $blue)
+  @include beautifyBorder(.3rem, $white, $white-gray, $bg_2, $dark-gray, $bg_1, $gray, 0
+  / .55em .55em)
   display: flex;
   flex-flow: column;
   justify-content: space-around;
   align-items: center;
-  margin: 5vh 7vw;
-  padding: 2.1em;
+  margin: 2.8rem 5rem 1rem 9.2rem;
+  padding: 2.1em 0;
   height: 65vh;
-  width: 81vw;
-  border: 3px solid black;
+  width: 65vw;
 
   label {
     align-self: flex-start;
-    margin-left: 15.8vw;
+    margin-left: 4rem;
   }
 
   input {
