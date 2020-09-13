@@ -2,13 +2,22 @@
 $bg_1: #afafaf;
 $bg_2: #cfcfcf;
 $gray: #d5c4a1;
-$white: #fbf1c7;
-$green: #4185d3;
-$light-green: #5190d8;
+// $bg_1: #bdae93;
+// $bg_2: #a89984;
+$white-gray: #d5c4a1;
+$white: #f9f5d7;
+$sky: #4185d3;
+$eve-sky: #4476b0;
+$sky-blue: #5190d8;
 $dark-blue: #2c3e50;
+$darker-green: #98971a;
 $blue: #458588;
 $black: #1d2021;
 $dark-gray: #504945;
+$off-gray: #928374;
+$green: #689d6a;
+$light-green: #8ec07c;
+$light-blue: #83a598;
 
 // Mixins
 @mixin pixelate($size, $base, $accent: rgba(0,0,0,.25)) {
@@ -25,15 +34,38 @@ $dark-gray: #504945;
 }
 
 @mixin beautifyBorder($border_size, $bg_accent_1, $bg_accent_2,
-$border_color_1, $border_color_2, $border_color_3, $border_color_4) {
+$border_color_1, $border_color_2, $border_color_3, $border_color_4, $expression: 0 / 2.1em 2.1em, $angle: -45deg, $radius: 8px) {
   padding: $border_size;
   border: $border_size solid transparent;
-  box-shadow: 2px 2px 8px $dark-gray;
-  background: radial-gradient($bg_accent_1 45%, $bg_accent_2 95%) padding-box,
-              repeating-linear-gradient(-45deg,
+  border-radius: $radius;
+  box-shadow: 5px 5px 21px $dark-gray;
+  background: radial-gradient($bg_accent_1 35%, $bg_accent_2 85%) padding-box,
+              repeating-linear-gradient($angle,
               $border_color_1 0, $border_color_1 12.5%,
               $border_color_2 0, $border_color_2 25%,
               $border_color_3 0, $border_color_3 37.5%,
               $border_color_4 0, $border_color_4 50%)
-              0 / 2.1em 2.1em;
+              $expression;
 }
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+
+  > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 80%;
+        height: 100%;
+  }
+}
+
