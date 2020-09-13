@@ -1,10 +1,14 @@
 <template>
   <div class="about">
     <section class='tabs'>
-      <button @click="view = 'how-to'" v-bind:class="{ active: view === 'how-to' }">How to?</button>
-      <button @click="view = 'why'" v-bind:class="{ active: view === 'why' }">Why Blockchain?</button>
-      <button @click="view = 'technologies'" v-bind:class="{ active: view === 'technologies' }">Technologies</button>
-      <button @click="view = 'contributors'" v-bind:class="{ active: view === 'contributors' }">Contributors</button>
+      <div @click="view = 'how-to'" v-bind:class="{ active: view === 'how-to' }">How
+        to?</div>
+      <div @click="view = 'why'" v-bind:class="{ active: view === 'why' }">Why
+        Blockchain?</div>
+      <div @click="view = 'technologies'" v-bind:class="{ active: view === 'technologies'
+        }">Technologies</div>
+      <div @click="view = 'contributors'" v-bind:class="{ active: view ===
+        'contributors' }">Contributors</div>
     </section>
     <section class="tab-view">
     <section v-if="view === 'how-to'" v-bind:class="{ active: userView }">
@@ -60,17 +64,36 @@ export default {
 .about {
   margin: auto;
   margin-top: 3rem;
-  display: grid;
-  grid-template-rows: 2rem 21rem;
+  display: flex;
+  flex-flow: column;
   width: 90vw;
+}
 
-  .tabs {
-    height: 3rem;
-    padding-bottom: 0;
-  }
+.tabs > div {
+  position: relative;
+  display: inline-block;
+  padding: .4em 1em 0;
+  margin-bottom: .3em;
+}
+
+.tabs > div::before {
+  content: '';
+  position: absolute;
+  top: 0; right: -13px; bottom: 0; left: -13px;
+  z-index: -1;
+  background: #ccc;
+  background-image: linear-gradient(
+                      hsla(0,0%,100%,.6),
+                      hsla(0,0%,100%,0));
+  border: 1px solid rgba(0,0,0,.4);
+  border-bottom: none;
+  border-radius: 0 .15em white inset;
+  transform: scaleY(1.3) perspective(.5em) rotateX(5deg);
+  transform-origin: bottom;
+  height: 2rem;
+}
 
   .tab-view {
     border: 3px solid black;
   }
-}
 </style>
