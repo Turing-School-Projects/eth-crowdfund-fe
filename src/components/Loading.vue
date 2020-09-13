@@ -100,7 +100,9 @@ export default {
       /* eslint-disable-next-line */
       function() { 
         self.mainMessage = self.messages[j].message;
-        j += 1
+        if (j < 4) {
+          j += 1
+        }
       }, 5000
     );
   }

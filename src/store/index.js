@@ -13,7 +13,8 @@ export default createStore({
     factory: {},
     accountNum: null,
     campaign: {},
-    userCampaigns: []
+    userCampaigns: [],
+    userContributions: []
   }),
   getters: {
     /* eslint-disable-next-line */
@@ -24,10 +25,24 @@ export default createStore({
     ADD_CAMPAIGN: (state, payload) => {
       state.campaigns = [...state.campaigns, payload];
     },
+    EDIT_CAMPAIGN: (state, payload) => {
+      const index = state.campaigns.findIndex((camp) => camp.id === payload.id);
+
+      state.campaigns = [
+        ...state.campaigns.slice(0, index),
+        payload,
+        ...state.campaigns.slice(index + 1)
+      ]
+    },
+    DELETE_CAMPAIGN: (state, id) => {
+      const index = state.campaigns.findIndex((camp) => camp.id === id)
+      state.campaigns.splice(index, 1)
+    },
     setTodos: (state, todos) => (state.todos = todos),
     setFactory: (state, instance) => (state.factory = instance),
     setCampaign: (state, instance) => (state.campaign = instance),
     setCampaigns: (state, instance) => (state.campaigns = instance),
+    setContributions: (state, instance) => (state.userContributions = instance),
     setAccountNum: (state, accNum) => (state.accountNum = accNum)
   },
   actions: {
@@ -68,6 +83,44 @@ export default createStore({
           return { error };
         }
       }
+    },
+    contributeToBlockChain: async ({ dispatch, state }, { address, contribution }) => {
+      const { toWei } = web3.utils;
+      const campaignInstance = await campaign.at(address);
+      const result = await campaignInstance.contribute({
+        from: state.accountNum,
+        value: toWei(contribution, "ether")
+      });
+      if (result) {
+        dispatch("sendContributionToDB", { address, contribution });
+      }
+    },
+    sendContributionToDB: async ({ getters, dispatch }, { address, contribution }) => {
+      const { value, id, min_contribution } = getters.getSingleCampaign(address);
+      try {
+        await axios.put(`${VUE_APP_API_URL}campaigns/${id}`, {
+          value: value + parseFloat(contribution)
+        });
+      } catch (error) {
+        return { error };
+      }
+      if (contribution > min_contribution) {
+        dispatch("addContributorToCampaign", { address });
+      }
+    },
+    addContributorToCampaign: async ({ state }, { address }) => {
+      try {
+        await axios.post(`${VUE_APP_API_URL}campaigns/${address}/contributor/${state.accountNum}`, {
+          address: state.accountNum,
+          email: null
+        });
+      } catch (error) {
+        return { error };
+      }
+    },
+    getUserContribution: async ({ state, commit }, payload) => {
+      const response = await axios.get(`${VUE_APP_API_URL}contributor/${payload}/campaigns`);
+      commit("setContributions", response.data);
     }
     /* eslint-enable */
   },

@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 <template>
-  <div class="details-card">
+  <Loading v-if="loading" />
+  <div class="details-card" v-if="!loading">
     <h1>{{ campaign.name }}</h1>
     <div class="campaign-section">
     <section>
@@ -22,22 +23,15 @@
         <button :disabled="!contribution"
         @click="convertToDollars">
         Convert To USD </button>
-        <p><b>Past contributors:</b></p>
-        <ul>
-        <li>Andy: $10 </li>
-        <li>Edwin: $10 </li>
-        <li>Jack: $1 </li>
-        </ul>
+        <p><b>Past contributors: 3</b></p>
+        <p v-if="userMessage">Please Enter an amount greater than {{campaign.min_contribution}}ETH</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 import web3 from "../contracts/web3";
-import ethCampaign from "../contracts/campaign";
-import { VUE_APP_API_URL } from "../env";
 
 web3.eth.getAccounts()
   .then((accounts) => console.log(accounts[0]))
@@ -50,51 +44,33 @@ export default {
       return this.$store.getters.getSingleCampaign(this.address)
     }
   },
-  methods: {
-    /* eslint-disable */
-    async submitContribution() {
-      const campaignInstance = await ethCampaign.at(this.address);
-      const result = await campaignInstance.contribute({
-        from: this.$store.state.accountNum,
-        value: web3.utils.toWei(this.contribution, "ether")
-      })
-      if (result) {
-        try {
-          await axios.put(
-            `${VUE_APP_API_URL}campaigns/${this.campaign.id}`,
-            {
-              value: (this.$store.getters.getSingleCampaign(this.address).value + parseFloat(this.contribution))
-            }
-          );
-        } catch (error) {
-          return { error };
-        }
-        if (this.contribution > this.campaign.min_contribution) {
-          try {
-            const resp = await axios.post(
-              `${VUE_APP_API_URL}campaigns/${this.campaign.address}/contributor/${this.$store.state.accountNum}`,
-              {
-                address: this.$store.state.accountNum,
-                email: null
-              }
-            );
-          } catch (error) {
-            return { error };
-          }
-        }
-      }
-    },
-  },
   data() {
     return {
       contribution: null,
-      userMessage: null
+      userMessage: null,
+      loading: false
+    }
+  },
+  components: {
+    // Loading
+  },
+  methods: {
+    /* eslint-disable */
+    async submitContribution() {
+      if(this.contribution > this.campaign.min_contribution){
+        this.$store.dispatch('contributeToBlockChain', {address: this.address, contribution: this.contribution})
+      } else {
+        this.userMessage = true;
+      }
     }
   }
 }
 </script>
 
+
 <style scoped lang='scss'>
+@import "../_variables.scss";
+
 section {
   display: flex;
   justify-content: center;
@@ -104,6 +80,8 @@ section {
   align-items: center;
   border: 3px solid black;
   width: 45rem;
+  background: radial-gradient($light-green 45%, $green 98%);
+
 }
 
 .img-area {
@@ -123,13 +101,14 @@ ul {
 .contribution-area {
   border: 3px solid black;
   margin-left: 2rem;
-  background: #42b983;
+  width: 30vw;
+  background: radial-gradient($light-green 45%, $green 98%);
 }
 
 .campaign-section {
   display: flex;
   margin: auto;
-  width: 60rem;
+  width: 80vw;
 }
 
 img {
@@ -154,3 +133,31 @@ input {
 }
 
 </style>
+      <!-- const campaignInstance = await ethCampaign.at(this.address); -->
+      <!-- const result = await campaignInstance.contribute({ -->
+      <!--   from: this.$store.state.accountNum, -->
+      <!--   value: web3.utils.toWei(this.contribution, "ether") -->
+      <!-- }) -->
+      <!-- if (result) { -->
+      <!--   try { -->
+      <!--     await axios.put( -->
+      <!--       `${VUE_APP_API_URL}campaigns/${this.campaign.id}`, -->
+      <!--       { -->
+      <!--         value: (this.$store.getters.getSingleCampaign(this.address).value + parseFloat(this.contribution)) -->
+      <!--       } -->
+      <!--     ); -->
+      <!--   } catch (error) { -->
+      <!--     return { error }; -->
+      <!--   } -->
+      <!--   if (this.contribution > this.campaign.min_contribution) { -->
+      <!--     try { -->
+      <!--       const resp = await axios.post( -->
+      <!--         `${VUE_APP_API_URL}campaigns/${this.campaign.address}/contributor/${this.$store.state.accountNum}`, -->
+      <!--         { -->
+      <!--           address: this.$store.state.accountNum, -->
+      <!--           email: null -->
+      <!--         } -->
+      <!--       ); -->
+      <!--     } catch (error) { -->
+      <!--       return { error }; -->
+      <!--     } -->

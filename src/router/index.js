@@ -13,6 +13,12 @@ const routes = [
     component: () => import("../views/About.vue")
   },
   {
+    path: "/campaigns/:address/edit",
+    name: "Edit Campaign",
+    component: () => import("../components/EditCampaignForm.vue"),
+    props: (route) => ({ ...route.params })
+  },
+  {
     path: "/campaigns/:address",
     name: "Single Campaign",
     component: () => import("../components/CampaignDetails.vue"),

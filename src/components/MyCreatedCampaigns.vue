@@ -3,12 +3,13 @@
       <section class="campaign-card">
         <section>
         <div class="img-div"><img :src=campaign.image /></div>
-        <div class="campaign-info">
-          <h1> {{campaign.name}}</h1>
-          <p>{{campaign.description}}</p>
+        <div>
+          <div class="campaign-info">
+            <h1> {{campaign.name}}</h1>
+            <p>{{campaign.description}}</p>
+          </div>
         </div>
         </section>
-        <button> Finalize Request and Distribute Money</button>
         <div class="requests"><b>Total Request:</b> {{campaign.requests.length}}</div>
         <router-link
           style="text-decoration: none;"
@@ -16,11 +17,20 @@
           params: {id: campaign.id, address: campaign.address}}">
           Create A Request
         </router-link>
+        <router-link
+          style="text-decoration: none;"
+          :to="{name: 'Edit Campaign',
+            params: { address: campaign.address } }">Edit
+        </router-link>
+        <a href="javascript:;" v-on:click="deleteCampaign(campaign)">Delete</a>
       </section>
     </div>
 </template>
 
 <script>
+import axios from "axios";
+import { VUE_APP_API_URL } from "../env";
+
 export default {
   name: 'UserCampaigns',
   computed: {
@@ -34,6 +44,17 @@ export default {
       return this.campaigns.filter((campaign) => campaign.manager === this.accountNum)
     }
   },
+  methods: {
+    async deleteCampaign(campaign) {
+      // eslint-disable-next-line no-restricted-globals
+      if (confirm(
+        `Are you sure you want to delete ${campaign.name}? Any funds remaining in this campaign will be lost.`
+      )) {
+        await axios.delete(`${VUE_APP_API_URL}campaigns/${campaign.id}`)
+        this.$store.commit('DELETE_CAMPAIGN', campaign.id)
+      }
+    }
+  },
   data() {
     return {
       userView: true
@@ -45,6 +66,11 @@ export default {
 <style scoped lang='scss'>
 .user-campaigns {
   margin-top: 5vh;
+  background: whitesmoke;
+  height: 60vh;
+  width: 40vw;
+  box-shadow: 1px 1px 3px grey;
+
 }
 
 img {
@@ -53,25 +79,24 @@ img {
   align-self: flex-end;
 }
 
+router-link {
+ align-self: flex-end;
+}
+
+button {
+  margin-top: -5vh;
+}
+
 .campaign-card {
-  background: whitesmoke;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   text-decoration: none;
-  box-shadow: 1px 1px 3px grey;
-  height: 60vh;
+  height: 55vh;
   width: 40vw;
   box-sizing: border-box;
   transform: scale(1);
   color: black;
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: 2px 2px 10px black;
-    transition: all 0.25s;
-    outline: 1px solid black;
-  }
 }
 
 .img-div {
