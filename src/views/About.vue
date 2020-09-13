@@ -1,7 +1,19 @@
 <template>
   <div class="about">
-    <SideBar class='sidebar'/>
-    <section class='about-content'>
+    <section class='tabs'>
+      <button @click="view = 'how-to'" v-bind:class="{ active: view === 'how-to' }">How to?</button>
+      <button @click="view = 'why'" v-bind:class="{ active: view === 'why' }">Why Blockchain?</button>
+      <button @click="view = 'technologies'" v-bind:class="{ active: view === 'technologies' }">Technologies</button>
+      <button @click="view = 'contributors'" v-bind:class="{ active: view === 'contributors' }">Contributors</button>
+    </section>
+    <section class="tab-view">
+    <section v-if="view === 'how-to'" v-bind:class="{ active: userView }">
+      <h2>Where to begin?</h2>
+    </section>
+    <section v-if="view === 'why'">
+      <h2>Why use Blockchain?</h2>
+    </section>
+    <section v-if="view === 'technologies'" class='about-content'>
       <h2>Turing School of Software & Design Capstone Project</h2>
       <p>The final project at Turing school is a full-stack venture to create an app
         around an idea pitched by one of the students. Our goal was to develop a
@@ -19,7 +31,11 @@
       <h3>Back-End Technologies</h3>
       <h3>Front-End Technologies</h3>
     </section>
-  </div>
+    <section v-if="view === 'contributors'">
+      <SideBar class='sidebar'/>
+    </section>
+    </section>
+    </div>
 </template>
 
 <script>
@@ -29,6 +45,11 @@ export default {
   name: 'About',
   components: {
     SideBar
+  },
+  data() {
+    return {
+      view: 'how-to'
+    }
   }
 }
 </script>
@@ -37,24 +58,19 @@ export default {
 @import "../_variables.scss";
 
 .about {
-  display: grid;
+  margin: auto;
   margin-top: 3rem;
-  grid-template-columns: 1fr 2fr;
+  display: grid;
+  grid-template-rows: 2rem 21rem;
+  width: 90vw;
 
-  .sidebar {
-    margin-right: 0.3rem;
-    width: 13rem;
+  .tabs {
+    height: 3rem;
+    padding-bottom: 0;
   }
 
-  .about-content {
-    @include beautifyBorder(.3rem, $bg_2, $bg_1, $bg_2, $eve-sky, $sky, $dark-blue,
-    0/ 0.8em 0.8em)
-    margin-left: 0rem;
-    margin-right: 1.3rem;
-    color: $black;
-    h2, h3, b {
-      color: $dark-blue;
-    }
+  .tab-view {
+    border: 3px solid black;
   }
 }
 </style>
