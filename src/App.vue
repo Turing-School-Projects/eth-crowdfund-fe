@@ -37,21 +37,21 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: $dark-purple;
+  color: $dark-blue;
 }
 
 body {
-  @include pixelate(3px, $white, $white-gray)
+  @include pixelate(3px, $bg_2, $gray)
   margin: 0;
 }
 
 #nav {
   padding: .3rem;
   border-bottom: .3rem solid transparent;
-  background: radial-gradient($light-blue 45%, $blue 95%) padding-box,
-              repeating-linear-gradient(45deg,
+  background: radial-gradient($sky-blue 45%, $eve-sky 95%) padding-box,
+              repeating-linear-gradient(-45deg,
               $bg_2 0, $bg_2 12.5%,
-              $dark-purple 0, $dark-purple 25%,
+              $off-gray 0, $off-gray 25%,
               $gray 0, $gray 37.5%,
               $dark-gray 0, $dark-gray 50%)
               0 / 0.8em 0.8em;

@@ -82,10 +82,10 @@ export default {
 @import '../_variables.scss';
 
 section {
-  @include beautifyBorder(.3rem, $light-green, $green, $bg_2, $dark-purple, $bg_1, $blue, 0/
-  .8em .8em)
+  @include beautifyBorder(.3rem, $white, $gray, $bg_2, $dark-blue, $bg_1, $blue, 0/
+  .5em .5em)
   width: 13rem;
-  color: $dark-purple;
+  color: $dark-blue;
   margin-left: 2rem;
   border: 4px solid transparent;
   .member {

@@ -47,13 +47,13 @@ export default {
   }
 
   .about-content {
-    @include beautifyBorder(.3rem, $light-green, $green, $bg_2, $dark-purple, $bg_1, $blue,
+    @include beautifyBorder(.3rem, $bg_2, $bg_1, $bg_2, $eve-sky, $sky, $dark-blue,
     0/ 0.8em 0.8em)
     margin-left: 0rem;
     margin-right: 1.3rem;
     color: $black;
     h2, h3, b {
-      color: $dark-purple;
+      color: $dark-blue;
     }
   }
 }

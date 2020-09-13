@@ -34,6 +34,7 @@ export default {
   name: 'CampaignRequestForm',
   props: ['id', 'address'],
   components: {
+    Loading,
     basicButton,
     EtherInput
   },
@@ -96,9 +97,6 @@ export default {
         this.error = { error }
       }
     }
-  },
-  components: {
-    Loading
   }
 }
 </script>
