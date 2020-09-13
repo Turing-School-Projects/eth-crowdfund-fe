@@ -1,6 +1,6 @@
 <template>
-  <h1  v-if="!this.loading"> Create a New Campaign </h1>
-  <form v-if="!this.loading" @submit.prevent='addCampaign'>
+  <h1  v-if="!this.$store.state.loading"> Create a New Campaign </h1>
+  <form v-if="!this.$store.state.loading" @submit.prevent='addCampaign'>
     <label>Campaign Title</label>
     <input v-model='title' placeholder='Ex: Arc Thrift' />
     <label>Enter Image Url</label>
@@ -13,7 +13,7 @@
   <div v-if="this.userMessage">Please fill out all inputs</div>
   <div v-if="this.error">{{this.error}}</div>
   </form>
-    <Loading v-if="this.loading" />
+    <Loading v-if="this.$store.state.loading" />
 </template>
 
 <script>
@@ -119,6 +119,7 @@ form {
   margin-top: 0.8rem;
   padding: 2.1rem 0;
   width: 65vw;
+  background: lighten($sky-blue, 20%);
 
   label {
     align-self: flex-start;

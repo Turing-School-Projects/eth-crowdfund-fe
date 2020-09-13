@@ -150,6 +150,33 @@ export default createStore({
     getUserContribution: async ({ state, commit }, payload) => {
       const response = await axios.get(`${VUE_APP_API_URL}contributor/${payload}/campaigns`);
       commit("setContributions", response.data);
+    },
+    approveRequest: async ({ commit, state }, { address, ethId, requestID }) => {
+      commit('SET_LOADING', true);
+      const campaignInstance = await campaign.at(address)
+      console.log(campaignInstance)
+      let result;
+      try {
+        result = await campaignInstance.approveRequest(ethId, { from: state.accountNum })
+      } catch (error) {
+        console.log(error)
+        commit('SET_LOADING', false);
+      }
+      const request = await campaignInstance.requests(ethId)
+      const approvalCount = parseInt(request.approvalCount.toString())
+      const voterCount = await campaignInstance.approversCount()
+      const voterString = voterCount.toString();
+      console.log('approvalCount', approvalCount)
+      console.log('voterCount', voterCount)
+      if (result && (approvalCount >= parseInt(voterString) / 2)) {
+        const resp = await axios.put(`${VUE_APP_API_URL}requests/${requestID}`, {
+          approved: "true"
+        });
+        console.log(resp);
+      }
+      if (result) {
+        commit('SET_LOADING', false)
+      }
     }
     /* eslint-enable */
   },
