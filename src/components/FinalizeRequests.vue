@@ -1,6 +1,6 @@
 <template>
-  <Loading v-if="loading" />
-  <div v-if="!loading">
+  <Loading v-if="this.$store.state.loading" />
+  <div v-if="!this.$store.state.loading">
     <div
       class="user-campaigns"
       v-for="campaign in campaigns"
@@ -62,28 +62,9 @@ export default {
   },
   methods: {
     /* eslint-disable */
-    async finalizeRequest(address, {eth_id, id, value}, campaign) {
-      this.loading = true
-      const campaignInstance = await Campaign.at(address)
-
-      try {
-        result = await campaignInstance.finalizeRequest(eth_id, { from: this.$store.state.accountNum, gas: '100000' })
-      } catch(error){
-        console.log(error)
-        this.loading = false;
-      }
-
-      if(result) {
-        this.loading = false;
-        const req_resp = await axios.put(`${VUE_APP_API_URL}requests/${id}`, {
-          finalized: "true"
-        });
-        const camp_resp = await axios.put(`${VUE_APP_API_URL}campaigns/${campaign.id}`, {
-          value: campaign.value - value
-        });
-        console.log('request', req_resp);
-        console.log('campaign', camp_resp);
-      }
+    finalizeRequest(address, {eth_id, id, value}, campaign) {
+      const payload = {address, eth_id, id, value}
+      this.$store.dispatch('finalizeRequest', payload)
     },
     async approvalCount(address, ethId) {
         const campaignInstance = await Campaign.at(address);

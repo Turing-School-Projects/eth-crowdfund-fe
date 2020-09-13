@@ -17,13 +17,9 @@
 </template>
 
 <script>
-import axios from "axios";
 import Loading from '@/components/Loading.vue';
 import basicButton from '@/ui/basicButton.vue'
 import etherInput from '@/ui/etherInput.vue'
-import web3 from '../contracts/web3'
-import Factory from "../contracts/factory";
-import { VUE_APP_API_URL } from "../env";
 
 export default {
   name: 'NewCampaignForm',
@@ -49,38 +45,18 @@ export default {
       this.createCampaign()
       this.$store.commit('ADD_CAMPAIGN', newCampaign)
     },
-    async createCampaign() {
+    createCampaign() {
       if (!this.title && !this.description && !this.minContribution && !this.imageUrl) {
         this.userMessage = true
         return
       }
-      this.loading = true;
-      // const accounts = await web3.eth.getAccounts();
-      const factory = await Factory.at(process.env.VUE_APP_FACTORY_ADDRESS);
-      const contribution = web3.utils.toWei(this.minContribution)
-      const result = await factory.createCampaign(contribution, { from: this.$store.state.accountNum })
-      const addresses = await factory.getDeployedCampaigns()
-      const campaignAddress = addresses[addresses.length - 1];
-
-      if (result) {
-        axios.post(`${VUE_APP_API_URL}campaigns/`, {
-          name: this.title,
-          description: this.description,
-          image: this.imageUrl,
-          value: "0",
-          upvote: "0",
-          manager: this.$store.state.accountNum,
-          address: campaignAddress,
-          min_contribution: this.minContribution
-        })
-          .then((resp) => console.log(resp))
-          // eslint-disable-next-line no-return-assign
-          .catch((error) => this.error = error.message)
-        this.clearInputs()
-        this.$router.push(`/campaigns/user`)
-        this.loading = false;
+      const payload = {
+        title: this.title,
+        description: this.description,
+        imageUrl: this.imageUrl,
+        minContribution: this.minContribution.toString()
       }
-      this.$router.push(`/campaigns/user`)
+      this.$store.dispatch('createCampaign', payload)
     },
     clearInputs() {
       this.title = ''

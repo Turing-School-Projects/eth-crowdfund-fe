@@ -177,6 +177,63 @@ export default createStore({
       if (result) {
         commit('SET_LOADING', false)
       }
+    },
+    finalizeRequest: async ({commit, state}, { address, eth_id, id, value}) => {
+      commit('SET_LOADING', true)
+
+      const campaignInstance = await campaign.at(address)
+
+      try {
+        result = await campaignInstance.finalizeRequest(eth_id, { from: state.accountNum, gas: '100000' })
+      } catch (error) {
+        console.log(error)
+        commit('SET_LOADING', false)
+
+      }
+
+      if (result) {
+        commit('SET_LOADING', false)
+        const req_resp = await axios.put(`${VUE_APP_API_URL}requests/${id}`, {
+          finalized: "true"
+        });
+        const camp_resp = await axios.put(`${VUE_APP_API_URL}campaigns/${campaign.id}`, {
+          value: campaign.value - value
+        });
+        console.log('request', req_resp);
+        console.log('campaign', camp_resp);
+      }
+    },
+    createCampaign: async ({commit, state, router}, {title, description, imageUrl, minContribution}) => {
+      commit('SET_LOADING', true)
+      const factoryInstance = await factory.at(process.env.VUE_APP_FACTORY_ADDRESS);
+      const contribution = web3.utils.toWei(minContribution)
+      let result;
+      try {
+        result = await factoryInstance.createCampaign(contribution, { from: state.accountNum })
+      } catch(error) {
+        console.log(error)
+        commit('SET_LOADING', false)
+
+      }
+      const addresses = await factoryInstance.getDeployedCampaigns()
+      const campaignAddress = addresses[addresses.length - 1];
+
+      if (result) {
+        commit('SET_LOADING', false)
+        axios.post(`${VUE_APP_API_URL}campaigns/`, {
+          name: title,
+          description: description,
+          image: imageUrl,
+          value: "0",
+          upvote: "0",
+          manager: state.accountNum,
+          address: campaignAddress,
+          min_contribution: minContribution
+        })
+          .then((resp) => console.log(resp))
+          // eslint-disable-next-line no-return-assign
+          .catch((error) => this.error = error.message)
+      }
     }
     /* eslint-enable */
   },
