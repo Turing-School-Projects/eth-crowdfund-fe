@@ -12,7 +12,7 @@
     </section>
     <section class="tab-view">
     <section v-if="view === 'how-to'" v-bind:class="{ active: userView }">
-      <h2>Where to begin?</h2>
+      <HowTo />
     </section>
     <section v-if="view === 'why'">
       <h2>Why use Blockchain?</h2>
@@ -36,19 +36,21 @@
       <h3>Front-End Technologies</h3>
     </section>
     <section v-if="view === 'contributors'">
-      <SideBar class='sidebar'/>
+      <Contributors class='sidebar'/>
     </section>
     </section>
     </div>
 </template>
 
 <script>
-import SideBar from "@/components/AboutSideBar.vue"
+import Contributors from "@/components/About/Contributors.vue"
+import HowTo from "@/components/About/howTo.vue"
 
 export default {
   name: 'About',
   components: {
-    SideBar
+    Contributors,
+    HowTo
   },
   data() {
     return {

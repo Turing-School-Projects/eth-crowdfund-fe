@@ -79,11 +79,9 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@import '../_variables.scss';
+@import '../../_variables.scss';
 
 section {
-  @include beautifyBorder(.3rem, $white, $gray, $bg_2, $dark-blue, $bg_1, $blue, 0/
-  .5em .5em)
   width: 13rem;
   color: $dark-blue;
   margin-left: 2rem;
