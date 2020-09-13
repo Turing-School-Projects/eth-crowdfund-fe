@@ -9,8 +9,8 @@
         <p>{{campaign.description}}</p>
         <ul class="requests">
           <li v-for="request in campaign.requests" v-bind:key="request.id">
-            <p><b>Summary:</b>{{request.description}}</p>
-            <p><b>Value:</b>{{request.value}}</p>
+            <p class="text"><b>Summary:</b>{{request.description}}</p>
+            <p class="value"><b>Value:</b>{{request.value}}</p>
             <button v-on:click="$emit('approve-request', {
             address: campaign.address,
             ethId: request.eth_id,
@@ -67,19 +67,42 @@ export default {
     margin-bottom: 1.8rem;
     flex: 0 0 auto;
     width: 45%;
-    min-width: 150px;
+    min-width: 10rem;
 
     ul {
-      max-height: 18rem;
+      max-height: 13rem;
       overflow-y: scroll;
+      border: 2px solid $bg_2;
+      box-shadow: 3px 3px 5px 3px $bg_1;
+      padding: 0px;
 
       li {
-        height: 15rem;
+        display: grid;
+        border-bottom: 3px solid $dark-blue;
+        grid-template-columns: minmax(4rem, auto);
+        grid-template-rows: minmax(3rem, auto), minmax(2rem, auto);
+        grid-template-areas:
+          "text text"
+          "value enter";
+        height: 4rem;
         list-style: none;
-        background: gray;
+        padding-bottom: 1px;
+        margin-bottom: 3px;
+        background: white;
 
-        p {
+        .text{
+          grid-area: text;
           margin: 0 3px;
+          height: 2rem;
+        }
+
+        .value {
+          grid-area: value;
+          margin: 0 3px 3px 3px;
+        }
+
+        button {
+          grid-area: enter;
         }
       }
     }
