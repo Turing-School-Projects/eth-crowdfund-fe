@@ -47,14 +47,8 @@ body {
 
 #nav {
   padding: .3rem;
-  border-bottom: .3rem solid transparent;
-  background: radial-gradient($sky-blue 45%, $eve-sky 95%) padding-box,
-              repeating-linear-gradient(-45deg,
-              $bg_2 0, $bg_2 12.5%,
-              $off-gray 0, $off-gray 25%,
-              $gray 0, $gray 37.5%,
-              $dark-gray 0, $dark-gray 50%)
-              0 / 0.8em 0.8em;
+  border-bottom: .2rem solid black;
+  background: linear-gradient($sky-blue 35%, $sky 70%);
   height: 5rem;
   display: grid;
   grid-template-columns: 21vw 79vw;
