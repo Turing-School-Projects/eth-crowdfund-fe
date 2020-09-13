@@ -16,8 +16,6 @@
 </template>
 
 <script>
-
-// import Loading from './Loading.vue';
 import RequestList from "@/ui/RequestContainer.vue"
 import Campaign from "../contracts/campaign";
 import Loading from "./Loading.vue";
@@ -26,6 +24,16 @@ export default {
   name: 'User Contributions',
   props: {
     msg: String
+  },
+  components: {
+    RequestList,
+    Loading
+  },
+  data() {
+    return {
+      loading: false,
+      error: ''
+    }
   },
   created() {
     this.$store.dispatch('fetchAccountNum')
@@ -38,16 +46,6 @@ export default {
     userContributions() {
       return this.$store.state.userContributions
     }
-  },
-  data() {
-    return {
-      loading: false,
-      error: ''
-    }
-  },
-  components: {
-    RequestList,
-    Loading
   },
   methods: {
     showContributions() {

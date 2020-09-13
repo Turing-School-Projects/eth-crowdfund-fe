@@ -7,20 +7,16 @@
       <figcaption>
         <h3>{{ campaign.name }}</h3>
         <p>{{campaign.description}}</p>
-        <ul v-for="request in campaign.requests" v-bind:key="request.id">
-          <li>
+        <ul class="requests">
+          <li v-for="request in campaign.requests" v-bind:key="request.id">
             <p><b>Summary:</b>{{request.description}}</p>
             <p><b>Value:</b>{{request.value}}</p>
-            <button v-on:click="$emit('approval-count',
-              {address: campaign.address, ethId: request.eth_id})">
-              Confirm emitted events
-            </button>
             <button v-on:click="$emit('approve-request', {
-              address: campaign.address,
-              ethId: request.eth_id,
-              requestID: request.id})"
-            >
-              ApproveRequests
+            address: campaign.address,
+            ethId: request.eth_id,
+            requestID: request.id})"
+                    >
+                    ApproveRequests
             </button>
           </li>
         </ul>
@@ -67,20 +63,27 @@ export default {
   }
 
   figcaption {
-    padding-right: 5.5rem;
+    padding-right: 3rem;
+    margin-bottom: 1.8rem;
     flex: 0 0 auto;
-    width: 25%;
+    width: 45%;
     min-width: 150px;
 
     ul {
+      max-height: 18rem;
       overflow-y: scroll;
+
+      li {
+        height: 15rem;
+        list-style: none;
+        background: gray;
+
+        p {
+          margin: 0 3px;
+        }
+      }
     }
 
-    li {
-      height: 8rem;
-      list-style: none;
-      background: gray;
-    }
   }
 
   &.scrollable {
