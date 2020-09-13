@@ -65,7 +65,13 @@ export default {
     async finalizeRequest(address, {eth_id, id, value}, campaign) {
       this.loading = true
       const campaignInstance = await Campaign.at(address)
-      const result = await campaignInstance.finalizeRequest(eth_id, { from: this.$store.state.accountNum, gas: '100000' })
+
+      try {
+        result = await campaignInstance.finalizeRequest(eth_id, { from: this.$store.state.accountNum, gas: '100000' })
+      } catch(error){
+        console.log(error)
+        this.loading = false;
+      }
 
       if(result) {
         this.loading = false;
