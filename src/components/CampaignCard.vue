@@ -6,7 +6,12 @@
     <div>
       <section class="campaign-card">
         <section>
-        <div class="img-div"><img :src=campaign.image /></div>
+        <div v-if="campaign.image" class="img-div"><img :src=campaign.image /></div>
+        <article v-if="!campaign.image" class="no-img">
+          <h4>
+            No <br /> Image <br /> available
+          </h4>
+        </article>
         <div class="campaign-info">
           <h1> {{campaign.name}}</h1>
           <p>{{campaign.description}}</p>
@@ -29,6 +34,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import "../_variables.scss";
 
 h1 {
   margin: 1rem 0 0 0;
@@ -61,10 +67,14 @@ img {
   }
 }
 
-.img-div {
+.img-div,
+.no-img {
   height: 30vh;
   width: 20vw;
-  background: aqua;
+}
+
+.no-img {
+  @include pixelate(.1rem, $dark_gray, $gray);
 }
 
 </style>

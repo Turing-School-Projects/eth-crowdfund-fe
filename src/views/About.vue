@@ -1,7 +1,23 @@
 <template>
   <div class="about">
-    <SideBar class='sidebar'/>
-    <section class='about-content'>
+    <section class='tabs'>
+      <div @click="view = 'how-to'" v-bind:class="{ active: view === 'how-to' }">How
+        to?</div>
+      <div @click="view = 'why'" v-bind:class="{ active: view === 'why' }">Why
+        Blockchain?</div>
+      <div @click="view = 'technologies'" v-bind:class="{ active: view === 'technologies'
+        }">Technologies</div>
+      <div @click="view = 'contributors'" v-bind:class="{ active: view ===
+        'contributors' }">Contributors</div>
+    </section>
+    <section class="tab-view">
+    <section v-if="view === 'how-to'" v-bind:class="{ active: userView }">
+      <HowTo />
+    </section>
+    <section v-if="view === 'why'">
+      <h2>Why use Blockchain?</h2>
+    </section>
+    <section v-if="view === 'technologies'" class='about-content'>
       <h2>Turing School of Software & Design Capstone Project</h2>
       <p>The final project at Turing school is a full-stack venture to create an app
         around an idea pitched by one of the students. Our goal was to develop a
@@ -19,16 +35,27 @@
       <h3>Back-End Technologies</h3>
       <h3>Front-End Technologies</h3>
     </section>
-  </div>
+    <section v-if="view === 'contributors'">
+      <Contributors class='sidebar'/>
+    </section>
+    </section>
+    </div>
 </template>
 
 <script>
-import SideBar from "@/components/AboutSideBar.vue"
+import Contributors from "@/components/About/Contributors.vue"
+import HowTo from "@/components/About/howTo.vue"
 
 export default {
   name: 'About',
   components: {
-    SideBar
+    Contributors,
+    HowTo
+  },
+  data() {
+    return {
+      view: 'how-to'
+    }
   }
 }
 </script>
@@ -37,25 +64,38 @@ export default {
 @import "../_variables.scss";
 
 .about {
-  display: grid;
+  margin: auto;
   margin-top: 3rem;
-  grid-template-columns: 1fr 2fr;
-
-  .sidebar {
-    margin-right: 0.3rem;
-    width: 13rem;
-  }
-
-  .about-content {
-    // @include beautifyBorder(.8rem, $light-green, $green, $bg_2, $dark-blue, $bg_1, $blue)
-    margin-left: 0rem;
-    margin-right: 1.3rem;
-    color: $black;
-    background: radial-gradient($light-green 45%, $green 98%);
-    border: 3px solid rgb(80, 80, 80);
-    h2, h3, b {
-      color: $dark-blue
-    }
-  }
+  display: flex;
+  flex-flow: column;
+  width: 90vw;
 }
+
+.tabs > div {
+  position: relative;
+  display: inline-block;
+  padding: .4em 1em 0;
+  margin-bottom: .3em;
+}
+
+.tabs > div::before {
+  content: '';
+  position: absolute;
+  top: 0; right: -13px; bottom: 0; left: -13px;
+  z-index: -1;
+  background: #ccc;
+  background-image: linear-gradient(
+                      hsla(0,0%,100%,.6),
+                      hsla(0,0%,100%,0));
+  border: 1px solid rgba(0,0,0,.4);
+  border-bottom: none;
+  border-radius: 0 .15em white inset;
+  transform: scaleY(1.3) perspective(.5em) rotateX(5deg);
+  transform-origin: bottom;
+  height: 2rem;
+}
+
+  .tab-view {
+    border: 3px solid black;
+  }
 </style>
