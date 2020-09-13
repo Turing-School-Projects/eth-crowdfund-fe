@@ -47,3 +47,25 @@ $border_color_1, $border_color_2, $border_color_3, $border_color_4, $expression:
               $border_color_4 0, $border_color_4 50%)
               $expression;
 }
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+
+  > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 80%;
+        height: 100%;
+  }
+}
+

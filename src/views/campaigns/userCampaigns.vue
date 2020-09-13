@@ -5,7 +5,7 @@
   <div v-if="userView === 1" v-bind:class="{ active: userView }" class="container">
     <MyCreatedCampaigns />
   </div>
-  <div v-if="userView === 2" class="container">
+  <div v-if="userView === 2" class="request-catalog">
     <ApproveRequests />
   </div>
   <div v-if="userView === 3" class="container">
@@ -61,6 +61,12 @@ h2 {
   display: grid;
   grid-template-columns: 1fr 1fr ;
   grid-gap: .5rem;
+}
+
+.request-catalog {
+  width: 95%;
+  height:95%;
+  margin-left: 2rem;
 }
 
 </style>
