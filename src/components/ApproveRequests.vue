@@ -1,6 +1,13 @@
+/* eslint-disable vue/no-use-v-if-with-v-for */
 <template>
-    <ul class="campaigns" v-for="campaign in userContributions" v-bind:key="campaign.id">
+  <Loading v-if="loading"/>
+    <ul
+      class="campaigns"
+      v-for="campaign in userContributions"
+      v-bind:key="campaign.id"
+      >
       <request-list
+        v-if="!loading"
         v-bind:campaign="campaign"
         v-on:approval-count="approvalCount"
         v-on:approve-request="approveRequest"
@@ -15,6 +22,7 @@ import axios from "axios";
 import RequestList from "@/ui/RequestContainer.vue"
 import Campaign from "../contracts/campaign";
 import { VUE_APP_API_URL } from "../env";
+import Loading from "./Loading.vue";
 
 export default {
   name: 'User Contributions',
@@ -39,7 +47,8 @@ export default {
     }
   },
   components: {
-    RequestList
+    RequestList,
+    Loading
   },
   methods: {
     showContributions() {
@@ -50,7 +59,13 @@ export default {
       this.loading = true;
       const campaignInstance = await Campaign.at(address)
       console.log(campaignInstance)
-      const result = await campaignInstance.approveRequest(ethId, { from: this.$store.state.accountNum})
+      let result;
+      try {
+        result = await campaignInstance.approveRequest(ethId, { from: this.$store.state.accountNum})
+      } catch(error) {
+        console.log(error)
+        this.loading = false;
+      }
       const request = await campaignInstance.requests(ethId)
       const approvalCount = parseInt(request.approvalCount.toString())
       const voterCount = await campaignInstance.approversCount()

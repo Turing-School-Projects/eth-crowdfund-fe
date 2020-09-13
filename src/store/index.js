@@ -85,8 +85,9 @@ export default createStore({
       const { description, value, recipient } = request;
       const weiValue = web3.utils.toWei(value);
       const campaignInstance = await campaign.at(address);
+      let result;
       try {
-        const result = await campaignInstance.createRequest(description, weiValue, recipient, {
+        result = await campaignInstance.createRequest(description, weiValue, recipient, {
           from: manager
         });
       } catch(error) {
@@ -94,6 +95,7 @@ export default createStore({
         commit('SET_LOADING', false)
       }
       if (result) {
+        commit('SET_LOADING', false)
         const newRequest = { ...request, value: value };
         try {
           await axios.post(`${VUE_APP_API_URL}requests/`, newRequest);
@@ -102,14 +104,14 @@ export default createStore({
         }
       }
 
-      commit('SET_LOADING', false)
     },
     contributeToBlockChain: async ({ dispatch, state, commit }, { address, contribution }) => {
       commit('SET_LOADING', true)
       const { toWei } = web3.utils;
       const campaignInstance = await campaign.at(address);
+      let result
       try {
-        const result = await campaignInstance.contribute({
+        result = await campaignInstance.contribute({
           from: state.accountNum,
           value: toWei(contribution, "ether")
         });
@@ -119,8 +121,8 @@ export default createStore({
       }
       if (result) {
         dispatch("sendContributionToDB", { address, contribution });
+        commit('SET_LOADING', false);
       }
-      commit('SET_LOADING', false)
     },
     sendContributionToDB: async ({ getters, dispatch }, { address, contribution }) => {
       const { value, id, min_contribution } = getters.getSingleCampaign(address);

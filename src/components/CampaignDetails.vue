@@ -47,14 +47,10 @@ export default {
       userMessage: null
     }
   },
-  components: {
-    Loading
-  },
   methods: {
     /* eslint-disable */
     async submitContribution() {
       if(this.contribution > this.campaign.min_contribution){
-        console.log('yay')
         this.$store.dispatch('contributeToBlockChain', {address: this.address, contribution: this.contribution})
       } else {
         this.userMessage = true;
@@ -62,7 +58,8 @@ export default {
     }
   },
   components: {
-    etherInput
+    etherInput,
+    Loading
   }
 }
 </script>
