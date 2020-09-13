@@ -6,10 +6,10 @@
     <label>Enter Image Url</label>
     <input v-model='imageUrl' placeholder='Ex: https://picsum.photos/200/300' />
     <label>Minimum Ether Contribution</label>
-    <input v-model='minContribution' placeholder='Ex: 100' type='number' step='0.0001'/>
+    <ether-input v-model:value="minContribution" class='ether-input'/>
     <label>Describe your campaign</label>
     <textarea v-model='description' placeholder='Ex: Help out a Denver-area store serving our community'></textarea>
-    <button type='submit' > Create Campaign </button>
+    <basicButton type='submit' text='Create Campaign' />
   <div v-if="this.userMessage">Please fill out all inputs</div>
   <div v-if="this.error">{{this.error}}</div>
   </form>
@@ -19,7 +19,9 @@
 <script>
 import axios from "axios";
 import Loading from '@/components/Loading.vue';
-import web3 from "../contracts/web3";
+import basicButton from '@/ui/basicButton.vue'
+import etherInput from '@/ui/etherInput.vue'
+import web3 from '../contracts/web3'
 import Factory from "../contracts/factory";
 import { VUE_APP_API_URL } from "../env";
 
@@ -29,7 +31,7 @@ export default {
     return {
       title: '',
       description: '',
-      minContribution: null,
+      minContribution: 0,
       userMessage: false,
       email: '',
       error: null,
@@ -98,7 +100,9 @@ export default {
     }
   },
   components: {
-    Loading
+    Loading,
+    basicButton,
+    etherInput
   }
 }
 </script>
@@ -106,31 +110,38 @@ export default {
 <style lang='scss'>
 @import '../_variables.scss';
 form {
-  // @include beautifyBorder(.8rem, $white, $gray, $bg_2, $dark-blue, $bg_1, $blue)
   display: flex;
   flex-flow: column;
   justify-content: space-around;
   align-items: center;
-  height: 70vh;
-  width: 90vw;
-  border: 3px solid rgb(80, 80, 80);
-  background: radial-gradient($light-green 45%, $green 98%);
+  height: 65vh;
+  margin-top: 0.8rem;
+  padding: 2.1rem 0;
+  width: 65vw;
 
   label {
     align-self: flex-start;
-    margin-left: 17.5vw;
+    margin-left: 3.4rem;
   }
 
   input {
     height: 2em;
-    width: 55vw;
+    width: 50vw;
     margin-bottom: 2vh;
+  }
+
+  .ether-input {
+    justify-self: center;
+    height: 2em;
+    width: 48vw;
+    margin-bottom: 2vh;
+    margin-right: 2.1rem;
   }
 
   textarea {
     resize: none;
-    height: 12em;
-    width: 55vw;
+    height: 5rem;
+    width: 50vw;
   }
 
   button {

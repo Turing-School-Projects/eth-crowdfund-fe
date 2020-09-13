@@ -4,12 +4,8 @@
     <form @submit.prevent='createRequest'>
       <label for='request-title'>Title</label>
       <input v-model='name' id='request-title' placeholder='request title' />
-      <label for='eth-value'>Ether Value</label>
-      <div class='value-box'>
-        <input id='eth-value' v-model='value' type='number' step='0.0001' min='0' /><p
-               class='coin'>ETH</p>
-        <p class='text'><i>A note on conversion 1.0 ETH = ~$350.00</i></p>
-      </div>
+      <label for='eth-value'>Withdrawal Amount</label>
+      <ether-input v-model:value='value' />
       <label for='recipient-wallet'>Wallet Public Address</label>
       <div class='wallet-address'>
         <input
@@ -20,7 +16,7 @@
         <p class='message'><i>**Defaults to current connected CryptoWallet.**</i></p>
       </div>
         <textarea v-model='description' placeholder='Request description'></textarea>
-        <button type='submit' > Create Withdrawal Request </button>
+        <basicButton type='submit' text="Create Withdrawal Request" />
         <div v-if="this.userMessage">Please request an Ether amount</div>
         <div v-if="this.error">{{this.error}}</div>
     </form>
@@ -31,10 +27,17 @@
 <script>
 
 import Loading from '@/components/Loading.vue';
+import basicButton from "@/ui/basicButton.vue"
+import EtherInput from '@/ui/etherInput.vue'
 
 export default {
   name: 'CampaignRequestForm',
   props: ['id', 'address'],
+  components: {
+    Loading,
+    basicButton,
+    EtherInput
+  },
   data() {
     return {
       name: '',
@@ -94,9 +97,6 @@ export default {
         this.error = { error }
       }
     }
-  },
-  components: {
-    Loading
   }
 }
 </script>
@@ -105,21 +105,18 @@ export default {
 @import "../_variables.scss";
 
 form {
-  // @include beautifyBorder(.8rem, $white, $gray, $bg_2, $dark-blue, $bg_1, $blue)
   display: flex;
   flex-flow: column;
   justify-content: space-around;
   align-items: center;
-  margin: 5vh 7vw;
-  padding: 2.1em;
+  margin: 2.8rem 5rem 1rem 9.2rem;
+  padding: 2.1em 0;
   height: 65vh;
-  width: 81vw;
-  border: 3px solid black;
-  background: radial-gradient($light-green 45%, $green 98%);
+  width: 65vw;
 
   label {
     align-self: flex-start;
-    margin-left: 15.8vw;
+    margin-left: 4rem;
   }
 
   input {

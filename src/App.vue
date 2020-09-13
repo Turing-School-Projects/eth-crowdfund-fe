@@ -41,20 +41,14 @@ export default {
 }
 
 body {
-  @include pixelate(3px, $bg_1, $bg_2)
+  @include pixelate(3px, $bg_2, $gray)
   margin: 0;
 }
 
 #nav {
   padding: .3rem;
-  // border-bottom: .3rem solid black;
-  background: radial-gradient($light-green 45%, $green 95%);
-              // repeating-linear-gradient(45deg,
-              // $bg_2 0, $bg_2 12.5%,
-              // $dark-blue 0, $dark-blue 25%,
-              // $bg_1 0, $bg_1 37.5%,
-              // $blue 0, $blue 50%)
-              // 0 / 1.3em 1.3em;
+  border-bottom: .2rem solid black;
+  background: linear-gradient($sky-blue 35%, $sky 70%);
   height: 5rem;
   display: grid;
   grid-template-columns: 21vw 79vw;
