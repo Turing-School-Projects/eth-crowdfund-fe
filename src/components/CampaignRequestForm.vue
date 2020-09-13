@@ -1,5 +1,6 @@
 <template>
-  <section v-if="!loading" class='withdrawal-request'>
+  <Loading v-if="this.$store.state.loading" />
+  <section v-if="!this.$store.state.loading" class='withdrawal-request'>
     <h2>Create A Withdrawal Request</h2>
     <form @submit.prevent='createRequest'>
       <label for='request-title'>Title</label>
@@ -25,7 +26,6 @@
         <div v-if="this.error">{{this.error}}</div>
     </form>
   </section>
-  <Loading v-if="loading" />
 </template>
 
 <script>

@@ -14,7 +14,8 @@ export default createStore({
     accountNum: null,
     campaign: {},
     userCampaigns: [],
-    userContributions: []
+    userContributions: [],
+    loading: false
   }),
   getters: {
     /* eslint-disable-next-line */
@@ -37,6 +38,10 @@ export default createStore({
     DELETE_CAMPAIGN: (state, id) => {
       const index = state.campaigns.findIndex((camp) => camp.id === id)
       state.campaigns.splice(index, 1)
+    },
+    SET_LOADING(state, loading) {
+      console.log('Set state to', loading)
+      state.loading = loading
     },
     setTodos: (state, todos) => (state.todos = todos),
     setFactory: (state, instance) => (state.factory = instance),
@@ -67,14 +72,19 @@ export default createStore({
       commit("setAccountNum", accounts[0]);
     },
     /* eslint-disable */
-    createWithdrawalRequest: async (context, { request, address, manager }) => {
+    createWithdrawalRequest: async ({ commit }, { request, address, manager }) => {
+      commit('SET_LOADING', true)
       const { description, value, recipient } = request;
       const weiValue = web3.utils.toWei(value);
-
       const campaignInstance = await campaign.at(address);
-      const result = await campaignInstance.createRequest(description, weiValue, recipient, {
-        from: manager
-      });
+      try {
+        const result = await campaignInstance.createRequest(description, weiValue, recipient, {
+          from: manager
+        });
+      } catch(error) {
+        console.log(error)
+        commit('SET_LOADING', false)
+      }
       if (result) {
         const newRequest = { ...request, value: value };
         try {
@@ -83,17 +93,26 @@ export default createStore({
           return { error };
         }
       }
+
+      commit('SET_LOADING', false)
     },
-    contributeToBlockChain: async ({ dispatch, state }, { address, contribution }) => {
+    contributeToBlockChain: async ({ dispatch, state, commit }, { address, contribution }) => {
+      commit('SET_LOADING', true)
       const { toWei } = web3.utils;
       const campaignInstance = await campaign.at(address);
-      const result = await campaignInstance.contribute({
-        from: state.accountNum,
-        value: toWei(contribution, "ether")
-      });
+      try {
+        const result = await campaignInstance.contribute({
+          from: state.accountNum,
+          value: toWei(contribution, "ether")
+        });
+      } catch (error) {
+        commit('SET_LOADING', false)
+        console.log(error)
+      }
       if (result) {
         dispatch("sendContributionToDB", { address, contribution });
       }
+      commit('SET_LOADING', false)
     },
     sendContributionToDB: async ({ getters, dispatch }, { address, contribution }) => {
       const { value, id, min_contribution } = getters.getSingleCampaign(address);

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 <template>
-  <Loading v-if="loading" />
-  <div class="details-card" v-if="!loading">
+  <Loading v-if="this.$store.state.loading" />
+  <div class="details-card" v-if="!this.$store.state.loading">
     <h1>{{ campaign.name }}</h1>
     <div class="campaign-section">
     <section>
@@ -31,10 +31,7 @@
 </template>
 
 <script>
-import web3 from "../contracts/web3";
-
-web3.eth.getAccounts()
-  .then((accounts) => console.log(accounts[0]))
+import Loading from "./Loading.vue";
 
 export default {
   name: 'CampaignDetails',
@@ -47,17 +44,17 @@ export default {
   data() {
     return {
       contribution: null,
-      userMessage: null,
-      loading: false
+      userMessage: null
     }
   },
   components: {
-    // Loading
+    Loading
   },
   methods: {
     /* eslint-disable */
     async submitContribution() {
       if(this.contribution > this.campaign.min_contribution){
+        console.log('yay')
         this.$store.dispatch('contributeToBlockChain', {address: this.address, contribution: this.contribution})
       } else {
         this.userMessage = true;
