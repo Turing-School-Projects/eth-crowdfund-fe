@@ -182,7 +182,7 @@ export default createStore({
       commit('SET_LOADING', true)
 
       const campaignInstance = await campaign.at(address)
-
+      let result;
       try {
         result = await campaignInstance.finalizeRequest(eth_id, { from: state.accountNum, gas: '100000' })
       } catch (error) {
