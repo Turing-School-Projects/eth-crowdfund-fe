@@ -8,6 +8,7 @@
       >
       <request-list
         v-if="!this.$store.state.loading"
+        type="contributor"
         v-bind:campaign="campaign"
         v-on:approval-count="approvalCount"
         v-on:approve-request="approveRequest"

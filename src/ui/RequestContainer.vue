@@ -11,7 +11,7 @@
           <li v-for="request in campaign.requests" v-bind:key="request.id">
             <p class="text"><b>Summary:</b>{{request.description}}</p>
             <p class="value"><b>Value:</b>{{request.value}}</p>
-            <button v-on:click="$emit('approve-request', {
+            <button v-if="type === 'contributor'" v-on:click="$emit('approve-request', {
             address: campaign.address,
             ethId: request.eth_id,
             requestID: request.id})"
@@ -28,7 +28,16 @@
 <script>
 export default {
   name: "RequestList",
-  props: ["campaign", "approvalCount"]
+  props: {
+    campaign: {
+      type: Object,
+      required: true
+    },
+    type: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 
