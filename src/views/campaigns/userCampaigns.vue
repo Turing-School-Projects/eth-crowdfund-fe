@@ -56,13 +56,7 @@ h2 {
   color: white;
 }
 
-.container {
-  margin: 1rem 0rem 4rem 4rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr ;
-  grid-gap: .5rem;
-}
-
+.container,
 .request-catalog {
   width: 95%;
   height:95%;

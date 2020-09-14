@@ -7,20 +7,36 @@
       <figcaption>
         <h3>{{ campaign.name }}</h3>
         <p>{{campaign.description}}</p>
-        <ul class="requests">
+        <ul v-if="campaign.requests.length" class="requests">
           <li v-for="request in campaign.requests" v-bind:key="request.id">
             <p class="text"><b>Summary:</b>{{request.description}}</p>
             <p class="value"><b>Value:</b>{{request.value}}</p>
-            <button v-if="type === 'contributor'" v-on:click="$emit('approve-request', {
-            address: campaign.address,
-            ethId: request.eth_id,
-            requestID: request.id})"
-                    >
-                    ApproveRequests
+            <button v-if="type === 'contributor'"
+              v-on:click="$emit('approve-request', {
+                address: campaign.address,
+                ethId: request.eth_id,
+                requestID: request.id})"
+            >
+              ApproveRequests
+            </button>
+            <button v-if="type === 'manager'"
+              :disabled="!request.approved || request.finalized"
+              v-on:click="$emit('finalize', {
+                address: campaign.address,
+                ethId: request.eth_id,
+                requestID: request.id})"
+            >
+              Finalize & Distribute
             </button>
           </li>
         </ul>
+        <article class="manager-buttons" v-if="type === 'manager'">
+          <button class="create">Create Request</button>
+          <button class="edit">Edit</button>
+          <!-- <button class="delete">Delete</button> -->
+        </article>
       </figcaption>
+      <button class="delete"><span>X</span></button>
     </figure>
   </li>
 </template>
@@ -45,6 +61,7 @@ export default {
 @import "../_variables.scss";
 
 .campaign-card {
+  color: black;
   position: relative;
   display: block;
   flex: 1 0 100%;
@@ -71,25 +88,41 @@ export default {
     object-fit: cover;
   }
 
+  .delete {
+    height: 2.1rem;
+    width: 2.8rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    background-color: rgba(214, 69, 65, 1);
+    border-radius: 5px;
+
+    span {
+      color: transparent;
+      background-color: whitesmoke;
+      text-shadow: 0px 1px 1px white;
+      background-clip: text;
+    }
+  }
+
   figcaption {
     padding-right: 3rem;
     margin-bottom: 1.8rem;
     flex: 0 0 auto;
-    width: 45%;
+    width: minmax(18.5rem, 55%);
     min-width: 10rem;
 
     ul {
       max-height: 13rem;
       overflow-y: scroll;
       border: 2px solid $bg_2;
-      box-shadow: 3px 3px 5px 3px $bg_1;
+      box-shadow: 2px 2px 9px 3px $bg_2;
       padding: 0px;
 
       li {
         display: grid;
         border-bottom: 3px solid $dark-blue;
-        grid-template-columns: minmax(4rem, auto);
-        grid-template-rows: minmax(3rem, auto), minmax(2rem, auto);
+        grid-template-columns: repeat(2, minmax(8.6rem, auto));
+        grid-template-rows: minmax(3rem, auto), minmax(1.3rem, auto);
         grid-template-areas:
           "text text"
           "value enter";
@@ -112,8 +145,33 @@ export default {
 
         button {
           grid-area: enter;
+          background: radial-gradient($bg_2 45%, $bg_1 95%);
+          border-radius: 3px;
+          box-shadow: 1px 1px 9px 2px $bg_2;
         }
       }
+    }
+
+    .manager-buttons {
+      display: flex;
+      flex-flow: column;
+      height: 4.5rem;
+      width: 15rem;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      margin-top: 1rem;
+
+      .create,
+      .edit {
+        width: 100%;
+        margin: .2rem 0;
+        height: 2.1rem;
+        background: radial-gradient($bg_2 45%, $bg_1 95%);
+        border-radius: 3px;
+        box-shadow: 1px 1px 9px 2px $bg_2;
+      }
+
     }
 
   }
@@ -124,3 +182,8 @@ export default {
 }
 
 </style>
+    <!-- span { -->
+    <!--   margin: 0 0 .21rem .15rem; -->
+    <!--   color: white; -->
+    <!--   text-shadow: inset .5px .5px black; -->
+    <!-- } -->
