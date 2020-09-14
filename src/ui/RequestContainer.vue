@@ -54,10 +54,11 @@
               Edit
             </router-link>
           </button>
-          <!-- <button class="delete">Delete</button> -->
         </article>
       </figcaption>
-      <button class="delete"><span>X</span></button>
+      <button v-if="type === 'manager'"
+        class="delete"
+        v-on:click="$emit('delete')"><span>X</span></button>
     </figure>
   </li>
 </template>
@@ -129,11 +130,13 @@ export default {
     padding-right: 3rem;
     margin-bottom: 1.8rem;
     flex: 0 0 auto;
-    width: minmax(18.5rem, 55%);
     min-width: 10rem;
+    width: minmax(18.5rem, 18.5rem);
 
     ul {
       max-height: 13rem;
+      max-width: 18rem;
+      overflow-wrap: anywhere;
       overflow-y: scroll;
       border: 2px solid $bg_2;
       box-shadow: 2px 2px 9px 3px $bg_2;
@@ -203,10 +206,4 @@ export default {
     overflow-y: scroll;
   }
 }
-
 </style>
-    <!-- span { -->
-    <!--   margin: 0 0 .21rem .15rem; -->
-    <!--   color: white; -->
-    <!--   text-shadow: inset .5px .5px black; -->
-    <!-- } -->

@@ -8,9 +8,8 @@
         </router-link>
       </div>
       <div class="links-section">
-        <router-link to="/">Campaigns</router-link>
-        <router-link to="/campaigns/new"> Create New Campaign</router-link>
-        <router-link to="/campaigns/user">Your Campaigns</router-link>
+        <router-link to="/">Boosters</router-link>
+        <router-link to="/campaigns/user">My Boosters</router-link>
         <router-link to='/about'>About</router-link>
       </div>
     </div>
