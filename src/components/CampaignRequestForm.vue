@@ -43,7 +43,7 @@ export default {
       name: '',
       description: '',
       value: 0,
-      recipientWallet: '',
+      recipientWallet: this.$store.state.accountNum,
       userMessage: false,
       email: '',
       error: null,

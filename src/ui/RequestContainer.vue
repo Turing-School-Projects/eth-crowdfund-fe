@@ -9,20 +9,9 @@
         <p>{{campaign.description}}</p>
         <ul v-if="campaign.requests.length" class="requests">
           <li v-for="request in campaign.requests" v-bind:key="request.id">
-            <p class="text"><b>Request Summary:</b>{{request.description}}</p>
-            <p class="value"><b>Value:</b>
-              ${{(request.value * exchangeRate).toFixed(2)}}
-              ({{request.value}} ETH)
-            </p>
+            <p class="text"><b>Summary:</b>{{request.description}}</p>
+            <p class="value"><b>Value:</b>{{request.value}}</p>
             <p> Approval Count : {{numOfVotes}} / {{voterCount}} </p>
-            <button v-if="type === 'contributor'"
-              v-on:click="$emit('approval-count', {
-                address: campaign.address,
-                ethId: request.eth_id
-              })"
-            >
-              ApprovalCount
-            </button>
             <button v-if="type === 'contributor'"
               :disabled="request.approved"
               v-on:click="$emit('approve-request', {
@@ -99,10 +88,11 @@ export default {
   },
   created() {
     const { requests } = this.campaign
+    console.log('this.campaign.address', this.campaign.address)
+    console.log(requests)
     requests.forEach((request) => {
       this.approvalCount(this.campaign.address, request.eth_id)
     })
-    this.$store.dispatch('fetchExchangeRate')
   },
   methods: {
     async approvalCount(address, ethId) {
@@ -112,11 +102,6 @@ export default {
       this.numOfVotes = numOfVotes;
       const voterCount = await campaignInstance.approversCount()
       this.voterCount = voterCount.toString();
-    }
-  },
-  computed: {
-    exchangeRate() {
-      return this.$store.state.exchangeRate
     }
   }
 }
@@ -177,7 +162,6 @@ export default {
     flex: 0 0 auto;
     min-width: 10rem;
     width: minmax(18.5rem, 18.5rem);
-
     ul {
       height: 15rem;
       // max-width: 18rem;
@@ -195,7 +179,8 @@ export default {
         grid-template-rows: minmax(3rem, auto), minmax(1.3rem, auto);
         grid-template-areas:
           "text text"
-          "value enter";
+          "value voter"
+          "enter enter";
         height: 14rem;
         list-style: none;
         padding-bottom: 1px;
@@ -217,6 +202,9 @@ export default {
           // grid-area: enter;
           background: radial-gradient($bg_2 45%, $bg_1 95%);
           border-radius: 3px;
+          height: 3rem;
+          margin:auto;
+          width: 10rem;
           box-shadow: 1px 1px 9px 2px $bg_2;
         }
       }
