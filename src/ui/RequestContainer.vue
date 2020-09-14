@@ -161,7 +161,9 @@ export default {
       background-clip: text;
     }
   }
-
+  p {
+    margin: 0;
+  }
   figcaption {
     padding-right: 3rem;
     margin-bottom: 1.8rem;
@@ -170,7 +172,7 @@ export default {
     width: minmax(18.5rem, 18.5rem);
 
     ul {
-      max-height: 13rem;
+      height: 15rem;
       // max-width: 18rem;
       width: 30rem;
       overflow-wrap: anywhere;
@@ -187,7 +189,7 @@ export default {
         grid-template-areas:
           "text text"
           "value enter";
-        height: 4rem;
+        height: 14rem;
         list-style: none;
         padding-bottom: 1px;
         margin-bottom: 3px;
