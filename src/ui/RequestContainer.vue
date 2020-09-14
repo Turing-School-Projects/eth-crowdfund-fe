@@ -58,7 +58,7 @@
       </figcaption>
       <button v-if="type === 'manager'"
         class="delete"
-        v-on:click="$emit('delete')"><span>X</span></button>
+        v-on:click="$emit('delete', campaign)"><span>X</span></button>
     </figure>
   </li>
 </template>
