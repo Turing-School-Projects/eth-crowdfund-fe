@@ -179,8 +179,7 @@ export default {
         grid-template-rows: minmax(3rem, auto), minmax(1.3rem, auto);
         grid-template-areas:
           "text text"
-          "value voter"
-          "enter enter";
+          "value voter";
         height: 14rem;
         list-style: none;
         padding-bottom: 1px;

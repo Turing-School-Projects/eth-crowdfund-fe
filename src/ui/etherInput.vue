@@ -38,8 +38,8 @@ export default {
   #eth-value {
     grid-area: value;
     padding: 0px;
-    margin: 0px;
-    width: 20vw;
+    margin: auto;
+    width: 80%;
   }
 
   .coin {
@@ -47,6 +47,7 @@ export default {
     grid-area: coin;
     margin: 0px;
     padding: 0px;
+    text-align: left;
   }
 
   .text {

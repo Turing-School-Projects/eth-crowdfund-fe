@@ -76,8 +76,6 @@ export default {
 <style scoped lang='scss'>
 @import "../_variables.scss";
 .details-card {
-  margin-left: 3rem;
-  margin-right: 22rem;
 
 section {
   display: flex;
