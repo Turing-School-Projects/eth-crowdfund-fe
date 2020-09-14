@@ -9,8 +9,11 @@
         <p>{{campaign.description}}</p>
         <ul v-if="campaign.requests.length" class="requests">
           <li v-for="request in campaign.requests" v-bind:key="request.id">
-            <p class="text"><b>Summary:</b>{{request.description}}</p>
-            <p class="value"><b>Value:</b>{{request.value}}</p>
+            <p class="text"><b>Request Summary:</b>{{request.description}}</p>
+            <p class="value"><b>Value:</b>
+              ${{(request.value * exchangeRate).toFixed(2)}}
+              ({{request.value}} ETH)
+            </p>
             <p> Approval Count : {{numOfVotes}} / {{voterCount}} </p>
             <button v-if="type === 'contributor'"
               v-on:click="$emit('approval-count', {
@@ -96,11 +99,10 @@ export default {
   },
   created() {
     const { requests } = this.campaign
-    console.log('this.campaign.address', this.campaign.address)
-    console.log(requests)
     requests.forEach((request) => {
       this.approvalCount(this.campaign.address, request.eth_id)
     })
+    this.$store.dispatch('fetchExchangeRate')
   },
   methods: {
     async approvalCount(address, ethId) {
@@ -110,6 +112,11 @@ export default {
       this.numOfVotes = numOfVotes;
       const voterCount = await campaignInstance.approversCount()
       this.voterCount = voterCount.toString();
+    }
+  },
+  computed: {
+    exchangeRate() {
+      return this.$store.state.exchangeRate
     }
   }
 }

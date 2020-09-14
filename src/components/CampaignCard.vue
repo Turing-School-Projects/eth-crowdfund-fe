@@ -17,7 +17,7 @@
           <p>{{campaign.description}}</p>
         </div>
         </section>
-        <div class="goal"><b>$2,000</b> USD raised</div>
+        <div class="goal"><b>${{(campaign.value* exchangeRate).toFixed(2)}}</b> raised</div>
       </section>
     </div>
   </router-link>
@@ -27,7 +27,15 @@
 
 export default {
   name: 'CampaignCard',
-  props: ["campaign"]
+  props: ["campaign"],
+  created() {
+    this.$store.dispatch('fetchExchangeRate')
+  },
+  computed: {
+    exchangeRate() {
+      return this.$store.state.exchangeRate
+    }
+  }
 }
 
 </script>
