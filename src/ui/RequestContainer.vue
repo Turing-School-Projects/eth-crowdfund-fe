@@ -12,6 +12,7 @@
             <p class="text"><b>Summary:</b>{{request.description}}</p>
             <p class="value"><b>Value:</b>{{request.value}}</p>
             <button v-if="type === 'contributor'"
+              :disabled="request.approved"
               v-on:click="$emit('approve-request', {
                 address: campaign.address,
                 ethId: request.eth_id,
@@ -23,16 +24,36 @@
               :disabled="!request.approved || request.finalized"
               v-on:click="$emit('finalize', {
                 address: campaign.address,
-                ethId: request.eth_id,
-                requestID: request.id})"
+                eth_id: request.eth_id,
+                id: request.id,
+                value: request.value
+              })"
             >
               Finalize & Distribute
             </button>
           </li>
         </ul>
         <article class="manager-buttons" v-if="type === 'manager'">
-          <button class="create">Create Request</button>
-          <button class="edit">Edit</button>
+          <button class="create">
+            <router-link
+              style="text-decoration: none;"
+              :to="{
+                name: 'Campaign Request',
+                params: {id: campaign.id, address: campaign.address}}"
+            >
+              Create A Request
+            </router-link>
+          </button>
+          <button class="edit">
+            <router-link
+              style="text-decoration: none;"
+              :to="{
+                name: 'Edit Campaign',
+                params: { address: campaign.address }}"
+            >
+              Edit
+            </router-link>
+          </button>
           <!-- <button class="delete">Delete</button> -->
         </article>
       </figcaption>
@@ -170,10 +191,12 @@ export default {
         background: radial-gradient($bg_2 45%, $bg_1 95%);
         border-radius: 3px;
         box-shadow: 1px 1px 9px 2px $bg_2;
+
+        a {
+          text-decoration: none;
+        }
       }
-
     }
-
   }
 
   &.scrollable {

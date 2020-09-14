@@ -3,7 +3,7 @@
       <request-list
         type="manager"
         v-bind:campaign="campaign"
-        v-on:finalize="console.log(hello)"
+        v-on:finalize="finalizeRequest"
         />
       <!-- <section class="campaign-card"> -->
       <!--   <section> -->
@@ -16,17 +16,17 @@
       <!--   </div> -->
       <!--   </section> -->
       <!--   <div class="requests"><b>Total Request:</b> {{campaign.requests.length}}</div> -->
-      <!--   <router-link -->
-      <!--     style="text-decoration: none;" -->
-      <!--     :to="{ name: 'Campaign Request', -->
-      <!--     params: {id: campaign.id, address: campaign.address}}"> -->
-      <!--     Create A Request -->
-      <!--   </router-link> -->
-      <!--   <router-link -->
-      <!--     style="text-decoration: none;" -->
-      <!--     :to="{name: 'Edit Campaign', -->
-      <!--       params: { address: campaign.address } }">Edit -->
-      <!--   </router-link> -->
+        <!-- <router-link -->
+        <!--   style="text-decoration: none;" -->
+        <!--   :to="{ name: 'Campaign Request', -->
+        <!--   params: {id: campaign.id, address: campaign.address}}"> -->
+        <!--   Create A Request -->
+        <!-- </router-link> -->
+        <!-- <router-link -->
+        <!--   style="text-decoration: none;" -->
+        <!--   :to="{name: 'Edit Campaign', -->
+        <!--     params: { address: campaign.address } }">Edit -->
+        <!-- </router-link> -->
       <!--   <a href="javascript:;" v-on:click="deleteCampaign(campaign)">Delete</a> -->
       <!-- </section> -->
     </ul>
@@ -65,6 +65,9 @@ export default {
         await axios.delete(`${VUE_APP_API_URL}campaigns/${campaign.id}`)
         this.$store.commit('DELETE_CAMPAIGN', campaign.id)
       }
+    },
+    finalizeRequest(payload) {
+      this.$store.dispatch('finalizeRequest', payload)
     }
   }
 }

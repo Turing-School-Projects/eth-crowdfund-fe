@@ -78,8 +78,8 @@ export default {
           description: this.description,
           image: this.image
         },
-        manager: this.accountNum,
-        address: this.address
+        address: this.address,
+        manager: this.accountNum
       }
 
       try {
