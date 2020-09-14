@@ -1,13 +1,13 @@
 <template>
   <div class="about">
-    <section class='tabs'>
-      <div @click="view = 'how-to'" v-bind:class="{ active: view === 'how-to' }">How
+    <section class='tabs' arial-label='about tabs'>
+      <div class="tab" @click="view = 'how-to'" v-bind:class="{ active: view === 'how-to' }">How
         to?</div>
-      <div @click="view = 'why'" v-bind:class="{ active: view === 'why' }">Why
-        use EthoBoost?</div>
-      <div @click="view = 'technologies'" v-bind:class="{ active: view === 'technologies'
+      <div class="tab" @click="view = 'why'" v-bind:class="{ active: view === 'why' }">Why
+        Blockchain?</div>
+      <div class="tab" @click="view = 'technologies'" v-bind:class="{ active: view === 'technologies'
         }">Technologies</div>
-      <div @click="view = 'contributors'" v-bind:class="{ active: view ===
+      <div class="tab" @click="view = 'contributors'" v-bind:class="{ active: view ===
         'contributors' }">Contributors</div>
     </section>
     <section class="tab-view">
