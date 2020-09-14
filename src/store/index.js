@@ -41,8 +41,8 @@ export default createStore({
       state.campaigns.splice(index, 1);
     },
     SET_LOADING(state, loading) {
-      console.log('Set state to', loading)
-      state.loading = loading
+      console.log("Set state to", loading);
+      state.loading = loading;
     },
     setTodos: (state, todos) => (state.todos = todos),
     setFactory: (state, instance) => (state.factory = instance),
@@ -81,7 +81,7 @@ export default createStore({
     },
     /* eslint-disable */
     createWithdrawalRequest: async ({ commit }, { request, address, manager }) => {
-      commit('SET_LOADING', true)
+      commit("SET_LOADING", true);
       const { description, value, recipient } = request;
       const weiValue = web3.utils.toWei(value);
       const campaignInstance = await campaign.at(address);
@@ -90,12 +90,13 @@ export default createStore({
         result = await campaignInstance.createRequest(description, weiValue, recipient, {
           from: manager
         });
-      } catch(error) {
-        console.log(error)
-        commit('SET_LOADING', false)
+        console.log(result);
+      } catch (error) {
+        console.log(error);
+        commit("SET_LOADING", false);
       }
       if (result) {
-        commit('SET_LOADING', false)
+        commit("SET_LOADING", false);
         const newRequest = { ...request, value: value };
         try {
           await axios.post(`${VUE_APP_API_URL}requests/`, newRequest);
@@ -103,25 +104,24 @@ export default createStore({
           return { error };
         }
       }
-
     },
     contributeToBlockChain: async ({ dispatch, state, commit }, { address, contribution }) => {
-      commit('SET_LOADING', true)
+      commit("SET_LOADING", true);
       const { toWei } = web3.utils;
       const campaignInstance = await campaign.at(address);
-      let result
+      let result;
       try {
         result = await campaignInstance.contribute({
           from: state.accountNum,
           value: toWei(contribution, "ether")
         });
       } catch (error) {
-        commit('SET_LOADING', false)
-        console.log(error)
+        commit("SET_LOADING", false);
+        console.log(error);
       }
       if (result) {
         dispatch("sendContributionToDB", { address, contribution });
-        commit('SET_LOADING', false);
+        commit("SET_LOADING", false);
       }
     },
     sendContributionToDB: async ({ getters, dispatch }, { address, contribution }) => {
@@ -152,87 +152,92 @@ export default createStore({
       commit("setContributions", response.data);
     },
     approveRequest: async ({ commit, state }, { address, ethId, requestID }) => {
-      commit('SET_LOADING', true);
-      const campaignInstance = await campaign.at(address)
-      console.log(campaignInstance)
+      commit("SET_LOADING", true);
+      const campaignInstance = await campaign.at(address);
+      console.log(campaignInstance);
       let result;
       try {
-        result = await campaignInstance.approveRequest(ethId, { from: state.accountNum })
+        result = await campaignInstance.approveRequest(ethId, { from: state.accountNum });
       } catch (error) {
-        console.log(error)
-        commit('SET_LOADING', false);
+        console.log(error);
+        commit("SET_LOADING", false);
       }
-      const request = await campaignInstance.requests(ethId)
-      const approvalCount = parseInt(request.approvalCount.toString())
-      const voterCount = await campaignInstance.approversCount()
+      const request = await campaignInstance.requests(ethId);
+      const approvalCount = parseInt(request.approvalCount.toString());
+      const voterCount = await campaignInstance.approversCount();
       const voterString = voterCount.toString();
-      console.log('approvalCount', approvalCount)
-      console.log('voterCount', voterCount)
-      if (result && (approvalCount >= parseInt(voterString) / 2)) {
+      console.log("approvalCount", approvalCount);
+      console.log("voterCount", voterCount);
+      if (result && approvalCount >= parseInt(voterString) / 2) {
         const resp = await axios.put(`${VUE_APP_API_URL}requests/${requestID}`, {
           approved: "true"
         });
         console.log(resp);
       }
       if (result) {
-        commit('SET_LOADING', false)
+        commit("SET_LOADING", false);
       }
     },
-    finalizeRequest: async ({commit, state}, { address, eth_id, id, value}) => {
-      commit('SET_LOADING', true)
+    finalizeRequest: async ({ commit, state }, { address, eth_id, id, value }) => {
+      commit("SET_LOADING", true);
 
-      const campaignInstance = await campaign.at(address)
+      const campaignInstance = await campaign.at(address);
       let result;
       try {
-        result = await campaignInstance.finalizeRequest(eth_id, { from: state.accountNum, gas: '100000' })
+        result = await campaignInstance.finalizeRequest(eth_id, {
+          from: state.accountNum,
+          gas: "100000"
+        });
       } catch (error) {
-        console.log(error)
-        commit('SET_LOADING', false)
-
+        console.log(error);
+        commit("SET_LOADING", false);
       }
 
       if (result) {
-        commit('SET_LOADING', false)
+        commit("SET_LOADING", false);
         const req_resp = await axios.put(`${VUE_APP_API_URL}requests/${id}`, {
           finalized: "true"
         });
         const camp_resp = await axios.put(`${VUE_APP_API_URL}campaigns/${campaign.id}`, {
           value: campaign.value - value
         });
-        console.log('request', req_resp);
-        console.log('campaign', camp_resp);
+        console.log("request", req_resp);
+        console.log("campaign", camp_resp);
       }
     },
-    createCampaign: async ({commit, state, router}, {title, description, imageUrl, minContribution}) => {
-      commit('SET_LOADING', true)
+    createCampaign: async (
+      { commit, state, router },
+      { title, description, imageUrl, minContribution }
+    ) => {
+      commit("SET_LOADING", true);
       const factoryInstance = await factory.at(process.env.VUE_APP_FACTORY_ADDRESS);
-      const contribution = web3.utils.toWei(minContribution)
+      const contribution = web3.utils.toWei(minContribution);
       let result;
       try {
-        result = await factoryInstance.createCampaign(contribution, { from: state.accountNum })
-      } catch(error) {
-        console.log(error)
-        commit('SET_LOADING', false)
-
+        result = await factoryInstance.createCampaign(contribution, { from: state.accountNum });
+      } catch (error) {
+        console.log(error);
+        commit("SET_LOADING", false);
       }
-      const addresses = await factoryInstance.getDeployedCampaigns()
+      const addresses = await factoryInstance.getDeployedCampaigns();
       const campaignAddress = addresses[addresses.length - 1];
 
       if (result) {
-        commit('SET_LOADING', false)
-        axios.post(`${VUE_APP_API_URL}campaigns/`, {
-          name: title,
-          description: description,
-          image: imageUrl,
-          value: "0",
-          upvote: "0",
-          manager: state.accountNum,
-          address: campaignAddress,
-          min_contribution: minContribution
-        })
-          .then((resp) => console.log(resp))
+        commit("SET_LOADING", false);
+        axios
+          .post(`${VUE_APP_API_URL}campaigns/`, {
+            name: title,
+            description: description,
+            image: imageUrl,
+            value: "0",
+            upvote: "0",
+            manager: state.accountNum,
+            address: campaignAddress,
+            min_contribution: minContribution
+          })
+          .then(resp => console.log(resp))
           // eslint-disable-next-line no-return-assign
-          .catch((error) => this.error = error.message)
+          .catch(error => (this.error = error.message));
       }
     }
     /* eslint-enable */
