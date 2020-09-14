@@ -23,7 +23,7 @@ describe('App.vue', () => {
   it('renders 5 router links in the App', () => {
     const wrapper = shallowMount(App)
     const links = wrapper.findAll('router-link')
-    expect(links.length).toBe(5)
+    expect(links.length).toBe(4)
   });
 
   it('renders a router link to About page', () => {
