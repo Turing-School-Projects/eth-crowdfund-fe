@@ -1,47 +1,53 @@
 <template>
-  <div class="user-campaigns" v-for="campaign in campaigns" v-bind:key="campaign.id">
-      <section class="campaign-card">
-        <section>
-        <div class="img-div"><img :src=campaign.image /></div>
+  <Loading v-if="this.$store.state.loading" />
+  <div v-if="!this.$store.state.loading">
+    <div
+      class="user-campaigns"
+      v-for="campaign in campaigns"
+      v-bind:key="campaign.id">
+        <section class="campaign-card">
+          <section>
+          <div class="img-div"><img :src=campaign.image /></div>
+          </section>
+          <div>
+            <div class="campaign-info">
+              <h1> {{campaign.name}}</h1>
+              <p>{{campaign.description}}</p>
+            </div>
+            <div class="requests"><b>Total Request:</b> {{campaign.requests.length}}</div>
+              <div class="requests" v-for="request in campaign.requests" v-bind:key="request.id">
+              <div class="">
+                Description: {{request.description}}
+              </div>
+              <div class="">
+                Value: {{request.value}}
+              </div>
+              <div class="">
+                <button type="button" @click="approvalCount(campaign.address, request.eth_id)">
+                approvalCount</button>
+              </div>
+              <button
+                :disabled="!request.approved || request.finalized"
+                @click="finalizeRequest(campaign.address, request, campaign)">
+                Finalize and Distribute</button>
+            </div>
+          </div>
         </section>
-        <div>
-          <div class="campaign-info">
-            <h1> {{campaign.name}}</h1>
-            <p>{{campaign.description}}</p>
-          </div>
-          <div class="requests"><b>Total Request:</b> {{campaign.requests.length}}</div>
-            <div class="requests" v-for="request in campaign.requests" v-bind:key="request.id">
-            <div class="">
-              Description: {{request.description}}
-            </div>
-            <div class="">
-              Value: {{request.value}}
-            </div>
-            <div class="">
-              <button type="button" @click="approvalCount(campaign.address, request.eth_id)">
-              approvalCount</button>
-            </div>
-            <button
-              :disabled="!request.approved || request.finalized"
-              @click="finalizeRequest(campaign.address, request, campaign)">
-              Finalize and Distribute</button>
-          </div>
-        </div>
-      </section>
-      <router-link
-            style="text-decoration: none;"
-            :to="{ name: 'Campaign Request',
-            params: {id: campaign.id, address: campaign.address}}">
-      <button>Create A Request</button>
-      </router-link>
-    </div>
+        <router-link
+              style="text-decoration: none;"
+              :to="{ name: 'Campaign Request',
+              params: {id: campaign.id, address: campaign.address}}">
+        <button>Create A Request</button>
+        </router-link>
+      </div>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 import Campaign from "../contracts/campaign";
 import { VUE_APP_API_URL } from "../env";
-// import Loading from "./Loading.vue";
+import Loading from "./Loading.vue";
 
 export default {
   name: 'FinalizeRequest',
@@ -52,28 +58,13 @@ export default {
     }
   },
   components: {
-    // eslint-disable-next-line vue/no-unused-components
-    // Loading
+    Loading
   },
   methods: {
     /* eslint-disable */
-    async finalizeRequest(address, {eth_id, id, value}, campaign) {
-      this.loading = true
-      const campaignInstance = await Campaign.at(address)
-      const result = await campaignInstance.finalizeRequest(eth_id, { from: this.$store.state.accountNum, gas: '100000' })
-      // const request = await campaignInstance.requests(ethId)
-
-      if(result) {
-        this.loading = false;
-        const req_resp = await axios.put(`${VUE_APP_API_URL}requests/${id}`, {
-          finalized: "true"
-        });
-        const camp_resp = await axios.put(`${VUE_APP_API_URL}campaigns/${campaign.id}`, {
-          value: campaign.value - value
-        });
-        console.log('request', req_resp);
-        console.log('campaign', camp_resp);
-      }
+    finalizeRequest(address, {eth_id, id, value}, campaign) {
+      const payload = {address, eth_id, id, value}
+      this.$store.dispatch('finalizeRequest', payload)
     },
     async approvalCount(address, ethId) {
         const campaignInstance = await Campaign.at(address);

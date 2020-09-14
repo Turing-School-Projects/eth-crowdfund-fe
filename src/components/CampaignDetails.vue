@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 <template>
-  <Loading v-if="loading" />
-  <div class="details-card" v-if="!loading">
+  <Loading v-if="this.$store.state.loading" />
+  <div class="details-card" v-if="!this.$store.state.loading">
     <h1>{{ campaign.name }}</h1>
     <div class="campaign-section">
     <section>
@@ -31,6 +31,7 @@
 
 <script>
 import etherInput from "@/ui/etherInput.vue";
+import Loading from "./Loading.vue";
 
 export default {
   name: 'CampaignDetails',
@@ -43,12 +44,8 @@ export default {
   data() {
     return {
       contribution: null,
-      userMessage: null,
-      loading: false
+      userMessage: null
     }
-  },
-  components: {
-    // Loading
   },
   methods: {
     /* eslint-disable */
@@ -61,7 +58,8 @@ export default {
     }
   },
   components: {
-    etherInput
+    etherInput,
+    Loading
   }
 }
 </script>

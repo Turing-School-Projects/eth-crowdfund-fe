@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <Loading v-if="this.$store.state.loading" />
+  <div v-if="!this.$store.state.loading">
     <div class="about">
     </div>
     <div class="container-header">

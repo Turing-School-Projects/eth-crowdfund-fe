@@ -1,5 +1,5 @@
 <template>
-  <li class="campaign-card">
+  <li class="campaign-card" v-if="!this.$store.state.loading" >
     <figure>
       <div>
         <img :src="campaign.image"/>

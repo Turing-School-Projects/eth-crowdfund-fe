@@ -41,7 +41,7 @@ export default {
 }
 
 body {
-  @include pixelate(3px, $bg_2, $bg_1)
+  @include pixelate(3px, $bg_2, $bg_1);
   margin: 0;
 }
 

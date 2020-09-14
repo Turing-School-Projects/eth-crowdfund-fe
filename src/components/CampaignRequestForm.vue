@@ -1,5 +1,6 @@
 <template>
-  <section v-if="!loading" class='withdrawal-request'>
+  <Loading v-if="this.$store.state.loading" />
+  <section v-if="!this.$store.state.loading" class='withdrawal-request'>
     <h2>Create A Withdrawal Request</h2>
     <form @submit.prevent='createRequest'>
       <label for='request-title'>Title</label>
@@ -21,7 +22,6 @@
         <div v-if="this.error">{{this.error}}</div>
     </form>
   </section>
-  <Loading v-if="loading" />
 </template>
 
 <script>
@@ -63,7 +63,6 @@ export default {
   },
   methods: {
     createRequest() {
-      const self = this
       if (!this.value) {
         this.userMessage = true
         return
@@ -71,14 +70,6 @@ export default {
       if (!this.recipientWallet) {
         this.recipientWallet = this.accountNum
       }
-      self.loading = true;
-      setInterval(
-        // No way of knowing when loading shoyld be complete
-        // eslint-disable-next-line func-names
-        () => {
-          self.loading = false
-        }, 15000
-      );
       const payload = {
         request: {
           campaign_id: this.id,
