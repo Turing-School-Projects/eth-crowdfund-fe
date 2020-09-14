@@ -39,7 +39,7 @@ export default {
     grid-area: value;
     padding: 0px;
     margin: 0px;
-    width: 47vw;
+    width: 20vw;
   }
 
   .coin {
