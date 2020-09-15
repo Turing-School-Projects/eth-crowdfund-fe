@@ -45,21 +45,22 @@
               Create A Request
             </router-link>
           </button>
-          <button class="edit">
-            <router-link
-              style="text-decoration: none;"
-              :to="{
-                name: 'Edit Campaign',
-                params: { address: campaign.address }}"
-            >
-              Edit
-            </router-link>
-          </button>
         </article>
       </figcaption>
+      <router-link
+        class="edit-campaign"
+        style="text-decoration: none;"
+        :to="{
+          name: 'Edit Campaign',
+          params: { address: campaign.address }}"
+      >
+        <img src="@/assets/more.png" alt="edit campaign" />
+      </router-link>
       <button v-if="type === 'manager'"
         class="delete"
-        v-on:click="$emit('delete', campaign)"><span>X</span></button>
+        v-on:click="$emit('delete', campaign)">
+          <span>X</span>
+      </button>
     </figure>
   </li>
 </template>
@@ -149,20 +150,26 @@ export default {
 
     span {
       color: transparent;
-      background-color: whitesmoke;
-      text-shadow: 0px 1px 1px white;
+      background-color: $bg_2;
+      text-shadow: 0px 2px 3px whitesmoke;
       background-clip: text;
     }
   }
 
+  .edit-campaign {
+    height: 2.1rem;
+    width: 2.8rem;
+    margin: .3rem .3rem 0 0;
+  }
+
   figcaption {
-    padding-right: 3rem;
+    padding-right: 1.8rem;
     margin-bottom: 1.8rem;
     flex: 0 0 auto;
     min-width: 10rem;
 
     ul {
-      height: 13rem;
+      height: 18rem;
       width: 30rem;
       overflow-wrap: anywhere;
       overflow-y: scroll;
@@ -223,17 +230,21 @@ export default {
       margin: auto;
       margin-top: 1rem;
 
-      .create,
-      .edit {
+      .create {
         width: 100%;
         margin: .2rem 0;
-        height: 2.1rem;
+        height: 2.7rem;
         background: radial-gradient($bg_2 45%, $bg_1 95%);
         border-radius: 3px;
         box-shadow: 1px 1px 9px 2px $bg_2;
 
         a {
+          font-size: 1.2rem;
           text-decoration: none;
+
+          &:visited {
+            color: $dark-blue;
+          }
         }
       }
     }
