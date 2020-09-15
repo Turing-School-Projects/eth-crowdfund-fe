@@ -1,7 +1,7 @@
 <template>
   <section class='sidebar'>
     <article class='project-manager'>
-      <h3>Project Manager &<br />BlockChain Guide</h3>
+      <h3>Blockchain &<br />Front End</h3>
       <div class='member' v-for="developer in contributors.BC" v-bind:key="developer.id">
         <a v-bind:href="developer.gitHub" target="blank">
           <img src="@/assets/GitHub-Mark-32px.png" />
