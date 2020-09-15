@@ -30,9 +30,9 @@
         requests to withdraw from that booster<br>
         <b>Review and approve withdrawal requests:</b> Withdrawals can only be finalized
         and distributed once the request has a 51% approval rating<br><br>
-        <b>Create a Booster</b> Include a picture and description to personalize your
+        <b>Create a Booster:</b> Include a picture and description to personalize your
         Booster.<br>
-        <b>Submit Requests to Withdraw funds</b> You can make a request to withdraw
+        <b>Submit requests to withdraw funds:</b> You can make a request to withdraw
         and send the funds to any valid Ethereum wallet address.<br>
     </p>
   </section>
