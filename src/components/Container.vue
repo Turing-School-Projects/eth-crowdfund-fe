@@ -4,7 +4,7 @@
     <div class="about">
     </div>
     <div class="container-header">
-      <h2>Active Campaigns</h2>
+      <h2>Active Boosters</h2>
       <div class= "button-section">
         <button :disabled="startIndex === 0" @click="previousPage">⇦</button>
         <button :disabled="startIndex + 4 >= campaigns.length" @click="nextPage">⇨</button>
@@ -21,6 +21,7 @@
 <script>
 
 import CampaignCard from '@/components/CampaignCard.vue';
+import Loading from '@/components/Loading.vue';
 
 export default {
   name: 'Container',
@@ -45,7 +46,8 @@ export default {
     }
   },
   components: {
-    CampaignCard
+    CampaignCard,
+    Loading
   }
 }
 

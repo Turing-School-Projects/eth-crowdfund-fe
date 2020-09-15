@@ -18,7 +18,9 @@ export default {
       mainImageSrc: 'https://i.imgur.com/cZftGOD.png?1',
       images: [],
       mainMessage: 'Waiting for Metamask Connection',
-      messages: []
+      messages: [],
+      firstInterval: null,
+      secondInterval: null
     }
   },
   created() {
@@ -37,7 +39,7 @@ export default {
       {
         id: '3',
         image: 'https://i.imgur.com/vy0OuXC.png',
-        message: 'Adding New Campaign to Blockchain'
+        message: 'Adding Information to Blockchain'
       },
       {
         id: '4',
@@ -72,11 +74,11 @@ export default {
       },
       {
         id: '3',
-        message: 'Creating Your Campaign'
+        message: 'Creating New Information'
       },
       {
         id: '3',
-        message: 'Adding New Campaign to Blockchain'
+        message: 'Adding New Information to Blockchain'
       },
       {
         id: '4',
@@ -85,7 +87,7 @@ export default {
     ]
     let i = 0
     let j = 0
-    setInterval(
+    this.firstInterval = setInterval(
       /* eslint-disable-next-line */
       function() { 
         if (j > 2) {
@@ -96,15 +98,20 @@ export default {
         i += 1
       }, 1000
     );
-    setInterval(
+    this.secondInterval = setInterval(
       /* eslint-disable-next-line */
       function() { 
+        console.log('oh no')
         self.mainMessage = self.messages[j].message;
         if (j < 4) {
           j += 1
         }
       }, 5000
     );
+  },
+  unmounted() {
+    clearInterval(this.firstInterval)
+    clearInterval(this.secondInterval)
   }
 }
 </script>
