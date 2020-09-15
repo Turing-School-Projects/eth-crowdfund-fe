@@ -1,6 +1,8 @@
 import { shallowMount, mount } from "@vue/test-utils";
 import About from "@/views/About.vue";
 import HowTo from "@/components/About/howTo.vue";
+import Why from "@/components/About/why.vue";
+import Technologies from "@/components/About/Technologies.vue";
 
 describe("truth", () => {
   it("should display four info tabs", () => {
@@ -21,12 +23,11 @@ describe("truth", () => {
 
     expect(header.text()).toEqual("How to use Etho-Boost");
     expect(subHeader.length).toEqual(4);
-    wrapper.destroy();
   });
 });
 
 describe("about page wiht testing library", () => {
-  it("should also show info on the blockchain", async () => {
+  it("should also show info on the blockchain", () => {
     const wrapper = mount(About, {
       data() {
         return {
@@ -35,6 +36,24 @@ describe("about page wiht testing library", () => {
       }
     });
 
-    const content = wrapper.findComponent();
+    const content = wrapper.findComponent(Why);
+    const header = content.find("h2");
+
+    expect(header.text()).toEqual("Why use EthoBoost?");
+  });
+
+  it("should show technology info", () => {
+    const wrapper = mount(About, {
+      data() {
+        return {
+          view: "technologies"
+        };
+      }
+    });
+
+    const tabview = wrapper.findComponent(Technologies);
+    const technologiesHeader = tabview.findAll("h3");
+
+    expect;
   });
 });
