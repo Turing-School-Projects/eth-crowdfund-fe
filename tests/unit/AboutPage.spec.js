@@ -1,5 +1,4 @@
 import { shallowMount, mount } from "@vue/test-utils";
-import { render, fireEvent } from "@testing-library/vue";
 import About from "@/views/About.vue";
 import HowTo from "@/components/About/howTo.vue";
 
@@ -24,6 +23,18 @@ describe("truth", () => {
     expect(subHeader.length).toEqual(4);
     wrapper.destroy();
   });
+});
 
-  it.skip("should also show info on the blockchain", () => {});
+describe("about page wiht testing library", () => {
+  it("should also show info on the blockchain", async () => {
+    const wrapper = mount(About, {
+      data() {
+        return {
+          view: "why"
+        };
+      }
+    });
+
+    const content = wrapper.findComponent();
+  });
 });
