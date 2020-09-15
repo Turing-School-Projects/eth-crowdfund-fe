@@ -17,23 +17,8 @@
     <section v-if="view === 'why'">
       <Why />
     </section>
-    <section v-if="view === 'technologies'" class='about-content'>
-      <h2>Turing School of Software & Design Capstone Project</h2>
-      <p>The final project at Turing school is a full-stack venture to create an app
-        around an idea pitched by one of the students. Our goal was to develop a
-        crowdfunding dApp that made use of blockchain technology.
-      </p><p>
-        We had two weeks to
-        wireframe a front-end to interact with the blockchain and a back-end to supplement
-        it. We decided to use <b>Python</b> (+ ...other technologies) for our database and
-        <b>Vue</b> (+ ...other technologies) for our front-end. To interact with the blockchain,
-        the truffle framework/environment was used.<b>*None of these technologies were
-        explicitly taught at Turing*</b>
-      </p>
-      <h3>Why use blockchain?</h3>
-      <h3>Working wiht the blockchain</h3>
-      <h3>Back-End Technologies</h3>
-      <h3>Front-End Technologies</h3>
+    <section v-if="view === 'technologies'">
+      <Technologies />
     </section>
     <section v-if="view === 'contributors'">
       <Contributors />
@@ -46,13 +31,15 @@
 import Contributors from "@/components/About/Contributors.vue"
 import HowTo from "@/components/About/howTo.vue"
 import Why from "@/components/About/why.vue"
+import Technologies from "@/components/About/Technologies.vue"
 
 export default {
   name: 'About',
   components: {
     Contributors,
     HowTo,
-    Why
+    Why,
+    Technologies
   },
   data() {
     return {
@@ -100,5 +87,6 @@ export default {
   .tab-view {
     border: 3px solid black;
     background: #ccc;
+    height: 45%;
   }
 </style>
