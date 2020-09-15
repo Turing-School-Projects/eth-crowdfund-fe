@@ -1,56 +1,42 @@
 <template>
   <section class='about-content'>
-    <h2>Turing School of Software & Design Capstone Project</h2>
     <div class="back-end">
       <h3>Back-End Technologies</h3>
-      <div class="tech-list">
-        <b> Language:</b> Python
-      </div>
-      <div class="tech-list">
-        <b> Framework:</b> Flask
-      </div>
-      <div class="tech-list">
-        <b> Database:</b> PostgreSQL/SQLAlchemy
-      </div>
-      <div class="tech-list">
-        <b> Testing:</b> pytest
-      </div>
-      <div class="tech-list">
-        <b> Continuous Integration:</b> TravisCI
+      <div class="tech-logos">
+        <img src="@/assets/chili.png" alt="chili logo" />
+        <img src="@/assets/marshmellow.png" alt="marshmellow logo" />
+        <img src="@/assets/psql.png" alt="psql logo" />
+        <img src="@/assets/python.png" alt="python logo" />
+        <img src="@/assets/reddis.png" alt="python logo" />
+        <img src="@/assets/send_grid.png" alt="send grid logo" />
+        <img src="@/assets/sqla.png" alt="sequal alchemy logo" />
+        <img src="@/assets/xylophone.png" alt="" />
       </div>
     </div>
     <div class="front-end">
       <h3>Front-End Technologies</h3>
-      <div class="tech-list">
-        <b> Languages:</b> Javascript, HTML, SCSS
-      </div>
-      <div class="tech-list">
-        <b> Framework:</b> Vue.js
-      </div>
-      <div class="tech-list">
-        <b> Testing:</b> Jest
-      </div>
-      <div class="tech-list">
-        <b> Continuous Integration:</b> TravisCI
+      <div class="tech-logos">
+        <img src="@/assets/heroku.png" alt="heroku logo" />
+        <img src="@/assets/JS.png" alt="javascript logo" />
+        <img src="@/assets/travis.png" alt="travis logo" />
+        <img src="@/assets/vue.png" alt="vue logo" />
+        <img src="@/assets/jest.png" alt="jest logo" />
+        <img src="@/assets/html5_logo_lrg.png" alt="w3 logo" />
+        <img src="@/assets/w3.png" alt="w3 logo" />
+        <img src="@/assets/css3.png" alt="w3 logo" />
       </div>
     </div>
     <div class="blockchain">
       <h3>Blockchain technologies</h3>
-        <div class="tech-list">
-          <b>Platform:</b> Ethereum
-        </div>
-        <div class="tech-list">
-          <b>Language:</b> Solidity
-        </div>
-        <div class="tech-list">
-          <b>Framework:</b> Truffle
-        </div>
-        <div class="tech-list">
-          <b>Testing:</b> Mocha, Ganache
-        </div>
-        <div class="tech-list">
-          <b>Libraries:</b> Web3.js, Web3.py
-        </div>
+      <div class="tech-logos">
+        <img src="@/assets/truffle.png" alt="truffle logo" />
+        <img src="@/assets/ethereum.png" alt="ethereum logo" />
+        <img src="@/assets/ganache.png" alt="ganache logo" />
+        <img src="@/assets/infura.png" alt="infura logo" />
+        <img src="@/assets/metafox.png" alt="metafox logo" />
+        <img src="@/assets/mocha.png" alt="mocha logo" />
+        <img src="@/assets/solidity.png" alt="solidity logo" />
+      </div>
     </div>
   </section>
 </template>
@@ -62,18 +48,24 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.about-content {
-  height: 25rem;
-  display: grid;
-  grid-template-rows: 3rem auto;
-  grid-template-areas:
-    "title title title"
-    "BE FE BC";
+@import "../../_variables.scss";
 
-  h2 {
-    grid-area: title;
-    margin: .3rem;
-  }
+.about-content {
+  background: lighten($sky-blue, 20%);
+  height: 33rem;
+  display: grid;
+  margin: .3rem;
+  grid-template-areas:
+    "BE FE"
+    "BC BC";
+
+    img {
+      width: 5rem;
+      height: 5rem;
+      background: white;
+      margin: .3rem .2rem;
+      padding: .2rem .3rem;
+    }
 
   .back-end {
     grid-area: BE;
@@ -83,8 +75,20 @@ export default {
     grid-area: FE;
   }
 
+  .tech-logos {
+    display: grid;
+    grid-template-columns: repeat(3, 6rem);
+    grid-template-rows: auto;
+    grid-gap: .2rem;
+    justify-content: center;
+  }
+
   .blockchain{
     grid-area: BC;
+
+    .tech-logos {
+      display: flex;
+    }
   }
   .tech-list {
     margin-bottom: 15px;

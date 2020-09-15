@@ -113,8 +113,8 @@ export default {
 }
 
 .tab-view {
+  background: lighten($sky-blue, 20%);
   border: 3px solid black;
-  background: #ccc;
   height: 45%;
 }
 </style>

@@ -25,7 +25,7 @@
         and international transaction costs.
       <br><br>
     </div>
-    <h3><i>Stop Paying. Start Donating</i></h3>
+    <h3><i>Stop Paying. Start Donating!</i></h3>
   </section>
 </template>
 
@@ -36,8 +36,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../_variables.scss";
+
 .why-content {
-  background: #ccc;
+  background: lighten($sky-blue, 20%);
+
   .why-info {
     width: 40rem;
     margin: auto;

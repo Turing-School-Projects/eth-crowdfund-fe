@@ -45,10 +45,11 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+@import "../../_variables.scss";
+
 .how-to-content {
-    background: #ccc;
+    background: lighten($sky-blue, 20%);
     width: 40rem;
-    background: rgb(204, 204, 204);
     margin: auto;
     padding: 25px 50px;
     p {

@@ -137,7 +137,7 @@ export default {
   }
 
   div {
-    @include aspect-ratio(3, 2);
+    @include aspect-ratio(16, 7);
     width: 100%;
   }
 
