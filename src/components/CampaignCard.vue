@@ -14,7 +14,7 @@
         </article>
         <div class="campaign-info">
           <h1> {{campaign.name}}</h1>
-          <p>{{campaign.description}}</p>
+          <p>{{campaign.description.split('.')[0]}}...</p>
         </div>
         </section>
         <div class="goal"><b>${{(campaign.value* exchangeRate).toFixed(2)}}</b> raised</div>
