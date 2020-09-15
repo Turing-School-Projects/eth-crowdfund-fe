@@ -11,7 +11,7 @@
         'contributors' }">Contributors</div>
     </section>
     <section class="tab-view">
-    <section v-if="view === 'how-to'" v-bind:class="{ active: userView }">
+    <section v-if="view === 'how-to'">
       <HowTo />
     </section>
     <section v-if="view === 'why'">
@@ -72,9 +72,9 @@ export default {
   position: absolute;
   top: 0; right: -13px; bottom: 0; left: -13px;
   z-index: -1;
-  background: #ccc;
+  background: $bg_1;
   background-image: linear-gradient(
-                      hsla(0,0%,100%,.6),
+                      hsla(0,0%,100%,.3),
                       hsla(0,0%,100%,0));
   border: 1px solid rgba(0,0,0,.4);
   border-bottom: none;
@@ -84,9 +84,26 @@ export default {
   height: 2rem;
 }
 
-  .tab-view {
-    border: 3px solid black;
-    background: #ccc;
-    height: 45%;
-  }
+.tabs > .active::before {
+  content: '';
+  position: absolute;
+  top: 0; right: -13px; bottom: 0; left: -13px;
+  z-index: -1;
+  background: #ccc;
+  background-image: linear-gradient(
+                      hsla(0,0%,100%,.6),
+                      hsla(0,0%,100%,0));
+  border: 1px solid rgba(0,0,0,.4);
+  border-bottom: none;
+  border-radius: 0 .15em white inset;
+  transform: scaleY(1.5) perspective(.5em) rotateX(5deg);
+  transform-origin: bottom;
+  height: 2rem;
+}
+
+.tab-view {
+  border: 3px solid black;
+  background: #ccc;
+  height: 45%;
+}
 </style>
