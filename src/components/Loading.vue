@@ -101,7 +101,6 @@ export default {
     this.secondInterval = setInterval(
       /* eslint-disable-next-line */
       function() { 
-        console.log('oh no')
         self.mainMessage = self.messages[j].message;
         if (j < 4) {
           j += 1

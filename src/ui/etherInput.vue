@@ -4,7 +4,7 @@
       type='number' step='0.0001' min='0'
            :value="value" @change="$emit('update:value', $event.target.value)"
       />
-    <p class='coin'>ETH</p>
+    <p class='coin' id='coin'>ETH</p>
     <p class='text'>
       <i>That's roughly ${{ (value * exchangeRate).toFixed(2) }}</i>
     </p>

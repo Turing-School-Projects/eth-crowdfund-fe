@@ -54,7 +54,7 @@
           name: 'Edit Campaign',
           params: { address: campaign.address }}"
       >
-        <img src="@/assets/more.png" alt="edit campaign" />
+        <img src="@/assets/edit-button2.png" alt="edit campaign" />
       </router-link>
       <button v-if="type === 'manager'"
         class="delete"
@@ -160,6 +160,11 @@ export default {
     height: 2.1rem;
     width: 2.8rem;
     margin: .3rem .3rem 0 0;
+    img {
+      height: 2.1rem;
+      width: 2.1rem;
+      margin-top: -5px;
+    }
   }
 
   figcaption {
