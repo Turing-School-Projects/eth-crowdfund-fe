@@ -6,12 +6,12 @@
       </div>
       <figcaption>
         <h3>{{ campaign.name }}</h3>
-        <p>{{campaign.description}}</p>
+        <!-- <p>{{campaign.description}}</p> -->
         <ul v-if="campaign.requests.length" class="requests">
           <li v-for="request in campaign.requests" v-bind:key="request.id">
-            <p class="text"><b>Summary:</b>{{request.description}}</p>
-            <p class="value"><b>Value:</b>{{request.value}}</p>
-            <p> Approval Count : {{numOfVotes}} / {{voterCount}} </p>
+            <p class="description"><b>Summary:</b><br /> {{request.description}}</p>
+            <p class="value"><b>Value:</b> {{request.value}}</p>
+            <p class="approvals"><b>Approval Count:</b> {{numOfVotes}} / {{voterCount}}</p>
             <button v-if="type === 'contributor'"
               :disabled="request.approved"
               v-on:click="$emit('approve-request', {
@@ -136,6 +136,7 @@ export default {
     display: block;
     flex: 1 1 auto;
     object-fit: cover;
+    max-width: 33rem;
   }
 
   .delete {
@@ -153,18 +154,15 @@ export default {
       background-clip: text;
     }
   }
-  p {
-    margin: 0;
-  }
+
   figcaption {
     padding-right: 3rem;
     margin-bottom: 1.8rem;
     flex: 0 0 auto;
     min-width: 10rem;
-    width: minmax(18.5rem, 18.5rem);
+
     ul {
-      height: 15rem;
-      // max-width: 18rem;
+      height: 13rem;
       width: 30rem;
       overflow-wrap: anywhere;
       overflow-y: scroll;
@@ -175,35 +173,41 @@ export default {
       li {
         display: grid;
         border-bottom: 3px solid $dark-blue;
-        grid-template-columns: repeat(2, minmax(8.6rem, auto));
-        grid-template-rows: minmax(3rem, auto), minmax(1.3rem, auto);
+        grid-template-columns: repeat(2, minmax(8.6rem, 21rem));
+        grid-template-rows: repeat(3, 3.6rem);
         grid-template-areas:
-          "text text"
-          "value voter";
-        height: 14rem;
+          "description value"
+          "description approvals"
+          "description action";
+        height: 10.8rem;
         list-style: none;
         padding-bottom: 1px;
         margin-bottom: 3px;
         background: white;
 
         .text{
-          grid-area: text;
-          margin: 0 3px;
-          height: 2rem;
+          grid-area: description;
+          margin: 0 8px;
+          text-align: center;
         }
 
         .value {
           grid-area: value;
-          margin: 0 3px 3px 3px;
+          place-self: center;
+        }
+
+        .approvals {
+          grid-area: approvals;
+          place-self: center;
         }
 
         button {
-          // grid-area: enter;
+          grid-area: action;
+          place-self: center;
+          height: 2.1rem;
+          max-width: 13rem;
           background: radial-gradient($bg_2 45%, $bg_1 95%);
           border-radius: 3px;
-          height: 3rem;
-          margin:auto;
-          width: 10rem;
           box-shadow: 1px 1px 9px 2px $bg_2;
         }
       }
