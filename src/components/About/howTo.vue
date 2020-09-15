@@ -16,7 +16,7 @@
       an Ethereum testnet. You can obtain ether(ETH) on the Rinkeby network from the
       <a href="#https://faucet.rinkeby.io/">Rinkeby Faucet</a>. This network behaves
       much like the Main Ethereum Network but ETH spent on this network is <b>NOT</b>
-      worth real money. <i>note: We are hoping to deploy our app to the Main
+      worth real money. <br><i>note: We are hoping to deploy our app to the Main
       Ethereum Network sometime in the future.</i>
     </p>
     <h3>Step 3: Connect to our site</h3>
