@@ -16,7 +16,13 @@ describe("about page content", () => {
   });
 
   it("should default to display a how to page", () => {
-    const wrapper = mount(About);
+    const wrapper = mount(About, {
+      data() {
+        return {
+          view: "how-to"
+        };
+      }
+    });
 
     const content = wrapper.findComponent(HowTo);
     const header = content.find("h2");

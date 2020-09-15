@@ -8,7 +8,7 @@
       beginner friendly and attatches right to your browser. <a href="#https://metamask.io/download.html">
       Download it here</a>
     </p>
-    <h3>Step2: Fund Your Account</h3>
+    <h3>Step 2: Fund Your Account</h3>
     <p>
       In order to create or contribute to a crowdfunding campaign you will need to have funds in
       your account. Our application is currently in beta and as a result our transactions
@@ -21,18 +21,19 @@
     </p>
     <h3>Step 3: Connect to our site</h3>
     <p>
-      MetaMask will ask for your permission to use our site. (INCLUDE PIC)
+      MetaMask will ask for your permission to use our site.
       We will only have access to your public address and nothing else.
     </p>
     <h3>Step 4: Interact with our platform</h3>
     <p>
-      <ul>
-        <li><b>Contribute to a Booster</b></li>
-        <li><b>Review and Approval Whitdrawal Requests</b></li>
-        <li><b>Create a Booster</b></li>
-        <li><b>Submit Requests to Withdraw funds</b></li>
-        <li><b></b></li>
-      </ul>
+        <b>Contribute to a Booster:</b> This will give you approval power for all
+        requests to withdraw from that booster<br>
+        <b>Review and approve withdrawal requests:</b> Withdrawals can only be finalized
+        and distributed once the request has a 51% approval rating<br><br>
+        <b>Create a Booster:</b> Include a picture and description to personalize your
+        Booster.<br>
+        <b>Submit requests to withdraw funds:</b> You can make a request to withdraw
+        and send the funds to any valid Ethereum wallet address.<br>
     </p>
   </section>
 </template>
@@ -46,5 +47,6 @@ export default {
 <style>
   .how-to-content {
     background: #ccc;
+    padding: 25px 50px;
   }
 </style>

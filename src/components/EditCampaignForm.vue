@@ -1,13 +1,13 @@
 <template>
-  <h1> Edit Campaign</h1>
+  <h1> Edit Booster</h1>
   <form @submit.prevent='updateCampaign'>
-    <label>Campaign Title</label>
+    <label>Booster Title</label>
     <input v-model='title' >
     <label>Image Url</label>
     <input v-model='imageUrl'/>
-    <label>Describe your campaign</label>
+    <label>Describe your Booster</label>
     <textarea v-model='description'></textarea>
-    <button type='submit' > Update Campaign </button>
+    <button type='submit' > Update Booster </button>
   <div v-if="this.userMessage">Please fill out all inputs</div>
   <div v-if="this.error">{{this.error}}</div>
   </form>
