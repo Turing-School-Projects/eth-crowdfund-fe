@@ -1,5 +1,5 @@
 <template>
-  <Loading v-if="this.$store.state.loading" />
+  <Loading />
   <div v-if="!this.$store.state.loading">
     <div
       class="user-campaigns"
@@ -53,7 +53,6 @@ export default {
   name: 'FinalizeRequest',
   data() {
     return {
-      loading: false,
       campaigns: []
     }
   },

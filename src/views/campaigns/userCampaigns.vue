@@ -1,4 +1,5 @@
 <template>
+  <Loading v-if="this.$store.state.loading" />
   <div v-if="!this.$store.state.loading">
     <h2 @click="userView = 1" v-bind:class="{ active: userView === 1 }">Manager</h2>
     <h2 @click="userView = 2" v-bind:class="{ active: userView === 2 }">Contributor</h2>
@@ -18,6 +19,7 @@
 <script>
 import MyCreatedCampaigns from '@/components/MyCreatedCampaigns.vue';
 import ApproveRequests from '@/components/ApproveRequests.vue';
+import Loading from '@/components/Loading.vue';
 
 export default {
   name: 'UserCampaigns',
@@ -36,7 +38,8 @@ export default {
   },
   components: {
     MyCreatedCampaigns,
-    ApproveRequests
+    ApproveRequests,
+    Loading
   }
 }
 </script>

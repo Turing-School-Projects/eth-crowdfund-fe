@@ -1,6 +1,5 @@
 /* eslint-disable vue/no-use-v-if-with-v-for */
 <template>
-  <Loading v-if="this.$store.state.loading"/>
     <ul
       class="campaigns"
       v-for="campaign in userContributions"
@@ -19,7 +18,6 @@
 <script>
 import RequestList from "@/ui/RequestContainer.vue"
 import Campaign from "../contracts/campaign";
-import Loading from "./Loading.vue";
 
 export default {
   name: 'User Contributions',
@@ -27,8 +25,7 @@ export default {
     msg: String
   },
   components: {
-    RequestList,
-    Loading
+    RequestList
   },
   data() {
     return {
