@@ -4,18 +4,15 @@
     <h2>Create A Withdrawal Request</h2>
     <form @submit.prevent='createRequest'>
       <label for='request-title'>Title</label>
-      <input v-model='name' id='request-title' placeholder='request title' />
+      <input v-model='name' id='request-title' placeholder='Request Title' />
       <label for='eth-value'>Withdrawal Amount</label>
-      <ether-input v-model:value='value' />
-      <label for='recipient-wallet'>Wallet Public Address</label>
-      <div class='wallet-address'>
+      <ether-input v-model:value='value' class="ether-input" />
+      <label for='recipient-wallet'>Recipient CryptoWallet Address</label>
         <input
           id='recipient-wallet'
           v-model='recipientWallet'
-          placeholder="Recipient Wallet Address"
+          placeholder="**Defaults to current connected CryptoWallet**"
         />
-        <p class='message'><i>**Defaults to current connected CryptoWallet.**</i></p>
-      </div>
         <textarea v-model='description' placeholder='Request description'></textarea>
         <basicButton type='submit' text="Create Withdrawal Request" />
         <div v-if="this.userMessage">Please request an Ether amount</div>
@@ -100,69 +97,48 @@ form {
   flex-flow: column;
   justify-content: space-around;
   align-items: center;
-  margin: 2.8rem 5rem 1rem 9.2rem;
+  margin: auto;
+  margin-top: 2.8rem;
   padding: 2.1em 0;
+  background: lighten($sky-blue, 20%);
+  border: 2px solid black;
   height: 65vh;
   width: 65vw;
 
   label {
     align-self: flex-start;
-    margin-left: 4rem;
+    margin-left: 7.4rem;
   }
 
   input {
-    width: 49.5vw;
     height: 2em;
-    font-size: 14px;
+    width: 43vw;
+    margin-bottom: 1.3rem;
+    margin-left: 1.1rem;
   }
 
-  .value-box {
-    display: grid;
-    margin-bottom: 8px;
-    grid-template-areas:
-          "value coin"
-          "text .";
+  .ether-input {
+    justify-self: center;
+    height: 2em;
+    width: 43vw;
+    padding-bottom: 1rem;
 
     #eth-value {
-      grid-area: value;
-      padding: 0px;
       margin: 0px;
-      width: 47vw;
-    }
-
-    .coin {
-      grid-area: coin;
-      align-self: center;
-      margin: 0px;
-      padding: 0px;
-    }
-
-    .text {
-      grid-area: text;
-      margin: 0px;
-      padding: 0px;
-    }
-  }
-
-  .wallet-address {
-
-    #recipient-wallet,
-    .message {
-      margin: 0px;
-      padding: 0px;
     }
   }
 
   textarea {
-    height: 7em;
-    margin-top: 8px;
+    height: 4em;
     resize: none;
-    width: 49.5vw;
+    width: 43vw;
+    margin-left: 1.2rem;
   }
 
   button {
-    width: 49.5vw;
-    height: 2em;
+    width: 40vw;
+    height: 1.8rem;
+    margin: 1.3rem 0 0.3rem 1.3rem;
   }
 }
 </style>
