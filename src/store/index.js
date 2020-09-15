@@ -106,7 +106,7 @@ export default createStore({
         return request
       }
     },
-    contributeToBlockChain: async ({ dispatch, state, commit }, { address, contribution }) => {
+    contributeToBlockChain: async ({ dispatch, state, commit }, { address, contribution, email }) => {
       commit("SET_LOADING", true);
       const { toWei } = web3.utils;
       const campaignInstance = await campaign.at(address);
@@ -121,7 +121,7 @@ export default createStore({
         console.log(error);
       }
       if (result) {
-        dispatch("sendContributionToDB", { address, contribution });
+        dispatch("sendContributionToDB", { address, contribution, email });
         commit("SET_LOADING", false);
       }
       return result
@@ -130,7 +130,8 @@ export default createStore({
       const { value, id, min_contribution } = getters.getSingleCampaign(address);
       try {
         await axios.put(`${VUE_APP_API_URL}campaigns/${id}`, {
-          value: value + parseFloat(contribution)
+          value: value + parseFloat(contribution),
+          email: email
         });
       } catch (error) {
         return { error };

@@ -19,8 +19,10 @@
     </section>
       <div class="contribution-area">
         <h3>Make a Contribution</h3>
-        <p>To become an approver of this Booster please contribute more than: {{campaign.min_contribution}}ETH</p>
+        <p>Fill out email if you would like to be notified when new requests are created. To become an approver of this Booster please contribute more than: {{campaign.min_contribution}}ETH</p>
         <ether-input id="contribution-input" v-model:value="contribution" />
+        <input class="email-input" v-model="email" />
+        <label class="email-label"> Email (optional) </label>
         <button :disabled="!contribution"
         @click="submitContribution">
         Submit Contribution </button>
@@ -52,14 +54,15 @@ export default {
       contribution: null,
       userMessage: null,
       pastApprovals: 0,
-      thankYouMessage: false
+      thankYouMessage: false,
+      email: ''
     }
   },
   methods: {
     /* eslint-disable */
     async submitContribution() {
       if(this.contribution > this.campaign.min_contribution){
-        const result = await this.$store.dispatch('contributeToBlockChain', {address: this.address, contribution: this.contribution})
+        const result = await this.$store.dispatch('contributeToBlockChain', {address: this.address, contribution: this.contribution, email: this.email})
         if(result) {
           this.thankYouMessage = true;
         }
@@ -105,7 +108,13 @@ section {
   background: radial-gradient($sky-blue 45%, $sky 98%);
 
 }
-
+.email-input {
+  width: 18rem;
+}
+.email-label {
+  display: block;
+  margin-bottom: 1rem;
+}
 .img-area {
   display: inherit;
   margin: 1rem;
@@ -119,7 +128,13 @@ ul {
 .user-message {
   font-weight: 600;
 }
-
+#contribution-input {
+  display: block;
+  margin: auto;
+  #coin {
+    display: none;
+  }
+}
 .contribution-area {
   border: 3px solid black;
   margin-left: 2rem;
@@ -130,6 +145,7 @@ ul {
     width: 20rem;
     margin: auto;
     margin-bottom: 2rem;
+    text-align: center;
   }
   button {
     margin-bottom: 1rem;
@@ -140,6 +156,9 @@ input {
   .eth-value {
     width: 8vw;
   }
+  width: 8vw;
+  margin-left: 0;
+  display: absolute;
 }
 
 .campaign-section {

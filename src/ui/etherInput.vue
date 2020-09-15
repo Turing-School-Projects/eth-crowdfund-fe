@@ -45,7 +45,8 @@ export default {
   .coin {
     grid-area: coin;
     padding: 0px;
-    text-align: left;
+    text-align: center;
+    margin: auto;
   }
 
   .text {
@@ -53,6 +54,7 @@ export default {
     justify-self: start;
     margin-right: 2rem;
     padding: 0px;
+    margin-top: 0;
   }
 }
 </style>
