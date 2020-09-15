@@ -1,14 +1,5 @@
 <template>
-  <section class='sidebar'>
-    <article class='project-manager'>
-      <h3>Blockchain &<br />Front End</h3>
-      <div class='member' v-for="developer in contributors.BC" v-bind:key="developer.id">
-        <a v-bind:href="developer.gitHub" target="blank">
-          <img src="@/assets/GitHub-Mark-32px.png" />
-          <p>{{ developer.name }}</p>
-        </a>
-      </div>
-    </article>
+  <section class='contributors'>
     <article class='front-end-team'>
       <h3>Front End Team</h3>
       <div class='member' v-for="developer in contributors.FE" v-bind:key="developer.id">
@@ -55,6 +46,11 @@ export default {
         ],
         FE: [
           {
+            id: 6,
+            name: 'Jack Cullen',
+            gitHub: 'https://github.com/jpc20'
+          },
+          {
             id: 4,
             name: 'Andrew Tom',
             gitHub: 'https://github.com/attom2'
@@ -63,13 +59,6 @@ export default {
             id: 5,
             name: 'Edwin Montealvo',
             gitHub: 'https://github.com/edmdc89'
-          }
-        ],
-        BC: [
-          {
-            id: 6,
-            name: 'Jack Cullen',
-            gitHub: 'https://github.com/jpc20'
           }
         ]
       }
@@ -81,11 +70,21 @@ export default {
 <style scoped lang='scss'>
 @import '../../_variables.scss';
 
-section {
-  width: 13rem;
+.contributors {
+  display: flex;
+  justify-content: space-around;
   color: $dark-blue;
   margin-left: 2rem;
   border: 4px solid transparent;
+  width: 88%;
+
+  h3 {
+    margin-bottom: .3rem;
+    text-align: left;
+    border-bottom: 3px solid $black;
+    color: $black;
+    width: 9rem;
+  }
   .member {
     a {
       color: $black;

@@ -36,7 +36,7 @@
       <h3>Front-End Technologies</h3>
     </section>
     <section v-if="view === 'contributors'">
-      <Contributors class='sidebar'/>
+      <Contributors />
     </section>
     </section>
     </div>
