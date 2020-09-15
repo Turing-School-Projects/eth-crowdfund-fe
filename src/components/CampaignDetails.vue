@@ -2,7 +2,11 @@
 /* eslint-disable  */
 <template>
   <Loading v-if="this.$store.state.loading" />
-  <div class="details-card" v-if="!this.$store.state.loading">
+  <div v-if="thankYouMessage" >
+    <h2> Thank you for your contribution!</h2>
+    <p> Taking you back to Active Boosters</p>
+  </div>
+  <div class="details-card" v-if="!this.$store.state.loading && !thankYouMessage">
     <h1>{{ campaign.name }}</h1>
     <div class="campaign-section">
     <section>
@@ -47,14 +51,26 @@ export default {
     return {
       contribution: null,
       userMessage: null,
-      pastApprovals: 0
+      pastApprovals: 0,
+      thankYouMessage: false
     }
   },
   methods: {
     /* eslint-disable */
     async submitContribution() {
       if(this.contribution > this.campaign.min_contribution){
-        this.$store.dispatch('contributeToBlockChain', {address: this.address, contribution: this.contribution})
+        const result = await this.$store.dispatch('contributeToBlockChain', {address: this.address, contribution: this.contribution})
+        if(result) {
+          this.thankYouMessage = true;
+        }
+        const self = this;
+        setTimeout(
+        /* eslint-disable-next-line */
+        function() { 
+          console.log('yay')
+          self.$router.push('/')
+        }, 4000
+        );
       } else {
         this.userMessage = true;
       }

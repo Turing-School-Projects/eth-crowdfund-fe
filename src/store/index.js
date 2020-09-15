@@ -123,6 +123,7 @@ export default createStore({
         dispatch("sendContributionToDB", { address, contribution });
         commit("SET_LOADING", false);
       }
+      return result
     },
     sendContributionToDB: async ({ getters, dispatch }, { address, contribution }) => {
       const { value, id, min_contribution } = getters.getSingleCampaign(address);
@@ -224,7 +225,7 @@ export default createStore({
 
       if (result) {
         commit("SET_LOADING", false);
-        axios
+        await axios
           .post(`${VUE_APP_API_URL}campaigns/`, {
             name: title,
             description: description,
@@ -239,6 +240,7 @@ export default createStore({
           // eslint-disable-next-line no-return-assign
           .catch(error => (this.error = error.message));
       }
+      return result
     }
     /* eslint-enable */
   },

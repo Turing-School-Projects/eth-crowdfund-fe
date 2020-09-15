@@ -58,6 +58,7 @@ export default {
       }
       try {
         const result = await this.$store.dispatch('createCampaign', payload)
+        console.log('result', result)
         if (result) {
           this.$router.push('/campaigns/user')
         }
