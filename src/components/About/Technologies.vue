@@ -3,26 +3,54 @@
     <h2>Turing School of Software & Design Capstone Project</h2>
     <div class="back-end">
       <h3>Back-End Technologies</h3>
-        <b> Language:</b> Python <br><br>
-        <b> Framework:</b> Flask <br><br>
-        <b> Database:</b> PostgreSQL/SQLAlchemy <br><br>
-        <b> Testing:</b> pytest <br><br>
-        <b> Continuous Integration:</b> TravisCI <br><br>
+      <div class="tech-list">
+        <b> Language:</b> Python
+      </div>
+      <div class="tech-list">
+        <b> Framework:</b> Flask
+      </div>
+      <div class="tech-list">
+        <b> Database:</b> PostgreSQL/SQLAlchemy
+      </div>
+      <div class="tech-list">
+        <b> Testing:</b> pytest
+      </div>
+      <div class="tech-list">
+        <b> Continuous Integration:</b> TravisCI
+      </div>
     </div>
     <div class="front-end">
       <h3>Front-End Technologies</h3>
-      <b> Languages:</b> Javascript, HTML, CSS <br><br>
-      <b> Framework:</b> Vue.js <br><br>
-      <b> Testing:</b> Jest <br><br>
-      <b> Continuous Integration:</b> TravisCI <br><br>
+      <div class="tech-list">
+        <b> Languages:</b> Javascript, HTML, SCSS
+      </div>
+      <div class="tech-list">
+        <b> Framework:</b> Vue.js
+      </div>
+      <div class="tech-list">
+        <b> Testing:</b> Jest
+      </div>
+      <div class="tech-list">
+        <b> Continuous Integration:</b> TravisCI
+      </div>
     </div>
     <div class="blockchain">
       <h3>Blockchain technologies</h3>
-        <b>Platform</b>: Ethereum <br><br>
-        <b>Language</b>: Solidity <br><br>
-        <b>Framework</b>: Truffle <br><br>
-        <b>Testing</b>: Mocha, Ganache <br><br>
-        <b>Libraries</b>: Web3.js, Web3.py <br><br>
+        <div class="tech-list">
+          <b>Platform:</b> Ethereum
+        </div>
+        <div class="tech-list">
+          <b>Language:</b> Solidity
+        </div>
+        <div class="tech-list">
+          <b>Framework:</b> Truffle
+        </div>
+        <div class="tech-list">
+          <b>Testing:</b> Mocha, Ganache
+        </div>
+        <div class="tech-list">
+          <b>Libraries:</b> Web3.js, Web3.py
+        </div>
     </div>
   </section>
 </template>
@@ -58,10 +86,8 @@ export default {
   .blockchain{
     grid-area: BC;
   }
-  .img-div {
-    height: 30vh;
-    width: 20vw;
-    background: aqua;
+  .tech-list {
+    margin-bottom: 15px;
   }
 }
 </style>

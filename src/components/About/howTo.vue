@@ -26,10 +26,14 @@
     </p>
     <h3>Step 4: Interact with our platform</h3>
     <p>
-        <b>Contribute to a Booster</b> <br>
-        <b>Review and Approval Whithdrawal Requests</b><br>
-        <b>Create a Booster</b><br>
-        <b>Submit Requests to Withdraw funds</b><br>
+        <b>Contribute to a Booster:</b> This will give you approval power for all
+        requests to withdraw from that booster<br>
+        <b>Review and approve withdrawal requests:</b> Withdrawals can only be finalized
+        and distributed once the request has a 51% approval rating<br><br>
+        <b>Create a Booster</b> Include a picture and description to personalize your
+        Booster.<br>
+        <b>Submit Requests to Withdraw funds</b> You can make a request to withdraw
+        and send the funds to any valid Ethereum wallet address.<br>
     </p>
   </section>
 </template>
