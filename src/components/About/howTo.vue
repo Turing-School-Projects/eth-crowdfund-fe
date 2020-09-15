@@ -26,8 +26,8 @@
     </p>
     <h3>Step 4: Interact with our platform</h3>
     <p>
-        <b>Contribute to a Booster:</b> <br>
-        <b>Review and Approval Whitdrawal Requests</b><br>
+        <b>Contribute to a Booster</b> <br>
+        <b>Review and Approval Whithdrawal Requests</b><br>
         <b>Create a Booster</b><br>
         <b>Submit Requests to Withdraw funds</b><br>
     </p>
@@ -43,5 +43,6 @@ export default {
 <style>
   .how-to-content {
     background: #ccc;
+    padding: 25px 50px;
   }
 </style>
