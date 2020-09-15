@@ -71,6 +71,7 @@ export default {
 @import '../../_variables.scss';
 
 .contributors {
+  background: lighten($sky-blue, 20%);
   display: flex;
   justify-content: space-around;
   color: $dark-blue;
