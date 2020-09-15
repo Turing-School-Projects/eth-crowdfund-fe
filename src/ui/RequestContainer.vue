@@ -125,6 +125,7 @@ export default {
   flex: 1 0 100%;
   width: 100%;
   height: 100%;
+  max-height: 33rem;
   overflow: hidden;
   box-sizing: border-box;
   white-space: normal;
@@ -142,9 +143,10 @@ export default {
 
   img {
     display: block;
-    flex: 1 1 auto;
-    object-fit: cover;
+    flex: 1 1 0;
+    object-fit: fill;
     max-width: 33rem;
+    max-height: 33rem;
   }
 
   .delete {
