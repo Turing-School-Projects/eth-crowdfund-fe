@@ -9,6 +9,8 @@
         }">Technologies</div>
       <div class="tab" @click="view = 'contributors'" v-bind:class="{ active: view ===
         'contributors' }">Contributors</div>
+      <div class="tab" @click="view = 'video'" v-bind:class="{ active: view ===
+        'contributors' }">Video</div>
     </section>
     <section class="tab-view">
     <section v-if="view === 'how-to'">
@@ -22,6 +24,14 @@
     </section>
     <section v-if="view === 'contributors'">
       <Contributors />
+    </section>
+    <section v-if="view === 'video'">
+     <iframe
+     width="711"
+     height="400"
+     src="https://www.youtube.com/embed/IsXvoYeJxKA"
+     frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+     allowfullscreen></iframe>
     </section>
     </section>
     </div>
@@ -43,7 +53,7 @@ export default {
   },
   data() {
     return {
-      view: 'how-to'
+      view: 'video'
     }
   }
 }
