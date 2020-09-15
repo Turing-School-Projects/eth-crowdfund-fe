@@ -130,21 +130,20 @@ export default createStore({
       const { value, id, min_contribution } = getters.getSingleCampaign(address);
       try {
         await axios.put(`${VUE_APP_API_URL}campaigns/${id}`, {
-          value: value + parseFloat(contribution),
-          email: email
+          value: value + parseFloat(contribution)
         });
       } catch (error) {
         return { error };
       }
       if (contribution > min_contribution) {
-        dispatch("addContributorToCampaign", { address });
+        dispatch("addContributorToCampaign", { address, email });
       }
     },
-    addContributorToCampaign: async ({ state }, { address }) => {
+    addContributorToCampaign: async ({ state }, { address, email }) => {
       try {
         await axios.post(`${VUE_APP_API_URL}campaigns/${address}/contributor/${state.accountNum}`, {
           address: state.accountNum,
-          email: null
+          email: email
         });
       } catch (error) {
         return { error };
