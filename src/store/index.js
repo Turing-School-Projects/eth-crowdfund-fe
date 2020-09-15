@@ -103,6 +103,7 @@ export default createStore({
         } catch (error) {
           return { error };
         }
+        return request
       }
     },
     contributeToBlockChain: async ({ dispatch, state, commit }, { address, contribution }) => {

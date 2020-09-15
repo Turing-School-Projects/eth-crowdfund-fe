@@ -59,7 +59,7 @@ export default {
     }
   },
   methods: {
-    createRequest() {
+    async createRequest() {
       if (!this.value) {
         this.userMessage = true
         return
@@ -80,7 +80,10 @@ export default {
       }
 
       try {
-        this.$store.dispatch('createWithdrawalRequest', payload)
+        const result = await this.$store.dispatch('createWithdrawalRequest', payload)
+        if (result) {
+          this.$router.push('/campaigns/user')
+        }
       } catch (error) {
         this.error = { error }
       }
