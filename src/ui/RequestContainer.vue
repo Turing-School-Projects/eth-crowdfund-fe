@@ -10,7 +10,7 @@
         <ul v-if="campaign.requests.length" class="requests">
           <li v-for="request in campaign.requests" v-bind:key="request.id">
             <p class="description"><b>Summary:</b><br /> {{request.description}}</p>
-            <p class="value"><b>Value:</b> {{request.value}}</p>
+            <p class="value"><b>Value:</b>${{ (request.value * exchangeRate).toFixed(2) }}({{request.value}}ETH)</p>
             <p class="approvals"><b>Approval Count:</b> {{numOfVotes}} / {{voterCount}}</p>
             <button v-if="type === 'contributor'"
               :disabled="request.approved"
@@ -48,6 +48,7 @@
         </article>
       </figcaption>
       <router-link
+        v-if="type === 'manager'"
         class="edit-campaign"
         style="text-decoration: none;"
         :to="{
@@ -87,8 +88,14 @@ export default {
       voterCount: 0
     }
   },
+  computed: {
+    exchangeRate() {
+      return this.$store.state.exchangeRate
+    }
+  },
   created() {
     const { requests } = this.campaign
+    this.$store.dispatch('fetchExchangeRate')
     console.log('this.campaign.address', this.campaign.address)
     console.log(requests)
     requests.forEach((request) => {

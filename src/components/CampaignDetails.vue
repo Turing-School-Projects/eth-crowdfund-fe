@@ -124,8 +124,16 @@ ul {
   border: 3px solid black;
   margin-left: 2rem;
   min-width: 20rem;
-  max-width: 30rem;
+  max-width: 28rem;
   background: radial-gradient($sky-blue 45%, $sky 98%);
+  p {
+    width: 20rem;
+    margin: auto;
+    margin-bottom: 2rem;
+  }
+  button {
+    margin-bottom: 1rem;
+  }
 }
 
 input {
@@ -137,6 +145,7 @@ input {
 .campaign-section {
   display: flex;
   margin: auto;
+  height: 32rem;
 }
 
 img {
