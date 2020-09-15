@@ -85,7 +85,8 @@ form {
   height: 70vh;
   width: 90vw;
   border: 3px solid rgb(80, 80, 80);
-  background: radial-gradient($light-green 45%, $green 98%);
+  background: radial-gradient($sky-blue 45%, $sky 98%);
+  margin: auto;
 
   label {
     align-self: flex-start;

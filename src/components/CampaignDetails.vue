@@ -19,8 +19,8 @@
     </section>
       <div class="contribution-area">
         <h3>Make a Contribution</h3>
-        <p>To become an approver of this Booster please contribute more than:</p>
-        <ether-input v-model:value="contribution" />
+        <p>To become an approver of this Booster please contribute more than: {{campaign.min_contribution}}ETH</p>
+        <ether-input id="contribution-input" v-model:value="contribution" />
         <button :disabled="!contribution"
         @click="submitContribution">
         Submit Contribution </button>
@@ -92,7 +92,7 @@ export default {
 <style scoped lang='scss'>
 @import "../_variables.scss";
 .details-card {
-
+display: inline-block;
 section {
   display: flex;
   justify-content: center;
@@ -101,7 +101,7 @@ section {
   box-shadow: 2px 2px 2px grey;
   align-items: center;
   border: 3px solid black;
-  width: 45rem;
+  width: 60rem;
   background: radial-gradient($sky-blue 45%, $sky 98%);
 
 }
@@ -123,7 +123,8 @@ ul {
 .contribution-area {
   border: 3px solid black;
   margin-left: 2rem;
-  width: 23vw;
+  min-width: 20rem;
+  max-width: 30rem;
   background: radial-gradient($sky-blue 45%, $sky 98%);
 }
 
@@ -136,7 +137,6 @@ input {
 .campaign-section {
   display: flex;
   margin: auto;
-  width: 80vw;
 }
 
 img {
@@ -150,4 +150,5 @@ img {
 }
 
 }
+
 </style>
