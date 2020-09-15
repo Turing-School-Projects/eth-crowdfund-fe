@@ -44,9 +44,20 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
   .how-to-content {
     background: #ccc;
+    width: 40rem;
+    background: rgb(204, 204, 204);
+    margin: auto;
     padding: 25px 50px;
+    p {
+      text-align: justify;
+      margin-top: .3rem;
+    }
+    h3 {
+      text-align: left;
+      margin-bottom: 0;
+    }
   }
 </style>
