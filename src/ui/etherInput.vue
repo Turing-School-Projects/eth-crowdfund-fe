@@ -31,28 +31,27 @@ export default {
 .eth-input {
   display: grid;
   margin-bottom: 8px;
+  grid-template-columns: 13rem 3rem 13rem;
   grid-template-areas:
-        "value coin"
-        "text .";
+        "value coin text";
 
   #eth-value {
     grid-area: value;
     padding: 0px;
     margin: auto;
-    width: 80%;
+    width: 90%;
   }
 
   .coin {
-    align-self: center;
     grid-area: coin;
-    margin: 0px;
     padding: 0px;
     text-align: left;
   }
 
   .text {
     grid-area: text;
-    margin: 0px;
+    justify-self: start;
+    margin-right: 2rem;
     padding: 0px;
   }
 }

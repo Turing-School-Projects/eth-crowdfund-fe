@@ -1,5 +1,5 @@
 <template>
-  <section class='about-content'>
+  <section class='how-to-content'>
     <h2>How to use Etho-Boost</h2>
     <h3>Step 1: Get a Wallet</h3>
     <p>Etho-Boost is a crowdfunding platform built on the Ethereum Blockchain.
@@ -16,7 +16,7 @@
       an Ethereum testnet. You can obtain ether(ETH) on the Rinkeby network from the
       <a href="#https://faucet.rinkeby.io/">Rinkeby Faucet</a>. This network behaves
       much like the Main Ethereum Network but ETH spent on this network is <b>NOT</b>
-      worth real money. <i>note: We are hoping to deploy our app to the Main
+      worth real money. <br><i>note: We are hoping to deploy our app to the Main
       Ethereum Network sometime in the future.</i>
     </p>
     <h3>Step 3: Connect to our site</h3>
@@ -24,9 +24,15 @@
       MetaMask will ask for your permission to use our site. (INCLUDE PIC)
       We will only have access to your public address and nothing else.
     </p>
-    <h3>Step 4: Interact with our dApp</h3>
+    <h3>Step 4: Interact with our platform</h3>
     <p>
-      Instructions interacting with campaigns....
+      <ul>
+        <li><b>Contribute to a Booster</b></li>
+        <li><b>Review and Approval Whitdrawal Requests</b></li>
+        <li><b>Create a Booster</b></li>
+        <li><b>Submit Requests to Withdraw funds</b></li>
+        <li><b></b></li>
+      </ul>
     </p>
   </section>
 </template>
@@ -38,4 +44,7 @@ export default {
 </script>
 
 <style>
+  .how-to-content {
+    background: #ccc;
+  }
 </style>

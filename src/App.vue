@@ -57,8 +57,9 @@ body {
     flex-flow: row nowrap;
     align-items: center;
     padding-left: 0.8rem;
-    height: 4.5rem;
+    height: 4rem;
     width: 25vw;
+    min-width: 18rem;
 
     a {
       padding: 0px;
@@ -75,18 +76,22 @@ body {
       display: inline;
       color: #2c3e50;
       font-family: 'Racing Sans One', cursive;
-      font-size: 35px;
+      font-size: 30px;
       padding: 0px;
     }
   }
 
   .links-section {
+    margin-bottom: 1.3rem;
+    margin-right: 3.4rem;
+
     a {
       font-weight: bold;
       color: #2c3e50;
       justify-self: end;
       align-self: end;
-      margin: 0em 1rem;
+      margin: 0 1rem;
+      padding-bottom: 0;
       font-size: 20px;
       text-decoration: none;
       text-shadow: 1px 1px solid black;

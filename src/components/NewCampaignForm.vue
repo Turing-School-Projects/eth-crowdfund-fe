@@ -9,7 +9,7 @@
       <ether-input v-model:value="minContribution" class='ether-input longer'/>
     <label>Describe your Booster </label>
       <textarea v-model='description' placeholder='Ex: Help out a Denver-area store serving our community'></textarea>
-    <basicButton type='submit' text='Create Campaign' />
+    <basicButton class="submit" type='submit' text='Create Campaign' />
   <div v-if="this.userMessage">Please fill out all inputs</div>
   <div v-if="this.error">{{this.error}}</div>
   </form>
@@ -114,30 +114,29 @@ form {
 
   input {
     height: 2em;
-    width: 50vw;
+    width: 43vw;
     margin-bottom: 2vh;
+    margin-left: 1.1rem;
   }
 
   .ether-input {
     justify-self: center;
     height: 2em;
-    width: 48vw;
-    margin-bottom: 2vh;
-    margin-right: 2.1rem;
-    input {
-      margin: auto;
-    }
+    width: 43vw;
+    padding-bottom: 1rem;
   }
 
   textarea {
     resize: none;
-    height: 5rem;
-    width: 50vw;
+    height: 4rem;
+    margin-left: 1.2rem;
+    width: 43vw;
   }
 
-  button {
-    width: 45vw;
-    height: 2em;
+  .submit {
+    width: 40vw;
+    height: 1.8rem;
+    margin: 1.3rem 0 0.3rem 1.3rem;
   }
 }
 </style>

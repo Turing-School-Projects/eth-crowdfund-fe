@@ -6,12 +6,12 @@
       </div>
       <figcaption>
         <h3>{{ campaign.name }}</h3>
-        <p>{{campaign.description}}</p>
+        <!-- <p>{{campaign.description}}</p> -->
         <ul v-if="campaign.requests.length" class="requests">
           <li v-for="request in campaign.requests" v-bind:key="request.id">
-            <p class="text"><b>Summary:</b>{{request.description}}</p>
-            <p class="value"><b>Value:</b>{{request.value}}</p>
-            <p> Approval Count : {{numOfVotes}} / {{voterCount}} </p>
+            <p class="description"><b>Summary:</b><br /> {{request.description}}</p>
+            <p class="value"><b>Value:</b> {{request.value}}</p>
+            <p class="approvals"><b>Approval Count:</b> {{numOfVotes}} / {{voterCount}}</p>
             <button v-if="type === 'contributor'"
               :disabled="request.approved"
               v-on:click="$emit('approve-request', {
@@ -45,21 +45,22 @@
               Create A Request
             </router-link>
           </button>
-          <button class="edit">
-            <router-link
-              style="text-decoration: none;"
-              :to="{
-                name: 'Edit Campaign',
-                params: { address: campaign.address }}"
-            >
-              Edit
-            </router-link>
-          </button>
         </article>
       </figcaption>
+      <router-link
+        class="edit-campaign"
+        style="text-decoration: none;"
+        :to="{
+          name: 'Edit Campaign',
+          params: { address: campaign.address }}"
+      >
+        <img src="@/assets/more.png" alt="edit campaign" />
+      </router-link>
       <button v-if="type === 'manager'"
         class="delete"
-        v-on:click="$emit('delete', campaign)"><span>X</span></button>
+        v-on:click="$emit('delete', campaign)">
+          <span>X</span>
+      </button>
     </figure>
   </li>
 </template>
@@ -136,6 +137,7 @@ export default {
     display: block;
     flex: 1 1 auto;
     object-fit: cover;
+    max-width: 33rem;
   }
 
   .delete {
@@ -148,23 +150,26 @@ export default {
 
     span {
       color: transparent;
-      background-color: whitesmoke;
-      text-shadow: 0px 1px 1px white;
+      background-color: $bg_2;
+      text-shadow: 0px 2px 3px whitesmoke;
       background-clip: text;
     }
   }
-  p {
-    margin: 0;
+
+  .edit-campaign {
+    height: 2.1rem;
+    width: 2.8rem;
+    margin: .3rem .3rem 0 0;
   }
+
   figcaption {
-    padding-right: 3rem;
+    padding-right: 1.8rem;
     margin-bottom: 1.8rem;
     flex: 0 0 auto;
     min-width: 10rem;
-    width: minmax(18.5rem, 18.5rem);
+
     ul {
-      height: 15rem;
-      // max-width: 18rem;
+      height: 18rem;
       width: 30rem;
       overflow-wrap: anywhere;
       overflow-y: scroll;
@@ -175,35 +180,41 @@ export default {
       li {
         display: grid;
         border-bottom: 3px solid $dark-blue;
-        grid-template-columns: repeat(2, minmax(8.6rem, auto));
-        grid-template-rows: minmax(3rem, auto), minmax(1.3rem, auto);
+        grid-template-columns: repeat(2, minmax(8.6rem, 21rem));
+        grid-template-rows: repeat(3, 3.6rem);
         grid-template-areas:
-          "text text"
-          "value voter";
-        height: 14rem;
+          "description value"
+          "description approvals"
+          "description action";
+        height: 10.8rem;
         list-style: none;
         padding-bottom: 1px;
         margin-bottom: 3px;
         background: white;
 
         .text{
-          grid-area: text;
-          margin: 0 3px;
-          height: 2rem;
+          grid-area: description;
+          margin: 0 8px;
+          text-align: center;
         }
 
         .value {
           grid-area: value;
-          margin: 0 3px 3px 3px;
+          place-self: center;
+        }
+
+        .approvals {
+          grid-area: approvals;
+          place-self: center;
         }
 
         button {
-          // grid-area: enter;
+          grid-area: action;
+          place-self: center;
+          height: 2.1rem;
+          max-width: 13rem;
           background: radial-gradient($bg_2 45%, $bg_1 95%);
           border-radius: 3px;
-          height: 3rem;
-          margin:auto;
-          width: 10rem;
           box-shadow: 1px 1px 9px 2px $bg_2;
         }
       }
@@ -219,17 +230,21 @@ export default {
       margin: auto;
       margin-top: 1rem;
 
-      .create,
-      .edit {
+      .create {
         width: 100%;
         margin: .2rem 0;
-        height: 2.1rem;
+        height: 2.7rem;
         background: radial-gradient($bg_2 45%, $bg_1 95%);
         border-radius: 3px;
         box-shadow: 1px 1px 9px 2px $bg_2;
 
         a {
+          font-size: 1.2rem;
           text-decoration: none;
+
+          &:visited {
+            color: $dark-blue;
+          }
         }
       }
     }

@@ -1,9 +1,12 @@
 <template>
-  <h2 @click="userView = 1" v-bind:class="{ active: userView === 1 }">Manager</h2>
-  <h2 @click="userView = 2" v-bind:class="{ active: userView === 2 }">Contributor</h2>
-  <h2>
-    <router-link to="/campaigns/new">Create New Booster</router-link>
-  </h2>
+  <div v-if="!this.$store.state.loading">
+    <h2 @click="userView = 1" v-bind:class="{ active: userView === 1 }">Manager</h2>
+    <h2 @click="userView = 2" v-bind:class="{ active: userView === 2 }">Contributor</h2>
+    <h2>
+      <router-link to="/campaigns/new">Create New Booster</router-link>
+    </h2>
+  </div>
+
   <div v-if="userView === 1" v-bind:class="{ active: userView }" class="container">
     <MyCreatedCampaigns />
   </div>
