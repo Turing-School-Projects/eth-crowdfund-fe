@@ -11,6 +11,7 @@
           <li v-for="request in campaign.requests" v-bind:key="request.id">
             <p class="text"><b>Summary:</b>{{request.description}}</p>
             <p class="value"><b>Value:</b>{{request.value}}</p>
+            <p> Approval Count : {{numOfVotes}} / {{voterCount}} </p>
             <button v-if="type === 'contributor'"
               :disabled="request.approved"
               v-on:click="$emit('approve-request', {
@@ -64,6 +65,9 @@
 </template>
 
 <script>
+
+import Campaign from "../contracts/campaign";
+
 export default {
   name: "RequestList",
   props: {
@@ -74,6 +78,30 @@ export default {
     type: {
       type: String,
       required: true
+    }
+  },
+  data() {
+    return {
+      numOfVotes: 0,
+      voterCount: 0
+    }
+  },
+  created() {
+    const { requests } = this.campaign
+    console.log('this.campaign.address', this.campaign.address)
+    console.log(requests)
+    requests.forEach((request) => {
+      this.approvalCount(this.campaign.address, request.eth_id)
+    })
+  },
+  methods: {
+    async approvalCount(address, ethId) {
+      const campaignInstance = await Campaign.at(address);
+      const request = await campaignInstance.requests(ethId);
+      const numOfVotes = request.approvalCount.toString();
+      this.numOfVotes = numOfVotes;
+      const voterCount = await campaignInstance.approversCount()
+      this.voterCount = voterCount.toString();
     }
   }
 }
@@ -125,17 +153,19 @@ export default {
       background-clip: text;
     }
   }
-
+  p {
+    margin: 0;
+  }
   figcaption {
     padding-right: 3rem;
     margin-bottom: 1.8rem;
     flex: 0 0 auto;
     min-width: 10rem;
     width: minmax(18.5rem, 18.5rem);
-
     ul {
-      max-height: 13rem;
-      max-width: 18rem;
+      height: 15rem;
+      // max-width: 18rem;
+      width: 30rem;
       overflow-wrap: anywhere;
       overflow-y: scroll;
       border: 2px solid $bg_2;
@@ -149,8 +179,8 @@ export default {
         grid-template-rows: minmax(3rem, auto), minmax(1.3rem, auto);
         grid-template-areas:
           "text text"
-          "value enter";
-        height: 4rem;
+          "value voter";
+        height: 14rem;
         list-style: none;
         padding-bottom: 1px;
         margin-bottom: 3px;
@@ -168,9 +198,12 @@ export default {
         }
 
         button {
-          grid-area: enter;
+          // grid-area: enter;
           background: radial-gradient($bg_2 45%, $bg_1 95%);
           border-radius: 3px;
+          height: 3rem;
+          margin:auto;
+          width: 10rem;
           box-shadow: 1px 1px 9px 2px $bg_2;
         }
       }

@@ -1,14 +1,14 @@
 <template>
-  <h1  v-if="!this.$store.state.loading"> Create a New Campaign </h1>
+  <h1  v-if="!this.$store.state.loading"> Create a New Booster </h1>
   <form v-if="!this.$store.state.loading" @submit.prevent='addCampaign'>
-    <label>Campaign Title</label>
-    <input v-model='title' placeholder='Ex: Arc Thrift' />
+    <label>Booster Title</label>
+      <input v-model='title' placeholder='Ex: Arc Thrift' />
     <label>Enter Image Url</label>
-    <input v-model='imageUrl' placeholder='Ex: https://picsum.photos/200/300' />
+      <input v-model='imageUrl' placeholder='Ex: https://picsum.photos/200/300' />
     <label>Minimum Ether Contribution</label>
-    <ether-input v-model:value="minContribution" class='ether-input'/>
-    <label>Describe your campaign</label>
-    <textarea v-model='description' placeholder='Ex: Help out a Denver-area store serving our community'></textarea>
+      <ether-input v-model:value="minContribution" class='ether-input longer'/>
+    <label>Describe your Booster </label>
+      <textarea v-model='description' placeholder='Ex: Help out a Denver-area store serving our community'></textarea>
     <basicButton type='submit' text='Create Campaign' />
   <div v-if="this.userMessage">Please fill out all inputs</div>
   <div v-if="this.error">{{this.error}}</div>
@@ -86,6 +86,7 @@ export default {
 
 <style lang='scss'>
 @import '../_variables.scss';
+
 form {
   display: flex;
   flex-flow: column;
@@ -96,10 +97,11 @@ form {
   padding: 2.1rem 0;
   width: 65vw;
   background: lighten($sky-blue, 20%);
+  border: 2px solid black;
 
   label {
     align-self: flex-start;
-    margin-left: 3.4rem;
+    margin-left: 7.4rem;
   }
 
   input {
@@ -114,6 +116,9 @@ form {
     width: 48vw;
     margin-bottom: 2vh;
     margin-right: 2.1rem;
+    input {
+      margin: auto;
+    }
   }
 
   textarea {

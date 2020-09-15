@@ -1,4 +1,5 @@
-/* eslint-disable max-len */
+/* eslint-disable vue/no-async-in-computed-properties */
+/* eslint-disable  */
 <template>
   <Loading v-if="this.$store.state.loading" />
   <div class="details-card" v-if="!this.$store.state.loading">
@@ -14,15 +15,12 @@
     </section>
       <div class="contribution-area">
         <h3>Make a Contribution</h3>
-        <p>To become an approver of this campaign please contribute more than:</p>
+        <p>To become an approver of this Booster please contribute more than:</p>
         <ether-input v-model:value="contribution" />
         <button :disabled="!contribution"
         @click="submitContribution">
         Submit Contribution </button>
-        <button :disabled="!contribution"
-        @click="convertToDollars">
-        Convert To USD </button>
-        <p><b>Past contributors: 3</b></p>
+        <p><b>Past contributors: {{ pastApprovals }}</b></p>
         <p v-if="userMessage">Please Enter an amount greater than {{campaign.min_contribution}}ETH</p>
       </div>
     </div>
@@ -32,6 +30,7 @@
 <script>
 import etherInput from "@/ui/etherInput.vue";
 import Loading from "./Loading.vue";
+import Campaign from "../contracts/campaign";
 
 export default {
   name: 'CampaignDetails',
@@ -41,10 +40,14 @@ export default {
       return this.$store.getters.getSingleCampaign(this.address)
     }
   },
+  created() {
+    this.getPastContributors()
+  },
   data() {
     return {
       contribution: null,
-      userMessage: null
+      userMessage: null,
+      pastApprovals: 0
     }
   },
   methods: {
@@ -55,6 +58,11 @@ export default {
       } else {
         this.userMessage = true;
       }
+    },
+    async getPastContributors() {
+      const campaignInstance = await Campaign.at(this.address);
+      const voterCount = await campaignInstance.approversCount()
+      this.pastApprovals = voterCount.toString();
     }
   },
   components: {
@@ -68,8 +76,6 @@ export default {
 <style scoped lang='scss'>
 @import "../_variables.scss";
 .details-card {
-  margin-left: 3rem;
-  margin-right: 22rem;
 
 section {
   display: flex;
@@ -80,7 +86,7 @@ section {
   align-items: center;
   border: 3px solid black;
   width: 45rem;
-  background: radial-gradient($light-green 45%, $green 98%);
+  background: radial-gradient($sky-blue 45%, $sky 98%);
 
 }
 
@@ -101,8 +107,8 @@ ul {
 .contribution-area {
   border: 3px solid black;
   margin-left: 2rem;
-  width: 30vw;
-  background: radial-gradient($light-green 45%, $green 98%);
+  width: 23vw;
+  background: radial-gradient($sky-blue 45%, $sky 98%);
 }
 
 input {
