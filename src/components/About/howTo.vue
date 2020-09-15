@@ -44,8 +44,8 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-  .how-to-content {
+<style lang='scss' scoped>
+.how-to-content {
     background: #ccc;
     width: 40rem;
     background: rgb(204, 204, 204);
