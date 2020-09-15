@@ -45,7 +45,7 @@ export default {
       this.createCampaign()
       this.$store.commit('ADD_CAMPAIGN', newCampaign)
     },
-    createCampaign() {
+    async createCampaign() {
       if (!this.title && !this.description && !this.minContribution && !this.imageUrl) {
         this.userMessage = true
         return
@@ -56,7 +56,14 @@ export default {
         imageUrl: this.imageUrl,
         minContribution: this.minContribution.toString()
       }
-      this.$store.dispatch('createCampaign', payload)
+      try {
+        const result = await this.$store.dispatch('createCampaign', payload)
+        if (result) {
+          this.$router.push('/campaigns/user')
+        }
+      } catch (error) {
+        console.log(error)
+      }
     },
     clearInputs() {
       this.title = ''
