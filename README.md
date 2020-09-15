@@ -25,6 +25,8 @@
 
 ## Tech
 
+  - 
+
 The [back-end](https://github.com/Eth-Crowdfund/eth_crowdfund_be) for this project was built in Python with a Flask framework.
 
 ## Project setup
