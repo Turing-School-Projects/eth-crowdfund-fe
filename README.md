@@ -43,7 +43,7 @@
   - Truffle
   - Ganache
   - Metamask
-### [back-end](https://github.com/Eth-Crowdfund/eth_crowdfund_be) 
+### [Back-End](https://github.com/Eth-Crowdfund/eth_crowdfund_be) 
   - Python 
   - Flask
   - pytest
