@@ -126,7 +126,7 @@ export default createStore({
       }
       return result
     },
-    sendContributionToDB: async ({ getters, dispatch }, { address, contribution }) => {
+    sendContributionToDB: async ({ getters, dispatch }, { address, contribution, email }) => {
       const { value, id, min_contribution } = getters.getSingleCampaign(address);
       try {
         await axios.put(`${VUE_APP_API_URL}campaigns/${id}`, {
