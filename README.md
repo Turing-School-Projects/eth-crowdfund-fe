@@ -28,11 +28,27 @@
 
 ## Demo
 
+* Placeholder for video
+
 ## Tech
 
-  - 
-
-The [back-end](https://github.com/Eth-Crowdfund/eth_crowdfund_be) for this project was built in Python with a Flask framework.
+### Front End
+  - Vue.js
+  - Jest
+  - TravisCI
+  - Heroku 
+  - Web3
+### Blockchain
+  - Solidity
+  - Truffle
+  - Ganache
+  - Metamask
+### [back-end](https://github.com/Eth-Crowdfund/eth_crowdfund_be) 
+  - Python 
+  - Flask
+  - pytest
+  - PostgreSQL
+  - SQLAlchemy
 
 ## Future Iterations
   * Integrate a stable coin(DAI, USDC, USDT, etc.)
