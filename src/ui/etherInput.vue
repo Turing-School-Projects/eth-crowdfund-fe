@@ -54,7 +54,7 @@ export default {
     justify-self: start;
     margin-right: 2rem;
     padding: 0px;
-    margin-top: 0;
+    margin:auto;
   }
 }
 </style>
