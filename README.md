@@ -37,12 +37,13 @@
   - Jest
   - TravisCI
   - Heroku 
-  - Web3
+  - HTML/SCSS
 ### Blockchain
   - Solidity
   - Truffle
   - Ganache
   - Metamask
+  - Web3
 ### [Back-End](https://github.com/Eth-Crowdfund/eth_crowdfund_be) 
   - Python 
   - Flask
