@@ -3,6 +3,7 @@
 # Etho-Boost
 [![Build Status](https://travis-ci.org/Eth-Crowdfund/eth-crowdfund-fe.svg?branch=main)](https://travis-ci.org/Eth-Crowdfund/eth-crowdfund-fe) 
 
+## About  
 [Etho-Boost](https://etho-boost-crowdfund.herokuapp.com/) is a crowdfunding platform that runs on the Ethereum blockchain. It the capstone/cross-pollination project built by 6 students at Turing School of Software and Design in their 4th and final module. Powered by smart-contracts deployed to the Ethereum blockchain, Etho-Boost gives donors the power to approve withdrawal requests ensuring that donations are used as advertised.
 
 ## Team
@@ -25,11 +26,15 @@
 
 [Taylor Keller](https://github.com/takeller)
 
+## Demo
+
 ## Tech
 
   - 
 
 The [back-end](https://github.com/Eth-Crowdfund/eth_crowdfund_be) for this project was built in Python with a Flask framework.
+
+## Future Iterations
 
 ## Project setup
 ```
