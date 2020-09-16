@@ -35,6 +35,9 @@
 The [back-end](https://github.com/Eth-Crowdfund/eth_crowdfund_be) for this project was built in Python with a Flask framework.
 
 ## Future Iterations
+  * Integrate a stable coin(DAI, USDC, USDT, etc.)
+  * 
+  * Deploy to the Main Ethereum Network
 
 ## Project setup
 ```
