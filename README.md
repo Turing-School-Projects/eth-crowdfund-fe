@@ -52,9 +52,10 @@
   - SQLAlchemy
 
 ## Future Iterations
-  * Integrate a stable coin(DAI, USDC, USDT, etc.)
-  * 
+  * Transition to a stable coin(DAI, USDC, USDT, etc.)
+  * Mobile App/PWA
   * Deploy to the Main Ethereum Network
+  * Increase functionality around requests
 
 ## Project setup
 ```
