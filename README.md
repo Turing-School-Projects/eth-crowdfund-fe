@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/Eth-Crowdfund/eth-crowdfund-fe.svg?branch=main)](https://travis-ci.org/Eth-Crowdfund/eth-crowdfund-fe) 
 
 ## About  
-[Etho-Boost](https://etho-boost-crowdfund.herokuapp.com/) is a crowdfunding platform that runs on the Ethereum blockchain. It the capstone/cross-pollination project built by 6 students at Turing School of Software and Design in their 4th and final module. Powered by smart-contracts deployed to the Ethereum blockchain, Etho-Boost gives donors the power to approve withdrawal requests ensuring that donations are used as advertised.
+[Etho-Boost](https://etho-boost-crowdfund.herokuapp.com/) is a crowdfunding platform that runs on the Ethereum blockchain. It the capstone/cross-pollination project built by 6 students at Turing School of Software and Design in their 4th and final module. Powered by smart-contracts deployed to the Ethereum Virtual Machine(EVM), Etho-Boost gives donors the power to review and approve withdrawal requests from the Boosters(campaigns) they have donated to, ensuring that donations are used as advertised.
 
 ## Team
 
@@ -29,6 +29,19 @@
 ## Demo
 
 [![](http://img.youtube.com/vi/0h1UFCdixyE/0.jpg)](https://www.youtube.com/watch?v=6TcHf7m1w40&feature=emb_title "Etho-Boost Demo")
+
+## Why? 
+
+#### Trust  
+ The untrustworthy nature of crowdfunding websites deters potential donors because there is no accountability. Fundraisers are not expected to publish honest, detailed information about where a donated dollar goes, and EthoBoost demands more transparency. 
+EthoBoost gives donors the power to review and approve requests to withdraw funds before a manager can complete a withdrawal, ensuring that donations are used as advertised. Fund managers set a minimum value that a donor must contribute in order to have approval rights for that fund. A fund manager must create a request to withdraw donations, and the request must be approved by over 50% of ‘approvers’ for the campaign.
+
+#### Borderless and Bankless  
+ Today’s financial system makes it extremely difficult to send and receive money across borders, forcing crowdfunding platforms to restrict transactions by imposing fees on international donations. EthoBoost is built on the Ethereum blockchain, granting donors and fundraisers the freedom to exchange funds without the constraints of a traditional bank account from any specific country. 
+ 
+ #### Transactions(Fees and time) 
+ Crowdfunding platforms generally charge a 5% transaction fee, and transactions take at least 3-5 business days to complete. Facilitated by the Ethereum blockchain, EthoBoosts transactions cost just a few cents and finalize in 30 seconds.
+
 
 ## Tech
 
