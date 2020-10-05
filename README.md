@@ -28,7 +28,7 @@
 
 ## Demo
 
-[![](https://www.youtube.com/embed/Fkq_CC_XmZI "Etho-Boost Demo")
+[![](http://img.youtube.com/vi/0h1UFCdixyE/0.jpg)](https://www.youtube.com/embed/Fkq_CC_XmZI "Etho-Boost Demo")
 
 ## Why? 
 
