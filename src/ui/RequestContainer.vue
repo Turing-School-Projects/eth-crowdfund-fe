@@ -106,7 +106,7 @@ export default {
     async approvalCount(address, ethId) {
       const campaignInstance = await Campaign.at(address);
       const request = await campaignInstance.requests(ethId);
-      const numOfVotes = request.approvalCount.toString();
+      const numOfVotes = await request.approvalCount.toString();
       this.numOfVotes = [...this.numOfVotes, numOfVotes]
       const voterCount = await campaignInstance.approversCount()
       this.voterCount = [...this.voterCount, voterCount.toString()];
