@@ -11,7 +11,8 @@
           <li v-for="(request, index) in campaign.requests" v-bind:key="request.id">
             <p class="description"><b>Summary:</b><br /> {{request.description}}</p>
             <p class="value"><b>Value:</b>${{ (request.value * exchangeRate).toFixed(2) }}({{request.value}}ETH)</p>
-            <p class="approvals"><b>Approval Count:</b> {{numOfVotes[index]}} / {{voterCount[index]}}</p>
+            <p class="approvals"><b>Approval Count:</b>
+              {{numOfVotes[request.id]}} / {{voterCount[index]}}</p>
             <button v-if="type === 'contributor'"
               :disabled="request.approved"
               v-on:click="$emit('approve-request', {
@@ -84,7 +85,7 @@ export default {
   },
   data() {
     return {
-      numOfVotes: [],
+      numOfVotes: {},
       voterCount: []
     }
   },
@@ -99,15 +100,15 @@ export default {
     console.log('this.campaign.address', this.campaign.address)
     console.log(requests)
     requests.forEach((request) => {
-      this.approvalCount(this.campaign.address, request.eth_id)
+      this.approvalCount(this.campaign.address, request.eth_id, request.id)
     })
   },
   methods: {
-    async approvalCount(address, ethId) {
+    async approvalCount(address, ethId, dbId) {
       const campaignInstance = await Campaign.at(address);
       const request = await campaignInstance.requests(ethId);
       const numOfVotes = await request.approvalCount.toString();
-      this.numOfVotes = [...this.numOfVotes, numOfVotes]
+      this.numOfVotes[dbId] = numOfVotes
       const voterCount = await campaignInstance.approversCount()
       this.voterCount = [...this.voterCount, voterCount.toString()];
     }
