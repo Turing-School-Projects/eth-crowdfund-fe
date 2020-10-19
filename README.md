@@ -18,7 +18,7 @@
 
 [Edwin Montealvo](https://github.com/edmdc89)
 
-### [Back-End](https://github.com/Eth-Crowdfund/eth_crowdfund_be) 
+### [Back-End](https://github.com/Turing-School-Projects/eth_crowdfund_be) 
 
 [Antonio Jackson](https://github.com/AntonioJacksonII)
 
