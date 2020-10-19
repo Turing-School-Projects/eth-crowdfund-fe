@@ -57,7 +57,7 @@ EthoBoost gives donors the power to review and approve requests to withdraw fund
   - Ganache
   - Metamask
   - Web3
-### [Back-End](https://github.com/Eth-Crowdfund/eth_crowdfund_be) 
+### [Back-End](https://github.com/Turing-School-Projects/eth_crowdfund_be) 
   - Python 
   - Flask
   - pytest
